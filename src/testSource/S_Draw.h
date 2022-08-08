@@ -8,7 +8,7 @@
 #include <SDL_ttf.h>
 
 #elif __linux__
-#Include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #endif
@@ -59,7 +59,7 @@ namespace POINTER
 
         //TODO: Experiment with other containers, perhaps unsorted map? perhaps vectors with the id being the iterator? Perhaps unsorted map with int id?
         std::map<std::string, SDL_Texture*> m_textures;
-        static inline S_Draw* s_instance;
+        static inline S_Draw* s_instance = nullptr;
 
     };
 

@@ -1,7 +1,7 @@
 
 #include "ECS.h"
 
-//#include <algorithm> //Might be necessary on some compilers for std::remove_if
+#include <algorithm> //Might be necessary on some compilers for std::remove_if
 
 int Entity::GetID() const
 {

@@ -7,6 +7,7 @@
 
 #elif __linux__
 #include <SDL2/SDL.h>
+#include "./testSource/FTexture.h"
 #endif
 
 #include "./testSource/Tile.h"

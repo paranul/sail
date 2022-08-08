@@ -3,7 +3,7 @@
 #include <SDL.h>
 
 #elif __linux__
-<SDL2/SDL.h>
+#include <SDL2/SDL.h>
 
 #endif
 
