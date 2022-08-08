@@ -1,0 +1,1508 @@
+
+C:\dev\pikuma\SAIL\scripts>set SDL2="C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include" 
+
+C:\dev\pikuma\SAIL\scripts>set SDL2_image="C:\libs\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include" 
+
+C:\dev\pikuma\SAIL\scripts>set SDL2_ttf="C:\libs\SDL2_ttf-2.0.18\include" 
+
+C:\dev\pikuma\SAIL\scripts>set SDL2_mixer="C:\libs\SDL2_mixer-2.0.4\include" 
+
+C:\dev\pikuma\SAIL\scripts>set glm="C:\dev\pikuma\SAIL\include\glm" 
+
+C:\dev\pikuma\SAIL\scripts>set SDL2_lib="C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86" 
+
+C:\dev\pikuma\SAIL\scripts>set SDL2_image_lib="C:\libs\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x86" 
+
+C:\dev\pikuma\SAIL\scripts>set SDL2_ttf_lib="C:\libs\SDL2_ttf-2.0.18\lib\x86" 
+
+C:\dev\pikuma\SAIL\scripts>set SDL2_mixer_lib="C:\libs\SDL2_mixer-2.0.4\lib\x86" 
+
+C:\dev\pikuma\SAIL\scripts>set lua536_lib="C:\libs\LUA-5.3.6_WIN32" 
+
+C:\dev\pikuma\SAIL\scripts>call cl ../src/*.cpp /std:c++17 /EHsc -Wall -I"C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include" -I"C:\libs\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include" -I"C:\libs\SDL2_ttf-2.0.18\include" -I"C:\libs\SDL2_mixer-2.0.4\include" -I"C:\dev\pikuma\SAIL\include\glm" -link -LIBPATH:"C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86" -LIBPATH:"C:\libs\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x86" -LIBPATH:"C:\libs\SDL2_ttf-2.0.18\lib\x86" -LIBPATH:"C:\libs\SDL2_mixer-2.0.4\lib\x86" -LIBPATH:"C:\libs\LUA-5.3.6_WIN32" user32.lib SDL2main.lib SDL2.lib SDL2_image.lib SDL2_ttf.lib liblua53.a shell32.lib /SUBSYSTEM:CONSOLE /out:../bin/main.exe 
+Game.cpp
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\begin_code.h(37): warning C4668: '__GNUC__' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_assert.h(72): warning C4668: '__GNUC__' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_keyboard.h(52): warning C4820: 'SDL_Keysym': '2' bytes padding added after data member 'SDL_Keysym::mod'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(462): warning C4820: 'SDL_HapticDirection': '3' bytes padding added after data member 'SDL_HapticDirection::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(481): warning C4820: 'SDL_HapticConstant': '2' bytes padding added after data member 'SDL_HapticConstant::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(564): warning C4820: 'SDL_HapticPeriodic': '2' bytes padding added after data member 'SDL_HapticPeriodic::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(585): warning C4820: 'SDL_HapticPeriodic': '2' bytes padding added after data member 'SDL_HapticPeriodic::fade_level'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(616): warning C4820: 'SDL_HapticCondition': '2' bytes padding added after data member 'SDL_HapticCondition::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(633): warning C4820: 'SDL_HapticCondition': '2' bytes padding added after data member 'SDL_HapticCondition::center'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(652): warning C4820: 'SDL_HapticRamp': '2' bytes padding added after data member 'SDL_HapticRamp::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(671): warning C4820: 'SDL_HapticRamp': '2' bytes padding added after data member 'SDL_HapticRamp::fade_level'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(691): warning C4820: 'SDL_HapticLeftRight': '2' bytes padding added after data member 'SDL_HapticLeftRight::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(717): warning C4820: 'SDL_HapticCustom': '2' bytes padding added after data member 'SDL_HapticCustom::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(729): warning C4820: 'SDL_HapticCustom': '1' bytes padding added after data member 'SDL_HapticCustom::channels'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_hidapi.h(97): warning C4820: 'SDL_hid_device_info': '2' bytes padding added after data member 'SDL_hid_device_info::release_number'
+C:\dev\pikuma\SAIL\src\Game.h(27): warning C4820: 'Game': '3' bytes padding added after data member 'Game::m_Active'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_stdinc.h(498): warning C4514: 'SDL_memset4': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_stdinc.h(725): warning C4514: 'SDL_memcpy4': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_endian.h(275): warning C4514: 'SDL_SwapFloat': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(110): warning C4514: 'SDL_PointInRect': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(119): warning C4514: 'SDL_RectEmpty': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(127): warning C4514: 'SDL_RectEquals': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(233): warning C4514: 'SDL_PointInFRect': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(242): warning C4514: 'SDL_FRectEmpty': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(267): warning C4514: 'SDL_FRectEquals': unreferenced inline function has been removed
+main.cpp
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\begin_code.h(37): warning C4668: '__GNUC__' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_assert.h(72): warning C4668: '__GNUC__' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_keyboard.h(52): warning C4820: 'SDL_Keysym': '2' bytes padding added after data member 'SDL_Keysym::mod'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(462): warning C4820: 'SDL_HapticDirection': '3' bytes padding added after data member 'SDL_HapticDirection::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(481): warning C4820: 'SDL_HapticConstant': '2' bytes padding added after data member 'SDL_HapticConstant::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(564): warning C4820: 'SDL_HapticPeriodic': '2' bytes padding added after data member 'SDL_HapticPeriodic::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(585): warning C4820: 'SDL_HapticPeriodic': '2' bytes padding added after data member 'SDL_HapticPeriodic::fade_level'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(616): warning C4820: 'SDL_HapticCondition': '2' bytes padding added after data member 'SDL_HapticCondition::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(633): warning C4820: 'SDL_HapticCondition': '2' bytes padding added after data member 'SDL_HapticCondition::center'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(652): warning C4820: 'SDL_HapticRamp': '2' bytes padding added after data member 'SDL_HapticRamp::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(671): warning C4820: 'SDL_HapticRamp': '2' bytes padding added after data member 'SDL_HapticRamp::fade_level'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(691): warning C4820: 'SDL_HapticLeftRight': '2' bytes padding added after data member 'SDL_HapticLeftRight::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(717): warning C4820: 'SDL_HapticCustom': '2' bytes padding added after data member 'SDL_HapticCustom::type'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_haptic.h(729): warning C4820: 'SDL_HapticCustom': '1' bytes padding added after data member 'SDL_HapticCustom::channels'
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_hidapi.h(97): warning C4820: 'SDL_hid_device_info': '2' bytes padding added after data member 'SDL_hid_device_info::release_number'
+C:\libs\SDL2_mixer-2.0.4\include\SDL_mixer.h(118): warning C4820: 'Mix_Chunk': '3' bytes padding added after data member 'Mix_Chunk::volume'
+C:\dev\pikuma\SAIL\include\glm\detail/setup.hpp(33): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_bool2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_bool2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_float2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_float2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_double2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_double2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_int2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_int2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_uint2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_uint2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_bool3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_bool3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_float3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_float3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_double3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_double3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_int3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_int3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_uint3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_uint3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_bool4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_bool4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_float4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_float4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_double4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_double4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_double4_precision.hpp(6): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_int4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_int4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_uint4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/vector_uint4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double2x2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail\type_mat2x2.inl(1): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double2x3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double2x3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float2x3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float2x3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double2x4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double2x4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float2x4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float2x4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double3x2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double3x2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float3x2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float3x2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double3x3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail\type_mat3x3.inl(1): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double3x3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float3x3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float3x3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double3x4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double3x4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float3x4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float3x4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double4x2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double4x2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float4x2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float4x2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double4x3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double4x3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float4x3.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float4x3_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double4x4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail\type_mat4x4.inl(1): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double4x4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float4x4.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float4x4_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail/func_matrix.inl(1): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail/func_geometric.inl(1): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail/func_exponential.inl(4): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail/func_geometric.inl(2): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail/func_common.inl(4): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_double2x2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float2x2.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\./ext/matrix_float2x2_precision.hpp(5): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(4): warning C4464: relative include path contains '..'
+../src/main.cpp(14): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1492): warning C4820: 'ImGuiStyle': '1' bytes padding added after data member 'ImGuiStyle::AntiAliasedFill'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1530): warning C4820: 'ImGuiIO': '3' bytes padding added after data member 'ImGuiIO::FontAllowUserScaling'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1539): warning C4820: 'ImGuiIO': '3' bytes padding added after data member 'ImGuiIO::ConfigWindowsMoveFromTitleBarOnly'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1579): warning C4820: 'ImGuiIO': '3' bytes padding added after data member 'ImGuiIO::MouseDown'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1607): warning C4820: 'ImGuiIO': '1' bytes padding added after data member 'ImGuiIO::NavVisible'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1622): warning C4820: 'ImGuiIO': '4' bytes padding added after data member 'ImGuiIO::MouseClickedPos'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1628): warning C4820: 'ImGuiIO': '3' bytes padding added after data member 'ImGuiIO::MouseDownWasDoubleClick'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1638): warning C4820: 'ImGuiIO': '2' bytes padding added after data member 'ImGuiIO::InputQueueSurrogate'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1641): warning C4820: 'ImGuiIO': '4' bytes padding added after data member 'ImGuiIO::InputQueueCharacters'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1666): warning C4820: 'ImGuiInputTextCallbackData': '2' bytes padding added after data member 'ImGuiInputTextCallbackData::EventChar'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1671): warning C4820: 'ImGuiInputTextCallbackData': '3' bytes padding added after data member 'ImGuiInputTextCallbackData::BufDirty'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1715): warning C4820: 'ImGuiPayload': '1' bytes padding added after data member 'ImGuiPayload::Delivery'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2205): warning C4820: 'ImDrawData': '3' bytes padding added after data member 'ImDrawData::Valid'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2230): warning C4820: 'ImFontConfig': '3' bytes padding added after data member 'ImFontConfig::FontDataOwnedByAtlas'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2235): warning C4820: 'ImFontConfig': '3' bytes padding added after data member 'ImFontConfig::PixelSnapH'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2241): warning C4820: 'ImFontConfig': '3' bytes padding added after data member 'ImFontConfig::MergeMode'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2247): warning C4820: 'ImFontConfig': '2' bytes padding added after data member 'ImFontConfig::Name'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2383): warning C4820: 'ImFontAtlas': '3' bytes padding added after data member 'ImFontAtlas::Locked'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2432): warning C4820: 'ImFont': '1' bytes padding added after data member 'ImFont::DirtyLookupTables'
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2462): warning C4820: 'ImFont': '2' bytes padding added after data member 'ImFont::Used4kPagesMap'
+../src/main.cpp(15): warning C4464: relative include path contains '..'
+../src/main.cpp(16): warning C4464: relative include path contains '..'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(1972): warning C4668: 'SOL_LUAJIT' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6873): warning C4365: 'argument': conversion from 'int' to 'std::array<std::string,37>::size_type', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::thread' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::string' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::table' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::function' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::nil' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::lightuserdata' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::boolean' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::lua_nil' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::none' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8106): warning C4061: enumerator 'sol::type::number' in switch of enum 'sol::type' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6684): note: see declaration of 'sol::type'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9770): warning C4626: 'sol::detail::properties_enrollment_allowed': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9770): warning C5027: 'sol::detail::properties_enrollment_allowed': move assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9748): warning C4365: 'argument': conversion from 'int' to 'size_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::type' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::index' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::storage' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::type_info' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::next' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::mode' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::construct' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::metatable' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::to_string' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::modulus' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::new_index' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::unary_minus' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::addition' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::subtraction' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::multiplication' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::division' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::power_of' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::involution' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::concatenation' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::garbage_collect' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::floor_division' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::bitwise_left_shift' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::bitwise_right_shift' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::bitwise_not' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::bitwise_and' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::bitwise_or' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::bitwise_xor' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::ipairs' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::call_construct' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::gc_names' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::static_index' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9767): warning C4061: enumerator 'sol::meta_function::static_new_index' in switch of enum 'sol::meta_function' is not explicitly handled by a case label
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6784): note: see declaration of 'sol::meta_function'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9782): warning C4626: 'sol::detail::indexed_insert': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9782): warning C5027: 'sol::detail::indexed_insert': move assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9823): warning C4820: 'sol::stack::probe': '3' bytes padding added after data member 'sol::stack::probe::success'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8500): warning C4626: 'sol::stack::push_popper<false,sol::reference &,void>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10078): note: see reference to class template instantiation 'sol::stack::push_popper<false,sol::reference &,void>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(11431): warning C4365: 'return': conversion from 'int' to 'char32_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(11434): warning C4365: 'return': conversion from 'int' to 'char32_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(11437): warning C4365: 'return': conversion from 'int' to 'char32_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13305): warning C5039: 'lua_pushcclosure': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13316): warning C5039: 'lua_pushcclosure': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13351): warning C5039: 'lua_pushcclosure': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13508): warning C4365: 'argument': conversion from 'int' to 'size_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13735): warning C4365: 'initializing': conversion from 'int' to 'size_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13812): warning C4365: 'initializing': conversion from 'int' to 'size_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8500): warning C4626: 'sol::stack::push_popper<false,const sol::reference &,void>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14398): note: see reference to class template instantiation 'sol::stack::push_popper<false,const sol::reference &,void>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14554): warning C5039: 'lua_load': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21158): warning C5243: 'sol::u_detail::change_indexing_mem_func': using incomplete class 'sol::u_detail::usertype_storage_base' can cause potential one definition rule violation due to ABI limitation
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21002): note: see declaration of 'sol::u_detail::usertype_storage_base'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21158): note: consider using inheritance keywords on the forward declaration of the class to avoid the issue: 'class [__single_inheritance|__multiple_inheritance|__virtual_inheritance] class-name;'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21271): warning C4820: 'sol::u_detail::usertype_storage_base': '6' bytes padding added after data member 'sol::u_detail::usertype_storage_base::is_using_new_index'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6302): warning C4626: 'sol::closure<nullptr,void *&,void *&,nullptr,const lua_Integer &>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21529): note: see reference to class template instantiation 'sol::closure<nullptr,void *&,void *&,nullptr,const lua_Integer &>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6302): warning C5027: 'sol::closure<nullptr,void *&,void *&,nullptr,const lua_Integer &>': move assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22668): warning C4626: 'sol::detail::ref_clean': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4820: 'sol::detail::optional_storage_base<T,false>': '3' bytes padding added after data member 'sol::detail::optional_storage_base<T,false>::m_has_value'
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3865): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3895): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3922): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3948): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23793): note: see reference to class template instantiation 'sol::optional<sol::environment>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4625: 'sol::detail::optional_storage_base<T,false>': copy constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4626: 'sol::detail::optional_storage_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C4625: 'sol::detail::optional_operations_base<T>': copy constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C5026: 'sol::detail::optional_operations_base<T>': move constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C4626: 'sol::detail::optional_operations_base<T>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C5027: 'sol::detail::optional_operations_base<T>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C5026: 'sol::detail::optional_copy_base<T,false>': move constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C4626: 'sol::detail::optional_copy_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C5027: 'sol::detail::optional_copy_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3911): warning C4626: 'sol::detail::optional_move_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3911): warning C5027: 'sol::detail::optional_move_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3934): warning C5027: 'sol::detail::optional_copy_assign_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4835): warning C4820: 'sol::optional<sol::environment>': '3' bytes padding added after base class 'sol::detail::optional_delete_assign_base<T,true,true>'
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3800): warning C4820: 'sol::detail::optional_storage_base<T,true>': '3' bytes padding added after data member 'sol::detail::optional_storage_base<T,true>::m_has_value'
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3859): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3887): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3917): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3939): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24164): note: see reference to class template instantiation 'sol::optional<sol::string_view>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4835): warning C4820: 'sol::optional<sol::string_view>': '3' bytes padding added after base class 'sol::detail::optional_delete_assign_base<T,true,true>'
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24184): warning C5039: 'lua_atpanic': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24193): warning C4365: 'initializing': conversion from 'int' to 'size_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4820: 'sol::detail::optional_storage_base<T,false>': '3' bytes padding added after data member 'sol::detail::optional_storage_base<T,false>::m_has_value'
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3865): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3895): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3922): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3948): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24289): note: see reference to class template instantiation 'sol::optional<sol::object>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4625: 'sol::detail::optional_storage_base<T,false>': copy constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4626: 'sol::detail::optional_storage_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C4625: 'sol::detail::optional_operations_base<T>': copy constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C5026: 'sol::detail::optional_operations_base<T>': move constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C4626: 'sol::detail::optional_operations_base<T>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C5027: 'sol::detail::optional_operations_base<T>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C5026: 'sol::detail::optional_copy_base<T,false>': move constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C4626: 'sol::detail::optional_copy_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C5027: 'sol::detail::optional_copy_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3911): warning C4626: 'sol::detail::optional_move_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3911): warning C5027: 'sol::detail::optional_move_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3934): warning C5027: 'sol::detail::optional_copy_assign_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4835): warning C4820: 'sol::optional<sol::object>': '3' bytes padding added after base class 'sol::detail::optional_delete_assign_base<T,true,true>'
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8500): warning C4626: 'sol::stack::push_popper<false,const sol::basic_table_core<false,sol::reference> &,void>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23027): note: see reference to class template instantiation 'sol::stack::push_popper<false,const sol::basic_table_core<false,sol::reference> &,void>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24290): note: see reference to function template instantiation 'decltype(auto) sol::basic_table_core<false,sol::reference>::traverse_get<sol::optional<sol::object>,const char(&)[8],const std::string&>(const char (&)[8],const std::string &) const' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24450): warning C5039: 'luaL_requiref': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4820: 'sol::detail::optional_storage_base<T,false>': '3' bytes padding added after data member 'sol::detail::optional_storage_base<T,false>::m_has_value'
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3865): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3895): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3922): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3948): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24469): note: see reference to class template instantiation 'sol::optional<sol::table>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4625: 'sol::detail::optional_storage_base<T,false>': copy constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3779): warning C4626: 'sol::detail::optional_storage_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C4625: 'sol::detail::optional_operations_base<T>': copy constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C5026: 'sol::detail::optional_operations_base<T>': move constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C4626: 'sol::detail::optional_operations_base<T>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): warning C5027: 'sol::detail::optional_operations_base<T>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C5026: 'sol::detail::optional_copy_base<T,false>': move constructor was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C4626: 'sol::detail::optional_copy_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3883): warning C5027: 'sol::detail::optional_copy_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3911): warning C4626: 'sol::detail::optional_move_base<T,false>': assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3911): warning C5027: 'sol::detail::optional_move_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3934): warning C5027: 'sol::detail::optional_copy_assign_base<T,false>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4835): warning C4820: 'sol::optional<sol::table>': '3' bytes padding added after base class 'sol::detail::optional_delete_assign_base<T,true,true>'
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C4626: 'sol::table_proxy<sol::basic_table_core<true,sol::reference> &,std::tuple<const char (&)[8]>>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23193): note: see reference to class template instantiation 'sol::table_proxy<sol::basic_table_core<true,sol::reference> &,std::tuple<const char (&)[8]>>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24469): note: see reference to function template instantiation 'auto sol::basic_table_core<true,sol::reference>::operator []<const char(&)[8]>(T) &' being compiled
+        with
+        [
+            T=const char (&)[8]
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C5027: 'sol::table_proxy<sol::basic_table_core<true,sol::reference> &,std::tuple<const char (&)[8]>>': move assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C4626: 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[10]>>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23193): note: see reference to class template instantiation 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[10]>>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24483): note: see reference to function template instantiation 'auto sol::basic_table_core<false,sol::reference>::operator []<const char(&)[10]>(T) &' being compiled
+        with
+        [
+            T=const char (&)[10]
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C5027: 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[10]>>': move assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24547): warning C5039: 'lua_load': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24811): warning C5039: 'lua_load': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24868): warning C5039: 'lua_atpanic': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25182): warning C5039: 'lua_newstate': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25783): warning C4626: 'sol::basic_variadic_results<std::allocator<sol::object>>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25785): note: see reference to class template instantiation 'sol::basic_variadic_results<std::allocator<sol::object>>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25791): warning C4626: 'sol::variadic_results': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25791): warning C5027: 'sol::variadic_results': move assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\Game.h(27): warning C4820: 'Game': '3' bytes padding added after data member 'Game::m_Active'
+../src/main.cpp(30): warning C4100: 'argv': unreferenced formal parameter
+../src/main.cpp(30): warning C4100: 'argc': unreferenced formal parameter
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8500): warning C4626: 'sol::stack::push_popper<false,sol::basic_table_core<false,sol::reference> &,void>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22431): note: see reference to class template instantiation 'sol::stack::push_popper<false,sol::basic_table_core<false,sol::reference> &,void>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22430): note: while compiling class template member function 'bool sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[10]>>::valid(void) const'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24486): note: see reference to function template instantiation 'bool sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[10]>>::valid(void) const' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23193): note: see reference to class template instantiation 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[10]>>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24483): note: see reference to function template instantiation 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[10]>> sol::basic_table_core<false,sol::reference>::operator []<const char(&)[10]>(T) &' being compiled
+        with
+        [
+            T=const char (&)[10]
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3765): warning C4583: 'sol::detail::optional_storage_base<T,false>::m_value': destructor is not implicitly called
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3765): note: while compiling class template member function 'sol::detail::optional_storage_base<T,false>::~optional_storage_base(void)'
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): note: see reference to function template instantiation 'sol::detail::optional_storage_base<T,false>::~optional_storage_base(void)' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3865): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3895): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3922): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3948): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24469): note: see reference to class template instantiation 'sol::optional<sol::table>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3765): warning C4583: 'sol::detail::optional_storage_base<T,false>::m_value': destructor is not implicitly called
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3765): note: while compiling class template member function 'sol::detail::optional_storage_base<T,false>::~optional_storage_base(void)'
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): note: see reference to function template instantiation 'sol::detail::optional_storage_base<T,false>::~optional_storage_base(void)' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3865): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3895): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3922): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3948): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24289): note: see reference to class template instantiation 'sol::optional<sol::object>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3765): warning C4583: 'sol::detail::optional_storage_base<T,false>::m_value': destructor is not implicitly called
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3765): note: while compiling class template member function 'sol::detail::optional_storage_base<T,false>::~optional_storage_base(void)'
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): note: see reference to function template instantiation 'sol::detail::optional_storage_base<T,false>::~optional_storage_base(void)' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3865): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3895): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3922): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3948): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,false>' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23793): note: see reference to class template instantiation 'sol::optional<sol::environment>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3758): warning C4582: 'sol::detail::optional_storage_base<T,false>::m_value': constructor is not implicitly called
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3758): note: while compiling class template member function 'sol::detail::optional_storage_base<T,false>::optional_storage_base(void) noexcept'
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): note: see reference to function template instantiation 'sol::detail::optional_storage_base<T,false>::optional_storage_base(void) noexcept' being compiled
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3758): warning C4582: 'sol::detail::optional_storage_base<T,false>::m_value': constructor is not implicitly called
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3758): note: while compiling class template member function 'sol::detail::optional_storage_base<T,false>::optional_storage_base(void) noexcept'
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): note: see reference to function template instantiation 'sol::detail::optional_storage_base<T,false>::optional_storage_base(void) noexcept' being compiled
+        with
+        [
+            T=sol::environment
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(11528): warning C4365: 'initializing': conversion from 'const char' to 'unsigned char', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12325): note: see reference to function template instantiation 'sol::unicode::decoded_result<const char *> sol::unicode::utf8_to_code_point<const char*>(It,It)' being compiled
+        with
+        [
+            It=const char *
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(11529): warning C4365: 'initializing': conversion from 'int' to 'size_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(11549): warning C4365: '=': conversion from 'const char' to '_Ty', signed/unsigned mismatch
+        with
+        [
+            _Ty=unsigned char
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10088): warning C4365: 'argument': conversion from '_Ty' to 'size_t', signed/unsigned mismatch
+        with
+        [
+            _Ty=int
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13566): note: see reference to function template instantiation 'int sol::stack::push<const char(&)[2],int>(lua_State *,T,int &&)' being compiled
+        with
+        [
+            T=const char (&)[2]
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18420): warning C4626: 'sol::detail::protected_handler<true,handler_t>': assignment operator was implicitly defined as deleted
+        with
+        [
+            handler_t=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18727): note: see reference to class template instantiation 'sol::detail::protected_handler<true,handler_t>' being compiled
+        with
+        [
+            handler_t=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18717): note: see reference to function template instantiation 'decltype(auto) sol::basic_protected_function<sol::stack_reference,true,sol::reference>::call<,>(void) const' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24552): note: see reference to function template instantiation 'sol::protected_function_result sol::basic_protected_function<sol::stack_reference,true,sol::reference>::operator ()<>(void) const' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24552): note: see reference to function template instantiation 'sol::protected_function_result sol::basic_protected_function<sol::stack_reference,true,sol::reference>::operator ()<>(void) const' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18420): warning C4626: 'sol::detail::protected_handler<false,handler_t>': assignment operator was implicitly defined as deleted
+        with
+        [
+            handler_t=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18727): note: see reference to class template instantiation 'sol::detail::protected_handler<false,handler_t>' being compiled
+        with
+        [
+            handler_t=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3758): warning C4582: 'sol::detail::optional_storage_base<T,false>::m_value': constructor is not implicitly called
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3758): note: while compiling class template member function 'sol::detail::optional_storage_base<T,false>::optional_storage_base(void) noexcept'
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): note: see reference to function template instantiation 'sol::detail::optional_storage_base<T,false>::optional_storage_base(void) noexcept' being compiled
+        with
+        [
+            T=sol::table
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9300): warning C4365: 'return': conversion from 'int' to 'size_t', signed/unsigned mismatch
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9419): note: see reference to function template instantiation 'size_t sol::detail::aligned_space_for<T*>(void *)' being compiled
+        with
+        [
+            T=void
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13485): note: see reference to function template instantiation 'T **sol::detail::usertype_allocate_pointer<void>(lua_State *)' being compiled
+        with
+        [
+            T=void
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21596): warning C4623: 'sol::u_detail::usertype_storage<T>': default constructor was implicitly defined as deleted
+        with
+        [
+            T=void
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21653): note: see reference to class template instantiation 'sol::u_detail::usertype_storage<T>' being compiled
+        with
+        [
+            T=void
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21716): note: see reference to function template instantiation 'void sol::u_detail::usertype_storage_base::set<T,std::string&,_Ty>(lua_State *,Key,Value &&)' being compiled
+        with
+        [
+            T=void,
+            _Ty=sol::reference,
+            Key=std::string &,
+            Value=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21550): note: see reference to function template instantiation 'void sol::u_detail::usertype_storage_base::set<void,sol::reference,sol::reference>(lua_State *,Key &&,Value &&)' being compiled
+        with
+        [
+            Key=sol::reference,
+            Value=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8500): warning C4626: 'sol::stack::push_popper<false,const sol::basic_object_base<base_type> &,void>': assignment operator was implicitly defined as deleted
+        with
+        [
+            base_type=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14687): note: see reference to class template instantiation 'sol::stack::push_popper<false,const sol::basic_object_base<base_type> &,void>' being compiled
+        with
+        [
+            base_type=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14709): note: see reference to function template instantiation 'bool sol::basic_object_base<base_type>::is_stack<T>(std::false_type) const' being compiled
+        with
+        [
+            base_type=sol::reference,
+            T=bool
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14709): note: see reference to function template instantiation 'bool sol::basic_object_base<base_type>::is_stack<T>(std::false_type) const' being compiled
+        with
+        [
+            base_type=sol::reference,
+            T=bool
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24291): note: see reference to function template instantiation 'bool sol::basic_object_base<base_type>::is<bool>(void) const' being compiled
+        with
+        [
+            base_type=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24291): note: see reference to function template instantiation 'bool sol::basic_object_base<base_type>::is<bool>(void) const' being compiled
+        with
+        [
+            base_type=sol::reference
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C4626: 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[8]>>': assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23193): note: see reference to class template instantiation 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[8]>>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24320): note: see reference to function template instantiation 'auto sol::basic_table_core<false,sol::reference>::operator []<const char(&)[8]>(T) &' being compiled
+        with
+        [
+            T=const char (&)[8]
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24338): note: see reference to function template instantiation 'void sol::state_view::ensure_package<sol::stack_reference&>(const std::string &,T)' being compiled
+        with
+        [
+            T=sol::stack_reference &
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24458): note: see reference to function template instantiation 'sol::object sol::state_view::require_core<sol::state_view::require_script::<lambda_f092ff3bb1bdd9e10209c94bd254e745>&>(const std::string &,Fx,bool)' being compiled
+        with
+        [
+            Fx=sol::state_view::require_script::<lambda_f092ff3bb1bdd9e10209c94bd254e745> &
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C5027: 'sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[8]>>': move assignment operator was implicitly defined as deleted
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C4626: 'sol::table_proxy<Table,std::tuple<const char (&)[8],T>>': assignment operator was implicitly defined as deleted
+        with
+        [
+            Table=sol::basic_table_core<false,sol::reference> &,
+            T=const std::string &
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22407): note: see reference to class template instantiation 'sol::table_proxy<Table,std::tuple<const char (&)[8],T>>' being compiled
+        with
+        [
+            Table=sol::basic_table_core<false,sol::reference> &,
+            T=const std::string &
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24325): note: see reference to function template instantiation 'decltype(auto) sol::table_proxy<sol::basic_table_core<false,sol::reference> &,std::tuple<const char (&)[8]>>::operator []<const std::string&>(K) &' being compiled
+        with
+        [
+            K=const std::string &
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22482): warning C5027: 'sol::table_proxy<Table,std::tuple<const char (&)[8],T>>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            Table=sol::basic_table_core<false,sol::reference> &,
+            T=const std::string &
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3784): warning C4582: 'sol::detail::optional_storage_base<T,true>::m_value': constructor is not implicitly called
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3784): note: while compiling class template member function 'sol::detail::optional_storage_base<T,true>::optional_storage_base(void) noexcept'
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3854): note: see reference to function template instantiation 'sol::detail::optional_storage_base<T,true>::optional_storage_base(void) noexcept' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3805): note: see reference to class template instantiation 'sol::detail::optional_storage_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3859): note: see reference to class template instantiation 'sol::detail::optional_operations_base<T>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3887): note: see reference to class template instantiation 'sol::detail::optional_copy_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3917): note: see reference to class template instantiation 'sol::detail::optional_move_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3939): note: see reference to class template instantiation 'sol::detail::optional_copy_assign_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4073): note: see reference to class template instantiation 'sol::detail::optional_move_assign_base<T,true>' being compiled
+        with
+        [
+            T=sol::string_view
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24164): note: see reference to class template instantiation 'sol::optional<sol::string_view>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6411): warning C4623: 'sol::nested<const _Ty2 &>': default constructor was implicitly defined as deleted
+        with
+        [
+            _Ty2=sol::lua_value
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13180): note: see reference to class template instantiation 'sol::nested<const _Ty2 &>' being compiled
+        with
+        [
+            _Ty2=sol::lua_value
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13158): note: see reference to function template instantiation 'int sol::stack::unqualified_pusher<sol::detail::as_table_tag<std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>>,void>::push<false>(std::true_type,std::integral_constant<bool,false>,lua_State *,const T &)' being compiled
+        with
+        [
+            T=std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13158): note: see reference to function template instantiation 'int sol::stack::unqualified_pusher<sol::detail::as_table_tag<std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>>,void>::push<false>(std::true_type,std::integral_constant<bool,false>,lua_State *,const T &)' being compiled
+        with
+        [
+            T=std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13157): note: while compiling class template member function 'int sol::stack::unqualified_pusher<sol::detail::as_table_tag<std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>>,void>::push(lua_State *,const T &)'
+        with
+        [
+            T=std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13266): note: see reference to function template instantiation 'int sol::stack::unqualified_pusher<sol::detail::as_table_tag<std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>>,void>::push(lua_State *,const T &)' being compiled
+        with
+        [
+            T=std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13263): note: see reference to class template instantiation 'sol::stack::unqualified_pusher<sol::detail::as_table_tag<std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>>,void>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13262): note: while compiling class template member function 'int sol::stack::unqualified_pusher<Tu,void>::push(lua_State *,const std::initializer_list<std::pair<sol::lua_value,sol::lua_value>> &)'
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10102): note: see reference to function template instantiation 'int sol::stack::unqualified_pusher<Tu,void>::push(lua_State *,const std::initializer_list<std::pair<sol::lua_value,sol::lua_value>> &)' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10088): note: see reference to class template instantiation 'sol::stack::unqualified_pusher<Tu,void>' being compiled
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14613): note: see reference to function template instantiation 'int sol::stack::push<_Ty,>(lua_State *,T &&)' being compiled
+        with
+        [
+            _Ty=std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>,
+            T=std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24039): note: see reference to function template instantiation 'R sol::make_reference<sol::reference,true,std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>>(lua_State *,T &&)' being compiled
+        with
+        [
+            R=sol::reference,
+            T=std::initializer_list<std::pair<sol::lua_value,sol::lua_value>>
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6411): warning C4626: 'sol::nested<const _Ty2 &>': assignment operator was implicitly defined as deleted
+        with
+        [
+            _Ty2=sol::lua_value
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6411): warning C5027: 'sol::nested<const _Ty2 &>': move assignment operator was implicitly defined as deleted
+        with
+        [
+            _Ty2=sol::lua_value
+        ]
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_stdinc.h(498): warning C4514: 'SDL_memset4': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_stdinc.h(725): warning C4514: 'SDL_memcpy4': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_endian.h(275): warning C4514: 'SDL_SwapFloat': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(110): warning C4514: 'SDL_PointInRect': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(119): warning C4514: 'SDL_RectEmpty': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(127): warning C4514: 'SDL_RectEquals': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(233): warning C4514: 'SDL_PointInFRect': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(242): warning C4514: 'SDL_FRectEmpty': unreferenced inline function has been removed
+C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include\SDL_rect.h(267): warning C4514: 'SDL_FRectEquals': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_common.inl(34): warning C4514: 'glm::abs': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_common.inl(664): warning C4514: 'glm::floatBitsToInt': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_common.inl(683): warning C4514: 'glm::floatBitsToUint': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_common.inl(702): warning C4514: 'glm::intBitsToFloat': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_common.inl(721): warning C4514: 'glm::uintBitsToFloat': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail\type_half.inl(19): warning C4514: 'glm::detail::uif32::uif32': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail\type_half.inl(23): warning C4514: 'glm::detail::uif32::uif32': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(9): warning C4514: 'glm::packUnorm2x16': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(25): warning C4514: 'glm::unpackUnorm2x16': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(38): warning C4514: 'glm::packSnorm2x16': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(54): warning C4514: 'glm::unpackSnorm2x16': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(67): warning C4514: 'glm::packUnorm4x8': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(85): warning C4514: 'glm::unpackUnorm4x8': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(98): warning C4514: 'glm::packSnorm4x8': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(116): warning C4514: 'glm::unpackSnorm4x8': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(129): warning C4514: 'glm::packDouble2x32': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(143): warning C4514: 'glm::unpackDouble2x32': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(156): warning C4514: 'glm::packHalf2x16': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_packing.inl(170): warning C4514: 'glm::unpackHalf2x16': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_integer.inl(176): warning C4514: 'glm::uaddCarry': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_integer.inl(194): warning C4514: 'glm::usubBorrow': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_integer.inl(213): warning C4514: 'glm::umulExtended': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\detail/func_integer.inl(229): warning C4514: 'glm::imulExtended': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(216): warning C4514: 'ImVec2::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(217): warning C4514: 'ImVec2::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(228): warning C4514: 'ImVec4::ImVec4': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1369): warning C4514: 'operator new': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1370): warning C4514: 'operator delete': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1680): warning C4514: 'ImGuiInputTextCallbackData::SelectAll': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1681): warning C4514: 'ImGuiInputTextCallbackData::ClearSelection': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1682): warning C4514: 'ImGuiInputTextCallbackData::HasSelection': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1710): warning C4514: 'ImGuiPayload::ImGuiPayload': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1712): warning C4514: 'ImGuiPayload::IsDataType': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1713): warning C4514: 'ImGuiPayload::IsPreview': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1714): warning C4514: 'ImGuiPayload::IsDelivery': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1726): warning C4514: 'ImGui::OpenPopupContextItem': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1732): warning C4514: 'ImGui::DragFloat': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1733): warning C4514: 'ImGui::DragFloat2': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1734): warning C4514: 'ImGui::DragFloat3': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1735): warning C4514: 'ImGui::DragFloat4': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1738): warning C4514: 'ImGui::SliderFloat': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1739): warning C4514: 'ImGui::SliderFloat2': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1740): warning C4514: 'ImGui::SliderFloat3': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1741): warning C4514: 'ImGui::SliderFloat4': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1743): warning C4514: 'ImGui::BeginPopupContextWindow': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1745): warning C4514: 'ImGui::TreeAdvanceToLabelPos': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1747): warning C4514: 'ImGui::SetNextTreeNodeOpen': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1749): warning C4514: 'ImGui::GetContentRegionAvailWidth': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1751): warning C4514: 'ImGui::GetOverlayDrawList': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1753): warning C4514: 'ImGui::SetScrollHere': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1755): warning C4514: 'ImGui::IsItemDeactivatedAfterChange': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1762): warning C4514: 'ImGui::IsAnyWindowFocused': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1763): warning C4514: 'ImGui::IsAnyWindowHovered': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1785): warning C4514: 'ImGuiOnceUponAFrame::ImGuiOnceUponAFrame': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1787): warning C4514: 'ImGuiOnceUponAFrame::operator bool': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1797): warning C4514: 'ImGuiTextFilter::Clear': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1798): warning C4514: 'ImGuiTextFilter::IsActive': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1806): warning C4514: 'ImGuiTextFilter::ImGuiTextRange::ImGuiTextRange': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1807): warning C4514: 'ImGuiTextFilter::ImGuiTextRange::ImGuiTextRange': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1808): warning C4514: 'ImGuiTextFilter::ImGuiTextRange::empty': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1823): warning C4514: 'ImGuiTextBuffer::ImGuiTextBuffer': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1824): warning C4514: 'ImGuiTextBuffer::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1825): warning C4514: 'ImGuiTextBuffer::begin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1826): warning C4514: 'ImGuiTextBuffer::end': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1827): warning C4514: 'ImGuiTextBuffer::size': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1828): warning C4514: 'ImGuiTextBuffer::empty': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1829): warning C4514: 'ImGuiTextBuffer::clear': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1830): warning C4514: 'ImGuiTextBuffer::reserve': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1831): warning C4514: 'ImGuiTextBuffer::c_str': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1852): warning C4514: 'ImGuiStorage::ImGuiStoragePair::ImGuiStoragePair': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1853): warning C4514: 'ImGuiStorage::ImGuiStoragePair::ImGuiStoragePair': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1854): warning C4514: 'ImGuiStorage::ImGuiStoragePair::ImGuiStoragePair': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1862): warning C4514: 'ImGuiStorage::Clear': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1950): warning C4514: 'ImColor::ImColor': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1951): warning C4514: 'ImColor::ImColor': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1952): warning C4514: 'ImColor::ImColor': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1954): warning C4514: 'ImColor::ImColor': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1955): warning C4514: 'ImColor::operator ImU32': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1956): warning C4514: 'ImColor::operator ImVec4': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1959): warning C4514: 'ImColor::SetHSV': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(1960): warning C4514: 'ImColor::HSV': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2109): warning C4514: 'ImDrawList::ImDrawList': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2111): warning C4514: 'ImDrawList::~ImDrawList': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2117): warning C4514: 'ImDrawList::GetClipRectMin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2118): warning C4514: 'ImDrawList::GetClipRectMax': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2153): warning C4514: 'ImDrawList::PathClear': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2154): warning C4514: 'ImDrawList::PathLineTo': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2155): warning C4514: 'ImDrawList::PathLineToMergeDuplicate': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2156): warning C4514: 'ImDrawList::PathFillConvex': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2157): warning C4514: 'ImDrawList::PathStroke': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2174): warning C4514: 'ImDrawList::ChannelsSplit': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2175): warning C4514: 'ImDrawList::ChannelsMerge': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2176): warning C4514: 'ImDrawList::ChannelsSetCurrent': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2188): warning C4514: 'ImDrawList::PrimVtx': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2214): warning C4514: 'ImDrawData::ImDrawData': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2215): warning C4514: 'ImDrawData::~ImDrawData': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2269): warning C4514: 'ImFontGlyphRangesBuilder::ImFontGlyphRangesBuilder': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2271): warning C4514: 'ImFontGlyphRangesBuilder::GetBit': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2273): warning C4514: 'ImFontGlyphRangesBuilder::AddChar': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2288): warning C4514: 'ImFontAtlasCustomRect::ImFontAtlasCustomRect': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2289): warning C4514: 'ImFontAtlasCustomRect::IsPacked': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2341): warning C4514: 'ImFontAtlas::IsBuilt': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2342): warning C4514: 'ImFontAtlas::SetTexID': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2372): warning C4514: 'ImFontAtlas::GetCustomRectByIndex': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2442): warning C4514: 'ImFont::GetCharAdvance': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2443): warning C4514: 'ImFont::IsLoaded': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/imgui/imgui.h(2444): warning C4514: 'ImFont::GetDebugName': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3392): warning C4514: 'sol::detail::error_result::error_result': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3395): warning C4514: 'sol::detail::error_result::error_result': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3398): warning C4514: 'sol::detail::error_result::error_result': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3403): warning C4514: 'sol::detail::handle_errors': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(5880): warning C4514: 'sol::stack_dependencies::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(5884): warning C4514: 'sol::stack_dependencies::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6114): warning C4514: 'sol::operator ==': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6117): warning C4514: 'sol::operator !=': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6213): warning C4514: 'sol::stack_count::stack_count': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6230): warning C4514: 'sol::userdata_value::operator void *': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6568): warning C4514: 'sol::this_state::operator lua_State *': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6572): warning C4514: 'sol::this_state::operator ->': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6587): warning C4514: 'sol::this_main_state::operator lua_State *': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6591): warning C4514: 'sol::this_main_state::operator ->': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6604): warning C4514: 'sol::new_table::new_table': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6737): warning C4514: 'sol::is_indeterminate_call_failure': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6752): warning C4514: 'sol::to_string': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(6880): warning C4514: 'sol::type_name': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(7910): warning C4514: 'sol::detail::base_class_index_propogation_key': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(7915): warning C4514: 'sol::detail::base_class_new_index_propogation_key': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8076): warning C4514: 'sol::detail::accumulate_and_mark': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8122): warning C4514: 'sol::type_panic_string': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8133): warning C4514: 'sol::type_panic_t::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8136): warning C4514: 'sol::type_panic_t::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8144): warning C4514: 'sol::constructor_handler::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8183): warning C4514: 'sol::type_error': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8193): warning C4514: 'sol::type_assert': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8224): warning C4514: 'sol::stateless_stack_reference::registry_index': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8230): warning C4514: 'sol::stateless_stack_reference::stateless_stack_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8291): warning C4514: 'sol::stack_reference::stack_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8293): warning C4514: 'sol::stack_reference::stack_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8297): warning C4514: 'sol::stack_reference::stack_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8303): warning C4514: 'sol::stack_reference::stack_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8357): warning C4514: 'sol::stack_reference::abandon': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8366): warning C4514: 'sol::operator !=': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8378): warning C4514: 'sol::operator !=': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8382): warning C4514: 'sol::operator !=': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8387): warning C4514: 'sol::stack_reference_equals::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8391): warning C4514: 'sol::stack_reference_equals::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8395): warning C4514: 'sol::stack_reference_equals::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8404): warning C4514: 'sol::stack_reference_hash::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8415): warning C4514: 'sol::detail::default_main_thread_name': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8452): warning C4514: 'sol::stack::push_popper_at::push_popper_at': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8455): warning C4514: 'sol::stack::push_popper_at::~push_popper_at': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8478): warning C4514: 'sol::stack::push_popper_n<true>::push_popper_n': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8601): warning C4514: 'sol::stateless_reference::copy_assign': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8609): warning C4514: 'sol::stateless_reference::move_assign': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8619): warning C4514: 'sol::stateless_reference::stack_index': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8636): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8638): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8640): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8642): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8654): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8667): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8691): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8695): warning C4514: 'sol::stateless_reference::stateless_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8708): warning C4514: 'sol::stateless_reference::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8748): warning C4514: 'sol::stateless_reference::abandon': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9226): warning C4514: 'sol::stack_guard::stack_guard': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9306): warning C4514: 'sol::detail::align_usertype_pointer': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9443): warning C4514: 'sol::detail::attempt_alloc': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9462): warning C4514: 'sol::detail::attempt_alloc_unique': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9734): warning C4514: 'sol::detail::property_always_true': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9743): warning C4514: 'sol::detail::properties_enrollment_allowed::properties_enrollment_allowed': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9747): warning C4514: 'sol::detail::properties_enrollment_allowed::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9776): warning C4514: 'sol::detail::indexed_insert::indexed_insert': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(9778): warning C4514: 'sol::detail::indexed_insert::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10020): warning C4514: 'sol::stack::stack_detail::undefined_metatable::undefined_metatable': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10023): warning C4514: 'sol::stack::stack_detail::undefined_metatable::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10047): warning C4514: 'sol::stack::coroutine_create_guard': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10083): warning C4514: 'sol::stack::clear': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(10168): warning C4514: 'sol::stack::multi_push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(11348): warning C4514: 'sol::unicode::to_string': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12205): warning C4514: 'sol::stack::unqualified_getter<sol::userdata_value,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12213): warning C4514: 'sol::stack::unqualified_getter<sol::lightuserdata_value,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12277): warning C4514: 'sol::stack::unqualified_getter<char,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12339): warning C4514: 'sol::stack::unqualified_getter<char32_t,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12358): warning C4514: 'sol::stack::unqualified_getter<wchar_t,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12369): warning C4514: 'sol::stack::unqualified_getter<sol::meta_function,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12382): warning C4514: 'sol::stack::unqualified_getter<sol::lua_nil_t,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12390): warning C4514: 'sol::stack::unqualified_getter<std::nullptr_t,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12398): warning C4514: 'sol::stack::unqualified_getter<sol::nullopt_t,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12406): warning C4514: 'sol::stack::unqualified_getter<sol::this_state,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12414): warning C4514: 'sol::stack::unqualified_getter<sol::this_main_state,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12422): warning C4514: 'sol::stack::unqualified_getter<lua_CFunction,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12430): warning C4514: 'sol::stack::unqualified_getter<sol::c_closure,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12451): warning C4514: 'sol::stack::unqualified_getter<void*,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(12459): warning C4514: 'sol::stack::unqualified_getter<const void*,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13283): warning C4514: 'sol::stack::unqualified_pusher<sol::stack_count,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13290): warning C4514: 'sol::stack::unqualified_pusher<sol::metatable_key_t,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13301): warning C4514: 'sol::stack::unqualified_pusher<int(lua_State *),void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13324): warning C4514: 'sol::stack::unqualified_pusher<int(lua_State *) noexcept,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13335): warning C4514: 'sol::stack::unqualified_pusher<sol::detail::lua_CFunction_noexcept,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13384): warning C4514: 'sol::stack::unqualified_pusher<const void*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13395): warning C4514: 'sol::stack::unqualified_pusher<sol::lightuserdata_value,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13481): warning C4514: 'sol::stack::unqualified_pusher<sol::userdata_value,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13518): warning C4514: 'sol::stack::unqualified_pusher<char*,void>::push_sized': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13524): warning C4514: 'sol::stack::unqualified_pusher<char*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13536): warning C4514: 'sol::stack::unqualified_pusher<char*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13564): warning C4514: 'sol::stack::unqualified_pusher<char,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13635): warning C4514: 'sol::stack::unqualified_pusher<sol::raw_index,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13646): warning C4514: 'sol::stack::unqualified_pusher<sol::ref_index,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13681): warning C4514: 'sol::stack::unqualified_pusher<wchar_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13687): warning C4514: 'sol::stack::unqualified_pusher<wchar_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13693): warning C4514: 'sol::stack::unqualified_pusher<wchar_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13759): warning C4514: 'sol::stack::unqualified_pusher<char16_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13765): warning C4514: 'sol::stack::unqualified_pusher<char16_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13771): warning C4514: 'sol::stack::unqualified_pusher<char16_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13836): warning C4514: 'sol::stack::unqualified_pusher<char32_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13842): warning C4514: 'sol::stack::unqualified_pusher<char32_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13848): warning C4514: 'sol::stack::unqualified_pusher<char32_t*,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13890): warning C4514: 'sol::stack::unqualified_pusher<wchar_t,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13898): warning C4514: 'sol::stack::unqualified_pusher<char16_t,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13906): warning C4514: 'sol::stack::unqualified_pusher<char32_t,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13956): warning C4514: 'sol::stack::unqualified_pusher<sol::nullopt_t,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13970): warning C4514: 'sol::stack::unqualified_pusher<sol::this_state,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(13977): warning C4514: 'sol::stack::unqualified_pusher<sol::this_main_state,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14015): warning C4514: 'sol::stack::stack_detail::push_function::push_function': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14360): warning C4514: 'sol::detail::default_chunk_name': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14397): warning C4514: 'sol::detail::clear_entries': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8322): warning C4514: 'sol::stack_reference::stack_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(8244): warning C4514: 'sol::stateless_stack_reference::stateless_stack_reference': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14539): warning C4514: 'sol::stack::get_call_syntax': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(14590): warning C4514: 'sol::stack::luajit_exception_off': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15055): warning C4514: 'sol::stack_proxy_base::get_type': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15079): warning C4514: 'sol::stack::unqualified_getter<sol::stack_proxy_base,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15086): warning C4514: 'sol::stack::unqualified_pusher<sol::stack_proxy_base,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15099): warning C4514: 'sol::stack_proxy::stack_proxy': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15116): warning C4514: 'sol::stack::unqualified_getter<sol::stack_proxy,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15124): warning C4514: 'sol::stack::unqualified_pusher<sol::stack_proxy,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15166): warning C4514: 'sol::protected_function_result::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15233): warning C4514: 'sol::protected_function_result::get_type': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15237): warning C4514: 'sol::protected_function_result::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15260): warning C4514: 'sol::protected_function_result::rbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15263): warning C4514: 'sol::protected_function_result::rend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15266): warning C4514: 'sol::protected_function_result::rbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15269): warning C4514: 'sol::protected_function_result::rend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15272): warning C4514: 'sol::protected_function_result::crbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15275): warning C4514: 'sol::protected_function_result::crend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15306): warning C4514: 'sol::stack::unqualified_pusher<sol::protected_function_result,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15349): warning C4514: 'sol::unsafe_function_result::unsafe_function_result': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15356): warning C4514: 'sol::unsafe_function_result::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15377): warning C4514: 'sol::unsafe_function_result::get_type': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15381): warning C4514: 'sol::unsafe_function_result::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15404): warning C4514: 'sol::unsafe_function_result::rbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15407): warning C4514: 'sol::unsafe_function_result::rend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15410): warning C4514: 'sol::unsafe_function_result::rbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15413): warning C4514: 'sol::unsafe_function_result::rend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15416): warning C4514: 'sol::unsafe_function_result::crbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15419): warning C4514: 'sol::unsafe_function_result::crend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15427): warning C4514: 'sol::unsafe_function_result::valid': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(15453): warning C4514: 'sol::stack::unqualified_pusher<sol::unsafe_function_result,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(16010): warning C4514: 'sol::policy_detail::handle_policy': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(17988): warning C4514: 'sol::stack::unqualified_pusher<sol::no_construction,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18195): warning C4514: 'sol::dump_error::error_code': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18200): warning C4514: 'sol::dump_pass_on_error': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18208): warning C4514: 'sol::dump_panic_on_error': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18216): warning C4514: 'sol::dump_throw_on_error': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18780): warning C4514: 'sol::protected_function_result::protected_function_result': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18788): warning C4514: 'sol::protected_function_result::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18801): warning C4514: 'sol::unsafe_function_result::unsafe_function_result': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18808): warning C4514: 'sol::unsafe_function_result::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(18837): warning C4514: 'sol::detail::std_shim<void>::std_shim': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(20866): warning C4514: 'sol::u_detail::make_string_view': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(20870): warning C4514: 'sol::u_detail::make_string_view': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(20874): warning C4514: 'sol::u_detail::make_string_view': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(20884): warning C4514: 'sol::u_detail::is_indexer': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(20894): warning C4514: 'sol::u_detail::is_indexer': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(20904): warning C4514: 'sol::u_detail::is_indexer': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21230): warning C4514: 'sol::u_detail::update_bases_func::operator ()': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21273): warning C4514: 'sol::u_detail::usertype_storage_base::usertype_storage_base': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21368): warning C4514: 'sol::u_detail::usertype_storage_base::clear': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21783): warning C4514: 'sol::u_detail::maybe_get_usertype_storage_base': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(5523): warning C4514: 'sol::optional<sol::u_detail::usertype_storage_base &>::optional': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(21790): warning C4514: 'sol::u_detail::get_usertype_storage_base': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(22670): warning C4514: 'sol::detail::fail_on_newindex': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23650): warning C4514: 'sol::stack::unqualified_getter<sol::metatable_key_t,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23806): warning C4514: 'sol::this_environment::operator bool': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23810): warning C4514: 'sol::this_environment::operator sol::optional<sol::environment> &': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23814): warning C4514: 'sol::this_environment::operator const sol::optional<sol::environment> &': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23818): warning C4514: 'sol::this_environment::operator sol::environment': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23822): warning C4514: 'sol::this_environment::operator sol::environment': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23830): warning C4514: 'sol::stack::unqualified_getter<sol::env_key_t,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23838): warning C4514: 'sol::stack::unqualified_getter<sol::this_environment,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23887): warning C4514: 'sol::load_result::load_result': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23897): warning C4514: 'sol::load_result::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23918): warning C4514: 'sol::load_result::valid': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23975): warning C4514: 'sol::load_result::lua_state': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(23978): warning C4514: 'sol::load_result::stack_index': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24032): warning C4514: 'sol::lua_value::lua_value': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24042): warning C4514: 'sol::lua_value::lua_value': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24071): warning C4514: 'sol::lua_value::value': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24106): warning C4514: 'sol::stack::unqualified_pusher<sol::lua_value,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24113): warning C4514: 'sol::stack::unqualified_getter<sol::lua_value,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24140): warning C4514: 'sol::default_at_panic': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24199): warning C4514: 'sol::script_pass_on_error': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24270): warning C4514: 'sol::stack::get_traceback_or_errors': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24350): warning C4514: 'sol::state_view::state_view': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24449): warning C4514: 'sol::state_view::require': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24454): warning C4514: 'sol::state_view::require_script': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24461): warning C4514: 'sol::state_view::require_file': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24468): warning C4514: 'sol::state_view::clear_package_loaders': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24608): warning C4514: 'sol::state_view::safe_script': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24635): warning C4514: 'sol::state_view::safe_script': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24662): warning C4514: 'sol::state_view::safe_script_file': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24683): warning C4514: 'sol::state_view::unsafe_script': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24759): warning C4514: 'sol::state_view::script': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24763): warning C4514: 'sol::state_view::script_file': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24780): warning C4514: 'sol::state_view::script': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24784): warning C4514: 'sol::state_view::script_file': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24795): warning C4514: 'sol::state_view::load_buffer': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24799): warning C4514: 'sol::state_view::load_buffer': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24803): warning C4514: 'sol::state_view::load_file': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24808): warning C4514: 'sol::state_view::load': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24815): warning C4514: 'sol::state_view::begin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24819): warning C4514: 'sol::state_view::end': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24823): warning C4514: 'sol::state_view::cbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24827): warning C4514: 'sol::state_view::cend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24831): warning C4514: 'sol::state_view::globals': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24837): warning C4514: 'sol::state_view::globals': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24841): warning C4514: 'sol::state_view::registry': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24845): warning C4514: 'sol::state_view::memory_used': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24853): warning C4514: 'sol::state_view::stack_clear': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24859): warning C4514: 'sol::state_view::collect_garbage': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24863): warning C4514: 'sol::state_view::operator lua_State *': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24867): warning C4514: 'sol::state_view::set_panic': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24871): warning C4514: 'sol::state_view::set_exception_handler': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(24968): warning C4514: 'sol::state_view::create_table': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(4010): warning C4514: 'sol::detail::optional_delete_assign_base<T,true,true>::optional_delete_assign_base': unreferenced inline function has been removed
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(3971): warning C4514: 'sol::detail::optional_delete_ctor_base<T,true,true>::optional_delete_ctor_base': unreferenced inline function has been removed
+        with
+        [
+            T=sol::object
+        ]
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25013): warning C4514: 'sol::lua_thread_state::operator lua_State *': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25016): warning C4514: 'sol::lua_thread_state::operator ->': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25024): warning C4514: 'sol::stack::unqualified_pusher<sol::lua_thread_state,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25032): warning C4514: 'sol::stack::unqualified_getter<sol::lua_thread_state,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25177): warning C4514: 'sol::state::state': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25182): warning C4514: 'sol::state::state': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25190): warning C4514: 'sol::state::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25198): warning C4514: 'sol::state::~state': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25592): warning C4514: 'sol::variadic_args::variadic_args': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25597): warning C4514: 'sol::variadic_args::variadic_args': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25606): warning C4514: 'sol::variadic_args::operator =': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25638): warning C4514: 'sol::variadic_args::rbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25641): warning C4514: 'sol::variadic_args::rend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25644): warning C4514: 'sol::variadic_args::rbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25647): warning C4514: 'sol::variadic_args::rend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25650): warning C4514: 'sol::variadic_args::crbegin': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25653): warning C4514: 'sol::variadic_args::crend': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25657): warning C4514: 'sol::variadic_args::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25678): warning C4514: 'sol::variadic_args::get_type': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25682): warning C4514: 'sol::variadic_args::operator []': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25686): warning C4514: 'sol::variadic_args::lua_state': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25689): warning C4514: 'sol::variadic_args::stack_index': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25695): warning C4514: 'sol::variadic_args::size': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25698): warning C4514: 'sol::variadic_args::top': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25706): warning C4514: 'sol::stack::unqualified_getter<sol::variadic_args,void>::get': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25714): warning C4514: 'sol::stack::unqualified_pusher<sol::variadic_args,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(25813): warning C4514: 'sol::stack::unqualified_pusher<sol::variadic_results,void>::push': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\include\glm\ext\../detail/type_vec4.hpp(97): warning C4514: 'glm::vec<4,float,glm::packed_highp>::vec': unreferenced inline function has been removed
+C:\dev\pikuma\SAIL\src\../include/sol/sol.hpp(5517): warning C4514: 'sol::optional<const std::exception &>::optional': unreferenced inline function has been removed
+Generating Code...
+Microsoft (R) Incremental Linker Version 14.31.31107.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:Game.exe 
+-LIBPATH:C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86 
+-LIBPATH:C:\libs\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x86 
+-LIBPATH:C:\libs\SDL2_ttf-2.0.18\lib\x86 
+-LIBPATH:C:\libs\SDL2_mixer-2.0.4\lib\x86 
+-LIBPATH:C:\libs\LUA-5.3.6_WIN32 
+user32.lib 
+SDL2main.lib 
+SDL2.lib 
+SDL2_image.lib 
+SDL2_ttf.lib 
+liblua53.a 
+shell32.lib 
+/SUBSYSTEM:CONSOLE 
+/out:../bin/main.exe 
+Game.obj 
+main.obj 
