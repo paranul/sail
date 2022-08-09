@@ -1,6 +1,11 @@
 
+#ifdef _WIN32
+#include <SDL.h>
+#include "Tile.h"
+#elif __linux__
 #include <SDL2/SDL.h>
 #include "Tile.h"
+#endif
 
 TestTile::TestTile()
 :
