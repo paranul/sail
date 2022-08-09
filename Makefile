@@ -70,7 +70,7 @@ OBJ_NAME = engine
 # Declare some Makefile rules
 ################################################################################
 build:
-	$(CC) $(COMPILER_FLAGS) $(LANG_STD) $(SRC_FILES) $(LINKER_FLAGS) -o $(OBJ_NAME)
+	$(CC) $(COMPILER_FLAGS) $(LANG_STD) $(SRC_FILES) $(LINKER_FLAGS) -o bin/engine.out
 
 run:
 	./$(OBJ_NAME)
