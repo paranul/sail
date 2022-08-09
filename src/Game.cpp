@@ -114,6 +114,11 @@ void Game::Setup()
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
     text.LoadFromRenderedText("This \t is \n another  \n line \n of text"); 
 
+    const char* path;
+    path = SDL_GetBasePath();
+
+    std::cout << "Path of executable: "  << path << std::endl;
+
 }
 
 void Game::Run()

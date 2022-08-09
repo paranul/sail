@@ -5,4 +5,4 @@
 
 ::call cd ..
 
-start C:\dev\SAIL\sail_engine\bin\main.exe
+start ..\bin\main.exe
