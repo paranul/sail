@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include "./testSource/S_Draw.h" //Perhaps add to compiler -I include path? So you can swam them out easier when you want to test others
+#include "Shapes.h"
 
 
 
@@ -273,14 +274,10 @@ void Game::Render()
 
     tile1.DrawUknownTile();
 
-
+    Shape::GetInstance().DrawCircle(100,100, 20);
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("adventurer_sheet", 0, 0);
-
-    static int x =0;
-    static int y = 0;
-
 
 
     text.Render(100,10);
