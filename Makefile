@@ -57,8 +57,8 @@ INCLUDE_PATH = -I"./include"
 SRC_FILES = ./src/*.cpp \
 		./src/ECS/*.cpp \
 		./src/ECSComponents/*.cpp \
+		./src/testSource/*.cpp \
 		#./src/ECSSystems/*.cpp \
-		./src/testSource/*.cpp
 			# ./src/*.cpp \
 			# ./src/Logger/*.cpp \
 			# ./src/ECS/*.cpp \
@@ -70,7 +70,7 @@ OBJ_NAME = engine
 # Declare some Makefile rules
 ################################################################################
 build:
-	$(CC) $(COMPILER_FLAGS) $(LANG_STD) $(INCLUDE_PATH) $(SRC_FILES) $(LINKER_FLAGS) -o $(OBJ_NAME)
+	$(CC) $(COMPILER_FLAGS) $(LANG_STD) $(SRC_FILES) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
 run:
 	./$(OBJ_NAME)
