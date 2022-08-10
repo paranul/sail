@@ -2,6 +2,9 @@
 #include "Shapes.h"
 #include "Game.h"
 #include "../external/glm/glm.hpp"
+#include <cmath>
+
+
 
 Shape& Shape::GetInstance()
 {
@@ -37,4 +40,58 @@ void Shape::DrawCircle(int centerX, int centerY, int radius)
     Shape::GetInstance().DrawPixel(rightX, topY);
     Shape::GetInstance().DrawPixel(rightX, bottomY);
     Shape::GetInstance().DrawPixel(LeftX, bottomY);
+
+    Shape::GetInstance().DrawPixel(centerX, centerY);
+
+    for(int x = LeftX; x <= rightX; x++)
+    {
+        
+        for(int y = topY; y <= bottomY; y++)
+        {
+            int a = centerX - x;
+            int b = centerY - y;
+
+            if( sqrt((a*a) + (b*b)) == radius)
+            {
+                Shape::GetInstance().DrawPixel(x, y);
+            }
+        }
+
+    }
+
+}
+
+void Shape::DrawCircleF(float centerX, float centerY, float radius)
+{
+    float LeftX = centerX - radius;
+    float topY = centerY - radius;
+    float rightX = centerX + radius;
+    float bottomY = centerY + radius;
+
+    // Shape::GetInstance().DrawPixel(LeftX, topY);
+    // Shape::GetInstance().DrawPixel(rightX, topY);
+    // Shape::GetInstance().DrawPixel(rightX, bottomY);
+    // Shape::GetInstance().DrawPixel(LeftX, bottomY);
+
+    Shape::GetInstance().DrawPixel(centerX, centerY);
+
+    float c = radius * radius;
+
+    for(float x = LeftX+1; x < rightX; x++)
+    {
+        
+        for(float y = topY+1; y < bottomY; y++)
+        {
+            float a = centerX - x;
+            float b = centerY - y;
+
+            if( ((a*a) + (b*b) == c) || (((a*a) + (b*b) <= c) && ((a*a) + (b*b) >= c)) )
+            {
+                //printf("Drawing at: %f, %f\n",x,y);
+                Shape::GetInstance().DrawPixel(float(x), float(y));
+            }
+        }
+
+    }
+
 }

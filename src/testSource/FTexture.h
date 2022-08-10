@@ -24,11 +24,12 @@ public:
     //This is for the text you want to display
     bool LoadFromRenderedText(std::string displayText, SDL_Color textColor = {255,255,255});
     void Render(int x, int y, SDL_Rect* clip = nullptr, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
+    void LoadFont(std::string file, int size);
 
     void SetBlendMode();
 
 
-public:
+private:
 
 SDL_Texture* m_texture;
 TTF_Font* m_font;
