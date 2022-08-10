@@ -26,7 +26,7 @@ CFLAGS += -Wunused-but-set-parameter
 CFLAGS += -Wwrite-strings
 
 CXXFLAGS += -pedantic
-CXXFLAGS += -Wall
+#CXXFLAGS += -Wall
 CXXFLAGS += -Wextra
 CXXFLAGS += -Wcast-align
 CXXFLAGS += -Wcast-qual
@@ -71,6 +71,11 @@ OBJ_NAME = engine
 ################################################################################
 build:
 	$(CC) $(COMPILER_FLAGS) $(LANG_STD) $(SRC_FILES) $(LINKER_FLAGS) -o bin/engine.out
+
+#Debug Build
+Dbuild:
+	$(CC) $(COMPILER_FLAGS) $(CXXFLAGS) -fsanitize=address -static-libasan -g3 $(LANG_STD) $(SRC_FILES) $(LINKER_FLAGS) -o bin/debugEngine.out
+
 
 run:
 	./$(OBJ_NAME)
