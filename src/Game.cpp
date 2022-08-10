@@ -111,9 +111,9 @@ void Game::Setup()
     POINTER::S_Draw::GetInstance()->LoadID("../assets/spear.png");
     POINTER::S_Draw::GetInstance()->LoadID("../assets/adventurer_sheet.png");
 
-    text.m_font = TTF_OpenFont("../assets/Minecraft.ttf", 20);
+    text.LoadFont("../assets/Minecraft.ttf", 20);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
-    text.LoadFromRenderedText("This \t is \n another  \n line \n of text"); 
+    //text.LoadFromRenderedText("This \t is \n another  \n line \n of text"); 
 
     const char* path;
     path = SDL_GetBasePath();
@@ -272,9 +272,11 @@ void Game::Render()
 
     TestTile tile1;
 
-    tile1.DrawUknownTile();
+   // SDL_RenderGeometry()
 
-    Shape::GetInstance().DrawCircle(100,100, 20);
+    //tile1.DrawUknownTile();
+
+    Shape::GetInstance().DrawCircle(100.0f,100.0f, 20.0f);
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("adventurer_sheet", 0, 0);
