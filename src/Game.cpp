@@ -11,8 +11,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "./testSource/S_Draw.h" //Perhaps add to compiler -I include path? So you can swam them out easier when you want to test others
+#include "./testSource/S_Draw.h" //Perhaps add to compiler -I include path? So you can swap them out easier when you want to test others
 #include "Shapes.h"
+#include "TextureManager.h"
 
 
 
@@ -110,6 +111,7 @@ void Game::Setup()
     //POINTER::S_Draw::GetInstance()->Load("spear", "../assets/spear.png");
     POINTER::S_Draw::GetInstance()->LoadID("../assets/spear.png");
     POINTER::S_Draw::GetInstance()->LoadID("../assets/adventurer_sheet.png");
+    TextureManager::GetInstance().Load("../assets/tree_0.png");
 
     text.LoadFont("../assets/Minecraft.ttf", 20);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
@@ -276,10 +278,15 @@ void Game::Render()
 
     //tile1.DrawUknownTile();
 
-    Shape::GetInstance().DrawCircle(100.0f,100.0f, 20.0f);
+
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("adventurer_sheet", 0, 0);
+
+    const SDL_Point p = {0,0};
+
+    TextureManager::GetInstance().DrawRotatingObject("tree_0", 500, 500, 300, &p);
+
 
 
     text.Render(100,10);
