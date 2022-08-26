@@ -34,8 +34,17 @@ public:
     void Kill();
 
 public:
-int m_windowWidth;
-int m_windowHeight;
+    int m_windowWidth;
+    int m_windowHeight;
+    Uint32 buttons;
+    int mouseX;
+    int mouseY;
+    inline static bool mouseButtonHeld = false;
+    Uint32 startMouseTime;
+
+    
+
+
 
 private:
     Game();

@@ -76,15 +76,15 @@ void TextureManager::DrawRotatingObject(std::string id, int x, int y, double ang
 
 void TextureManager::DrawObjectDimensions(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip)
 {
-    //int in_width = width;
-    //int in_height = height;
-
-    SDL_QueryTexture(m_textureMap[id], NULL, NULL, &width, &height);
-
     SDL_Rect srcRect = {0, 0, width, height};
     SDL_Rect dstRect = {x, y, width, height};
 
     SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), m_textureMap[id], &srcRect, &dstRect, 0, NULL, flip);
+
+
+    //DEBUG//////////////////////////////////////////////////////////
+
+    //Shape::GetInstance().DrawRect(x, y, width, height);
 }
 
 

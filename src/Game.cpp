@@ -17,6 +17,7 @@
 
 
 
+
 Game::Game()
     :
     m_window(NULL),
@@ -110,17 +111,33 @@ void Game::Setup()
 
     //POINTER::S_Draw::GetInstance()->Load("spear", "../assets/spear.png");
     POINTER::S_Draw::GetInstance()->LoadID("../assets/spear.png");
-    POINTER::S_Draw::GetInstance()->LoadID("../assets/adventurer_sheet.png");
+    POINTER::S_Draw::GetInstance()->LoadID("../assets/oot-2d-map.png");
     TextureManager::GetInstance().Load("../assets/tree_0.png");
+    TextureManager::GetInstance().Load("../assets/adventurer_sheet.png");
 
     text.LoadFont("../assets/Minecraft.ttf", 20);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
     //text.LoadFromRenderedText("This \t is \n another  \n line \n of text"); 
 
+    //This is important for later to make sure that we are finding the assets and data folder correctly, even if exe is not in /bin
     const char* path;
     path = SDL_GetBasePath();
 
     std::cout << "Path of executable: "  << path << std::endl;
+    for(int i = 0; i < 10; i++)
+    {
+        std::cout << path[i];
+    }
+
+    //SDL_VERSION()
+    SDL_version linked;
+    SDL_GetVersion(&linked);
+    //accessing twice at the same time makes this crash
+    //https://docs.microsoft.com/en-us/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions?view=msvc-170
+    //printf("\nSDL Version: %o", linked.major);
+    //adding a + before a number will print it as a number otherwise cout tries to print as character
+    //https://stackoverflow.com/questions/19562103/uint8-t-cant-be-printed-with-cout
+    std::cout << "\nSDL Version cout<<: " << +linked.major << "." << linked.minor + 0 <<"." << +linked.patch << "\n";
 
 }
 
@@ -135,20 +152,22 @@ void Game::Run()
         //start frametime timepoint here
         Update();
         //end frametime timepoint here
-        Render();
         //subtract to see the time one  frame took
+        Render();
         
     }
 
 }
 
 
-static bool mouseButtonHeld = false;
+
 
 void Game::ProcessInput()
 {
-
+    //pretty important to have SDL_PumpEvents before you get the state to make sure you get the correct state (Key state and mouse state)
+    SDL_PumpEvents();
     SDL_Event sdlEvent;
+    buttons = SDL_GetMouseState(&mouseX, &mouseY);
 
     while( SDL_PollEvent( &sdlEvent ) )
     {
@@ -203,6 +222,8 @@ void Game::ProcessInput()
                     static bool debugMode = false;
                     debugMode = !debugMode;
                     printf("Debug mode:%i \n", debugMode);
+
+                    std::cout << "Middle Mouse held: "<<mouseButtonHeld << "\n";
                 }
                 break;
 
@@ -227,8 +248,9 @@ void Game::ProcessInput()
                 if(sdlEvent.button.button == SDL_BUTTON_MIDDLE)
                 {
                     printf("Middle mouse pressed\n");
-                    printf("Middle Mouse Button Held!\n");
-                    mouseButtonHeld = true;
+                    
+                    startMouseTime = SDL_GetTicks();
+
                 }
             default:
                 {
@@ -258,6 +280,33 @@ void Game::ProcessInput()
 
         }
     }
+
+
+
+    if((buttons & SDL_BUTTON_MMASK) != 0)
+    {
+
+        Uint32 now = SDL_GetTicks();
+
+        if(now - startMouseTime >= 1000)
+        {
+
+            printf("MouseButton HELDDDDD\n");
+            mouseButtonHeld = true;
+        }
+        //State machine tags this on release as well
+        //small fix for now is to check if middle mouse is released and tag it as released...not sure if good fix
+
+    }
+
+    //If i pump events I should not need this check every single frame....
+    // else if((buttons & SDL_BUTTON_MMASK) == 0)
+    // {
+    //     mouseButtonHeld = false;
+    // }
+
+
+
 }
 
 void Game::Update()
@@ -273,6 +322,8 @@ void Game::Render()
     SDL_RenderClear(m_renderer);
 
     TestTile tile1;
+    //unicode 
+    //РУСКИЙ
 
    // SDL_RenderGeometry()
 
@@ -281,15 +332,17 @@ void Game::Render()
 
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
-    POINTER::S_Draw::GetInstance()->DrawQueriedTexture("adventurer_sheet", 0, 0);
+    POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", 0, 0);
 
     const SDL_Point p = {0,0};
 
     TextureManager::GetInstance().DrawRotatingObject("tree_0", 500, 500, 300, &p);
 
+    TextureManager::GetInstance().DrawObjectDimensions("adventurer_sheet", 300,200,25,40);
 
 
-    text.Render(100,10);
+
+    text.Render(200,100, nullptr,-5.0);
 
 
     SDL_RenderPresent(m_renderer);

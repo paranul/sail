@@ -24,8 +24,7 @@ public:
     void DrawObject(std::string id, int x, int y, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void DrawRotatingObject(std::string id, int x, int y, double angle, const SDL_Point *center,  SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-
-    //TODO:: NOT WORKING YET
+    //Draw a part of a texture by specifying with and height
     void DrawObjectDimensions(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     std::string StripFileNameExtension(std::string fileName);

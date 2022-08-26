@@ -10,7 +10,7 @@
 ::doskey SDL2="C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include"
 
 ::INCLUDE DIRECTORIES
-set SDL2="C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include"
+set SDL2="C:\libs\SDL2-2.24.0\include"
 set SDL2_image="C:\libs\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\include"
 set SDL2_ttf="C:\libs\SDL2_ttf-2.0.18\include"
 set SDL2_mixer="C:\libs\SDL2_mixer-2.0.4\include"
@@ -19,7 +19,7 @@ set glm="C:\dev\SAIL\sail_engine\external\glm"
 ::set luaINCLUDE="C:\dev\pikuma\SAIL\include\lua"
 
 ::LIBRARY DIRECTORIES
-set SDL2_lib="C:\libs\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86"
+set SDL2_lib="C:\libs\SDL2-2.24.0\lib\x86"
 set SDL2_image_lib="C:\libs\SDL2_image-devel-2.0.5-VC\SDL2_image-2.0.5\lib\x86"
 set SDL2_ttf_lib="C:\libs\SDL2_ttf-2.0.18\lib\x86"
 set SDL2_mixer_lib="C:\libs\SDL2_mixer-2.0.4\lib\x86"

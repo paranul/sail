@@ -20,12 +20,12 @@ public:
     void Draw(int x, int y, int spriteWidth, int spriteHeight);
 
 private:
-    int m_spriteRow;
-    int m_spriteFrame;
-    int m_animationSpeed;
-    int m_frameCount;
     std::string m_textureID;
+    int m_spriteRow;
+    int m_frameCount;
+    int m_animationSpeed;
     SDL_RendererFlip m_flip;
+    int m_spriteFrame;
 
 
 };
