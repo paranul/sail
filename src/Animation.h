@@ -15,7 +15,9 @@ class Animation
 
 public:
     Animation();
+    //std::string textureID needs to already have been loaded from TextureManager()
     void SetProperties(std::string textureID, int spriteRow, int frameCount, int animationSpeed, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    //m_animationSpeed # will dictate how many milliseconds per frame
     void Update();
     void Draw(int x, int y, int spriteWidth, int spriteHeight);
 

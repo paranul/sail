@@ -4,11 +4,17 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "Shapes.h"
+#include <iostream>
 
 TextureManager& TextureManager::GetInstance()
 {
     static TextureManager instance;
     return instance;
+}
+
+TextureManager::TextureManager()
+{
+    std::cout << "TextureManager::map_size: " << m_textureMap.size() << '\n';
 }
 
 //TODO: Might consider making this a boolean to see if the load was all good or not
@@ -85,6 +91,13 @@ void TextureManager::DrawObjectDimensions(std::string id, int x, int y, int widt
     //DEBUG//////////////////////////////////////////////////////////
 
     //Shape::GetInstance().DrawRect(x, y, width, height);
+}
+
+void TextureManager::DrawFrame(std::string id, int x, int y, int width, int height, int row, int frame, SDL_RendererFlip flip)
+{
+    SDL_Rect srcRect = {width * frame, height * row, width, height};
+    SDL_Rect dstRect = {x, y, width, height};
+    SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), m_textureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
 }
 
 

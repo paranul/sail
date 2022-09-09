@@ -59,7 +59,7 @@ bool FTexture::LoadFromFile(std::string path)
 
 bool FTexture::LoadFromRenderedText(std::string displayText, SDL_Color textColor )
 {
-    //free(); Needed?
+    Free(); //Needed? ----Yes very much needed otherwises crashess after a few runs
 
     //TODO: Need to load m_font (Pass into the function or seperate load?)
     //TODO: since this is a bool type function, add negative success values to NULL texture / surface
@@ -108,4 +108,16 @@ void FTexture::Render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* cen
 
     //Render to screen
     SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), m_texture, clip, &renderQuad, angle, center, flip);
+}
+
+void FTexture::Free()
+{
+	//Free texture if it exists
+	if( m_texture != NULL )
+	{
+		SDL_DestroyTexture( m_texture );
+		m_texture = NULL;
+		m_width = 0;
+		m_height = 0;
+	}
 }

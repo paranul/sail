@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 
     while(Game::GetInstance().IsRunning())
     {
-        Game::GetInstance().ProcessInput();
+        Game::GetInstance().Input();
         Game::GetInstance().Update();
         Game::GetInstance().Render();
     }

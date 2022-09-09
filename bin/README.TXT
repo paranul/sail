@@ -8,3 +8,10 @@ https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setprocess
 BOOL SetProcessDpiAwarenessContext(
   [in] DPI_AWARENESS_CONTEXT value
 );
+
+
+
+
+NOTE::::QuickEdit Mode (Console CMD highlighting feature freezes the application)
+
+https://stackoverflow.com/questions/55497407/disable-quick-edit-mode-for-console-from-c
