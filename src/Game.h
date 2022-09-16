@@ -50,6 +50,7 @@ public:
     void Kill();
 
 public:
+//NOTE: Make these into static singletons?? I Will probably need to access them all over the place
     int m_windowWidth;
     int m_windowHeight;
 
@@ -88,7 +89,7 @@ Animation adv;
 
 
 
-    //---------------------------------Nuklear GUI components--------------
+    //---------------------------------Nuklear GUI components---------------------------------//
     struct nk_context *m_nukCtxt;
     struct nk_colorf m_nukBG;
 

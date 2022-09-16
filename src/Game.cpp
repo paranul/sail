@@ -14,6 +14,7 @@
 #include "./testSource/S_Draw.h" //Perhaps add to compiler -I include path? So you can swap them out easier when you want to test others
 #include "Shapes.h"
 #include "TextureManager.h"
+#include "InputManager.h"
 //#include <sstream>
 
 
@@ -361,7 +362,10 @@ void Game::Input()
     //     mouseButtonHeld = false;
     // }
 
-
+    if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_SPACE))
+    {
+        std::cout <<"SPACE PRESSED\n\n";
+    }
 
 }
 
@@ -424,7 +428,7 @@ void Game::Render()
 
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
-    POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", -500, -800);
+    POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", -1000, -1000);
 
 
 
@@ -470,8 +474,13 @@ void Game::Render()
                 nk_value_int(m_nukCtxt, "Window Height", m_windowHeight);
                 nk_layout_row_dynamic(m_nukCtxt, 8, 1);
                 nk_value_float(m_nukCtxt, "Zoom Scale", POINTER::S_Draw::GetInstance()->m_scale);
+                //NOTE: Need to put texturemanager class back to private member variables eventuallu...
                 nk_value_int(m_nukCtxt, "TextureManager map_size()", TextureManager::GetInstance().m_textureMap.size());
-                
+                nk_value_int(m_nukCtxt, "Middle Mouse Held", mouseButtonHeld);
+                nk_layout_row_static(m_nukCtxt, 30, 140, 2);
+                nk_value_int(m_nukCtxt, "Mouse_Screen X", mouseX);
+                nk_value_int(m_nukCtxt, "Y", mouseY);
+
             }
 
 

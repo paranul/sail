@@ -13,5 +13,6 @@ BOOL SetProcessDpiAwarenessContext(
 
 
 NOTE::::QuickEdit Mode (Console CMD highlighting feature freezes the application)
+--A Quick fix is to right click on the command window do exit highlighting mode
 
 https://stackoverflow.com/questions/55497407/disable-quick-edit-mode-for-console-from-c
