@@ -1,3 +1,6 @@
+#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
+
 
 #ifdef _WIN32
 #include <SDL.h>
@@ -63,3 +66,5 @@ std::map<std::string, SDL_Texture*> m_textureMap;
 
 
 */
+
+#endif

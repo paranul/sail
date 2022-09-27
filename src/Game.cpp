@@ -12,9 +12,9 @@
 #include <string>
 #include <vector>
 #include "./testSource/S_Draw.h" //Perhaps add to compiler -I include path? So you can swap them out easier when you want to test others
-#include "Shapes.h"
+//#include "Shapes.h"
 #include "TextureManager.h"
-#include "InputManager.h"
+//#include "InputManager.h"
 //#include <sstream>
 
 
@@ -44,6 +44,7 @@ Game::Game()
     m_window(NULL),
     m_renderer(NULL),
     m_Active(false)
+    //adveturer("adventurer_sheet", 0, 13, 32, 32, 200)
 
 {
     std::cout << "Game Object Constructed!\n";
@@ -166,7 +167,7 @@ void Game::Setup()
     TextureManager::GetInstance().Load("../assets/tree_0.png");
     TextureManager::GetInstance().Load("../assets/adventurer_sheet.png");
 
-    adv.SetProperties("adventurer_sheet", 0, 13, 200);
+    //adv.SetProperties("adventurer_sheet", 0, 13, 32, 32, 200);
 
     text.LoadFont("../assets/arial.ttf", 12);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
@@ -345,7 +346,7 @@ void Game::Input()
 
         Uint32 now = SDL_GetTicks();
 
-        if(now - startMouseTime >= 1000)
+        if(now - startMouseTime >= 300)
         {
 
             //printf("MouseButton HELDDDDD\n");
@@ -362,10 +363,13 @@ void Game::Input()
     //     mouseButtonHeld = false;
     // }
 
-    if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_SPACE))
-    {
-        std::cout <<"SPACE PRESSED\n\n";
-    }
+
+
+    /////////////delete this as this is using another while loop for SDL_Event
+    // if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_SPACE))
+    // {
+    //     std::cout <<"SPACE PRESSED\n\n";
+    // }
 
 }
 
@@ -388,7 +392,7 @@ void Game::Update()
     //     // lastTime = currentTime;
     // }
 
-    adv.Update();
+    //adv.Update();
 
 
     // if(SDL_GetTicks() % 1000 == 0)
@@ -442,8 +446,8 @@ void Game::Render()
     TextureManager::GetInstance().DrawObjectDimensions("adventurer_sheet", 300,200,25,40);
 
 
-    adv.Draw(0,0, 32,30);
-    
+    //adv.Draw(50,50);
+    //adveturer.Draw();
 
     // timeText.str("");
     // timeText << "milliseconds since start time " << SDL_GetTicks();
@@ -533,7 +537,7 @@ void Game::Render()
         nk_end(m_nukCtxt);
 
     countedUpdateFrames++;
-    rotation += 0.01;
+    rotation += 0.01f;
 
     nk_sdl_render(NK_ANTI_ALIASING_OFF);
     SDL_RenderPresent(m_renderer);

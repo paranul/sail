@@ -11,7 +11,8 @@
 #endif
 
 #include "./testSource/Tile.h"
-#include "Animation.h"
+//#include "Animation.h"
+#include "Adventurer.h"
 
 #include <sstream>
 
@@ -74,18 +75,18 @@ private:
     ~Game() {}
 
 
-SDL_Window* m_window;
-SDL_Renderer* m_renderer;
+    SDL_Window* m_window;
+    SDL_Renderer* m_renderer;
 
-bool m_Active;
+    bool m_Active;
 
-FTexture text;
+    FTexture text;
 
-Uint32 startTime = 0;
-std::stringstream timeText;
+    Uint32 startTime = 0;
+    std::stringstream timeText;
 
-Animation adv;
-
+    // Animation adv;
+    // Adventurer adveturer;
 
 
 

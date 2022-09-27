@@ -1,4 +1,5 @@
-
+#ifndef INPUTMANAGER_H
+#define INPUTMANAGER_H
 
 #ifdef _WIN32
 #include <SDL.h>
@@ -30,3 +31,5 @@ private:
     //SDL_Event m_sdlEvent;
 
 };
+
+#endif

@@ -10,9 +10,9 @@
 // #include <SDL2/SDL_ttf.h>
 // #endif
 
-#include "../external/glm/vec2.hpp"
+//#include "../external/glm/vec2.hpp"
 
-#include "ECS/ECS.h"
+//#include "ECS/ECS.h" //not being used right now
 
 
 #include <iostream>
