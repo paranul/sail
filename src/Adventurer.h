@@ -22,17 +22,26 @@ public:
     ~Adventurer();
     void SetProperties();
     void Draw();
-    void Update();
+    void Update(const int &mouesX, const int &mouseY);
     void Input();
+    void WorldToScreen(float worldX, float worldY, int &screenX, int &screenY);
+    void ScreenToWorld(int screenX, int screenY, float &worldX, float &worldY);
+    void WorldToScreenMouse(float worldX, float worldY, int &screenX, int &screenY);
 
 
-private:
+public:
 
-    float m_worldX = 0.0f;
-    float m_worldY = 0.0f;
+    float m_speed = 0.3f;
+    float m_worldX = 100.0f;
+    float m_worldY = 100.0f;
 
-    int m_screenX = 0;
-    int m_screenY = 0;
+    int m_screenX = 100;
+    int m_screenY = 100;
+
+    bool m_DirectControl = true;
+
+    int moveToX;
+    int moveToY;
 
 
 

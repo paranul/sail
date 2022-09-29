@@ -221,7 +221,7 @@ void Game::Input()
 {
     //pretty important to have SDL_PumpEvents before you get the state to make sure you get the correct state (Key state and mouse state)
     SDL_PumpEvents();
-    SDL_Event sdlEvent;
+    
     buttons = SDL_GetMouseState(&m_mouseX, &m_mouseY);
 
     //SDL_GetKeyboardState(int * num);
@@ -309,23 +309,23 @@ void Game::Input()
                     m_mouseHeldStartY = m_mouseY;
 
                 }
-            default:
-                {
-                    //POINTER::S_Draw::GetInstance()->m_scale += 0;
-                    //printf("Default case Running\n");
-                }
-                break;
-            case SDL_MOUSEBUTTONUP:
-                if(sdlEvent.button.button == SDL_BUTTON_MIDDLE)
-                {
-                    printf("Middle mouse released!\n");
-                    m_mouseButtonHeld = false;
-                    m_mousePOScaptured = false;
-                    //SDL_SetRelativeMouseMode(SDL_FALSE);
+            // default:
+            //     {
+            //         //POINTER::S_Draw::GetInstance()->m_scale += 0;
+            //         //printf("Default case Running\n");
+            //     }
+            //     break;
+            // case SDL_MOUSEBUTTONUP:
+            //     if(sdlEvent.button.button == SDL_BUTTON_MIDDLE)
+            //     {
+            //         // printf("Middle mouse released!\n");
+            //         //m_mouseButtonHeld = false;
+            //         m_mousePOScaptured = false;
+            //         //SDL_SetRelativeMouseMode(SDL_FALSE);
 
 
-                }
-                break;
+            //     }
+            //     break;
 
             case SDL_MOUSEMOTION:
                 {
@@ -343,6 +343,8 @@ void Game::Input()
     }
     nk_input_end(m_nukCtxt);
 
+    
+
     if(InputManager::GetInstance().ReadMouseDown())
     {
         std::cout << "Mouse Press\n";
@@ -351,10 +353,7 @@ void Game::Input()
 
     if(InputManager::GetInstance().MiddleMouseHeld())
     {
-        m_mouseHeldStartX = m_mouseX;
-        m_mouseHeldStartY = m_mouseY;
-        m_mousePOScaptured = true;
-        std::cout << m_mouseHeldStartX;
+
         fOffsetX -= (m_mouseX - m_mouseHeldStartX);
         fOffsetY -= (m_mouseY - m_mouseHeldStartY);
 
@@ -363,69 +362,6 @@ void Game::Input()
     }
 
 
-
-    if((buttons & SDL_BUTTON_MMASK) != 0)
-    {
-
-        Uint32 now = SDL_GetTicks();
-
-        if(now - startMouseTime >= 100)
-        {
-            m_mouseButtonHeld = true;
-            
-            if(m_mouseButtonHeld)
-            {   
-                static int picStartX;
-                static int picStartY;
-                if(m_mousePOScaptured == false)
-                {
-                    m_mouseHeldStartX = m_mouseX;
-                    m_mouseHeldStartY = m_mouseY;
-
-                    m_mousePOScaptured = true;
-                    std::cout << m_mouseHeldStartX;
-
-                }
-                    fOffsetX -= (m_mouseX - m_mouseHeldStartX);
-                    fOffsetY -= (m_mouseY - m_mouseHeldStartY);
-
-                    m_mouseHeldStartX = m_mouseX;
-                    m_mouseHeldStartY = m_mouseY;
-                // m_mouseXoffset = (m_mouseX - m_mouseHeldStartX) ;
-                // m_mouseYoffset = (m_mouseY - m_mouseHeldStartY) ;
-                
-
-                // //SDL_SetRelativeMouseMode(SDL_TRUE);
-
-                // POINTER::S_Draw::GetInstance()->m_offsetX = m_mouseXoffset ;
-                // POINTER::S_Draw::GetInstance()->m_offsetY = m_mouseYoffset ;
-
-                ////TODO: capture mouse X and mouse Y at the beginning of a hold -- them do current mousePOS - startMousePOS;
-
-
-                //SDL_GetMouseState(&startX, &startY);
-
-            }
-            
-        }
-        //State machine tags this on release as well
-        //small fix for now is to check if middle mouse is released and tag it as released...not sure if good fix
-
-    }
-
-    //If i pump events I should not need this check every single frame....
-    // else if((buttons & SDL_BUTTON_MMASK) == 0)
-    // {
-    //     mouseButtonHeld = false;
-    // }
-
-
-
-    /////////////delete this as this is using another while loop for SDL_Event
-    // if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_SPACE))
-    // {
-    //     std::cout <<"SPACE PRESSED\n\n";
-    // }
 
 }
 
@@ -457,7 +393,10 @@ void Game::Update()
         
     // }
 
-    adveturer.Update();
+
+    adveturer.Update(m_mouseX, m_mouseY);
+    WorldToScreen(c_worldx, c_worldy, c_screenx, c_screeny);
+    WorldToScreen(c2_worldx, c2_worldy, c2_screenx, c2_screeny);
 
     //c2_worldx +=1;
     
@@ -485,9 +424,7 @@ void Game::Render()
     //unicode 
     //РУСКИЙ
 
-   // SDL_RenderGeometry()
 
-    //tile1.DrawUknownTile();
 
 
 
@@ -509,8 +446,7 @@ void Game::Render()
     //adv.Draw(50,50);
     adveturer.Draw();
 
-    WorldToScreen(c_worldx, c_worldy, c_screenx, c_screeny);
-    WorldToScreen(c2_worldx, c2_worldy, c2_screenx, c2_screeny);
+
 
     Shape::GetInstance().DrawCircle(c_screenx, c_screeny, 20);
 
@@ -554,7 +490,12 @@ void Game::Render()
                 nk_layout_row_dynamic(m_nukCtxt, 8, 1);
                 nk_value_int(m_nukCtxt, "S_DRAW offsetX", POINTER::S_Draw::GetInstance()->m_offsetX);
                 nk_value_int(m_nukCtxt, "fOffsetX", fOffsetX);   
-                nk_value_int(m_nukCtxt, "fOffsetY", fOffsetY);          
+                nk_value_int(m_nukCtxt, "fOffsetY", fOffsetY);
+                nk_value_int(m_nukCtxt, "mouseState", buttons);  
+                nk_value_int(m_nukCtxt, "treeAdventurer screenX", adveturer.m_screenX);       
+                nk_value_int(m_nukCtxt, "treeAdventurer screenY", adveturer.m_screenY);  
+                nk_value_int(m_nukCtxt, "treeAdventurer WorldX", adveturer.m_worldX);
+                nk_value_int(m_nukCtxt, "treeAdventurer WorldY", adveturer.m_worldY);                 
 
             }
 

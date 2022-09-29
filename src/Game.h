@@ -91,7 +91,11 @@ private:
 
     bool m_Active;
 
+    SDL_Event sdlEvent;
+
     FTexture text;
+
+
 
     Uint32 startTime = 0;
     std::stringstream timeText;

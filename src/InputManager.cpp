@@ -10,7 +10,6 @@
 InputManager::InputManager()
 {
     m_keystate = SDL_GetKeyboardState(nullptr);
-    Listen();
 }
 
 InputManager& InputManager::GetInstance()
@@ -27,7 +26,7 @@ bool InputManager::ReadKeyDown(SDL_Scancode key)
 
 bool InputManager::ReadMouseDown()
 {
-    //m_buttonState = SDL_GetMouseState(&m_mouseX, &m_mouseX);
+    m_buttonState = SDL_GetMouseState(&m_mouseX, &m_mouseX);
 
     if((m_buttonState & SDL_BUTTON_LMASK) != 0)
     {
@@ -37,9 +36,10 @@ bool InputManager::ReadMouseDown()
     return false;
 
 }
-
+        //TODO: Timer Function not popping off correctly because it goes out of scope and 
+        //  therefore never has a chance to be compared properly.. think of fix
 bool InputManager::MiddleMouseHeld()
-{
+{       
 
     m_buttonState = SDL_GetMouseState(&m_mouseX, &m_mouseX);
 
@@ -47,39 +47,24 @@ bool InputManager::MiddleMouseHeld()
 
     if((m_buttonState & SDL_BUTTON_MMASK) != 0)
     {
+        
+        //std::cout << "INPUT MANAGER middle mouse pressed\n";
 
         Uint32 now = SDL_GetTicks();
 
-        if(now - startMouseTime >= 100)
+        //TODO: Timer Function not popping off correctly because it goes out of scope and 
+        //  therefore never has a chance to be compared properly.. think of fix
+
+        //if(now - startMouseTime >= 100)
         {
             m_middleButtonHeld = true;
             
-            if(m_middleButtonHeld)
-            {   
-
-                if(m_mousePosCaptured == false)
-                {
-                    m_mouseStartX = m_mouseX;
-                    m_mouseStartY = m_mouseY;
-
-                    m_mousePosCaptured = true;
-                    std::cout << m_mouseStartX;
-
-                }
-
-
-                    m_mouseStartX = m_mouseX;
-                    m_mouseStartY = m_mouseY;
-
-                    return true;
-
-
-            }
-            
+            return true;
         }
 
-
     }
+
+
 
     return false;
 }
@@ -124,6 +109,7 @@ void InputManager::Listen()
             case SDL_MOUSEBUTTONUP:
             {
                 m_middleButtonHeld = false;
+                printf("Middle mouse released!\n");
             }
 
 
