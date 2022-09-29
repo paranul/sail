@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 #include "./testSource/S_Draw.h" //Perhaps add to compiler -I include path? So you can swap them out easier when you want to test others
-//#include "Shapes.h"
+#include "Shapes.h"
 #include "TextureManager.h"
 //#include "InputManager.h"
 //#include <sstream>
@@ -161,6 +161,7 @@ void Game::Init()
 void Game::Setup()
 {
 
+
     //POINTER::S_Draw::GetInstance()->Load("spear", "../assets/spear.png");
     POINTER::S_Draw::GetInstance()->LoadID("../assets/spear.png");
     POINTER::S_Draw::GetInstance()->LoadID("../assets/oot-2d-map.png");
@@ -174,7 +175,7 @@ void Game::Setup()
     //text.LoadFromRenderedText("This \t is \n another  \n line \n of text"); 
 
     //This is important for later to make sure that we are finding the assets and data folder correctly, even if exe is not in /bin
-    const char* path;
+    char* path;
     path = SDL_GetBasePath();
 
     std::cout << "Path of executable: "  << path << std::endl;
@@ -221,7 +222,7 @@ void Game::Input()
     //pretty important to have SDL_PumpEvents before you get the state to make sure you get the correct state (Key state and mouse state)
     SDL_PumpEvents();
     SDL_Event sdlEvent;
-    buttons = SDL_GetMouseState(&mouseX, &mouseY);
+    buttons = SDL_GetMouseState(&m_mouseX, &m_mouseY);
 
     //SDL_GetKeyboardState(int * num);
     nk_input_begin(m_nukCtxt);
@@ -279,7 +280,6 @@ void Game::Input()
                     debugMode = !debugMode;
                     printf("Debug mode:%i \n", debugMode);
 
-                    std::cout << "Middle Mouse held: "<<mouseButtonHeld << "\n";
                 }
                 break;
 
@@ -289,14 +289,14 @@ void Game::Input()
                 if(sdlEvent.wheel.y > 0)
                 {
                    // printf("Mouse wheel going up!\n");
-                    POINTER::S_Draw::GetInstance()->m_scale += .5;
+                    POINTER::S_Draw::GetInstance()->m_scale += .1;
                     std::cout << POINTER::S_Draw::GetInstance()->m_scale << std::endl;
                     break;
                 }
                 else if(sdlEvent.wheel.y < 0)
                 {
                     //printf("Mouse wheel down!\n");
-                    POINTER::S_Draw::GetInstance()->m_scale -= .5;
+                    POINTER::S_Draw::GetInstance()->m_scale -= .1;
                     std::cout << POINTER::S_Draw::GetInstance()->m_scale << std::endl;
                     break;
                 }
@@ -304,8 +304,9 @@ void Game::Input()
                 if(sdlEvent.button.button == SDL_BUTTON_MIDDLE)
                 {
                     printf("Middle mouse pressed\n");
-                    
                     startMouseTime = SDL_GetTicks();
+                    m_mouseHeldStartX = m_mouseX;
+                    m_mouseHeldStartY = m_mouseY;
 
                 }
             default:
@@ -318,7 +319,10 @@ void Game::Input()
                 if(sdlEvent.button.button == SDL_BUTTON_MIDDLE)
                 {
                     printf("Middle mouse released!\n");
-                    mouseButtonHeld = false;
+                    m_mouseButtonHeld = false;
+                    m_mousePOScaptured = false;
+                    //SDL_SetRelativeMouseMode(SDL_FALSE);
+
 
                 }
                 break;
@@ -346,11 +350,44 @@ void Game::Input()
 
         Uint32 now = SDL_GetTicks();
 
-        if(now - startMouseTime >= 300)
+        if(now - startMouseTime >= 100)
         {
+            m_mouseButtonHeld = true;
+            
+            if(m_mouseButtonHeld)
+            {   
+                static int picStartX;
+                static int picStartY;
+                if(m_mousePOScaptured == false)
+                {
+                    m_mouseHeldStartX = m_mouseX;
+                    m_mouseHeldStartY = m_mouseY;
 
-            //printf("MouseButton HELDDDDD\n");
-            mouseButtonHeld = true;
+                    m_mousePOScaptured = true;
+                    std::cout << m_mouseHeldStartX;
+
+                }
+                    fOffsetX -= (m_mouseX - m_mouseHeldStartX);
+                    fOffsetY -= (m_mouseY - m_mouseHeldStartY);
+
+                    m_mouseHeldStartX = m_mouseX;
+                    m_mouseHeldStartY = m_mouseY;
+                // m_mouseXoffset = (m_mouseX - m_mouseHeldStartX) ;
+                // m_mouseYoffset = (m_mouseY - m_mouseHeldStartY) ;
+                
+
+                // //SDL_SetRelativeMouseMode(SDL_TRUE);
+
+                // POINTER::S_Draw::GetInstance()->m_offsetX = m_mouseXoffset ;
+                // POINTER::S_Draw::GetInstance()->m_offsetY = m_mouseYoffset ;
+
+                ////TODO: capture mouse X and mouse Y at the beginning of a hold -- them do current mousePOS - startMousePOS;
+
+
+                //SDL_GetMouseState(&startX, &startY);
+
+            }
+            
         }
         //State machine tags this on release as well
         //small fix for now is to check if middle mouse is released and tag it as released...not sure if good fix
@@ -400,6 +437,10 @@ void Game::Update()
 
         
     // }
+
+    adveturer.Update();
+
+    //c2_worldx +=1;
     
 }
 
@@ -432,7 +473,7 @@ void Game::Render()
 
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
-    POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", -1000, -1000);
+    //POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", -1000, -1000);
 
 
 
@@ -447,7 +488,14 @@ void Game::Render()
 
 
     //adv.Draw(50,50);
-    //adveturer.Draw();
+    adveturer.Draw();
+
+    WorldToScreen(c_worldx, c_worldy, c_screenx, c_screeny);
+    WorldToScreen(c2_worldx, c2_worldy, c2_screenx, c2_screeny);
+
+    Shape::GetInstance().DrawCircle(c_screenx, c_screeny, 20);
+
+    Shape::GetInstance().DrawRect(c2_screenx, c2_screeny, 20,20);
 
     // timeText.str("");
     // timeText << "milliseconds since start time " << SDL_GetTicks();
@@ -480,10 +528,14 @@ void Game::Render()
                 nk_value_float(m_nukCtxt, "Zoom Scale", POINTER::S_Draw::GetInstance()->m_scale);
                 //NOTE: Need to put texturemanager class back to private member variables eventuallu...
                 nk_value_int(m_nukCtxt, "TextureManager map_size()", TextureManager::GetInstance().m_textureMap.size());
-                nk_value_int(m_nukCtxt, "Middle Mouse Held", mouseButtonHeld);
+                nk_value_int(m_nukCtxt, "Middle Mouse Held", m_mouseButtonHeld);
                 nk_layout_row_static(m_nukCtxt, 30, 140, 2);
-                nk_value_int(m_nukCtxt, "Mouse_Screen X", mouseX);
-                nk_value_int(m_nukCtxt, "Y", mouseY);
+                nk_value_int(m_nukCtxt, "Mouse_Screen X", m_mouseX);
+                nk_value_int(m_nukCtxt, "Y", m_mouseY);
+                nk_layout_row_dynamic(m_nukCtxt, 8, 1);
+                nk_value_int(m_nukCtxt, "S_DRAW offsetX", POINTER::S_Draw::GetInstance()->m_offsetX);
+                nk_value_int(m_nukCtxt, "fOffsetX", fOffsetX);   
+                nk_value_int(m_nukCtxt, "fOffsetY", fOffsetY);          
 
             }
 
@@ -544,6 +596,8 @@ void Game::Render()
 
 }
 
+
+
 void Game::Kill()
 {
     SDL_DestroyRenderer(m_renderer);
@@ -551,3 +605,9 @@ void Game::Kill()
     SDL_Quit();
 }
 
+
+void Game::WorldToScreen(float worldX, float worldY, int &screenX, int &screenY)
+{
+    screenX = (int)(worldX - fOffsetX);
+    screenY = (int)(worldY - fOffsetY);
+}

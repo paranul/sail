@@ -22,6 +22,12 @@ void Shape::DrawRect(int x, int y, int width, int height)
     SDL_RenderDrawRect(Game::GetInstance().GetRenderer(), &rect);
 }
 
+void Shape::DrawLine(int x1, int y1, int x2, int y2)
+{
+    SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 255,0,0,255);
+    SDL_RenderDrawLine(Game::GetInstance().GetRenderer(), x1, y1, x2, y2);
+}
+
 void Shape::DrawPixel(int x, int y)
 {
     SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 255,0,0,255);

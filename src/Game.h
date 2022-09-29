@@ -47,6 +47,9 @@ public:
     SDL_Renderer* GetRenderer();
     bool IsRunning();
 
+    void WorldToScreen(float worldX, float worldY, int &screenX, int &screenY);
+
+
 
     void Kill();
 
@@ -57,10 +60,18 @@ public:
 
     //SDL_Mouse stuff
     Uint32 buttons;
-    int mouseX;
-    int mouseY;
-    inline static bool mouseButtonHeld = false;
+    int m_mouseX;
+    int m_mouseY;
+    int m_mouseXoffset = 0;
+    int m_mouseYoffset = 0;
+    int m_mouseHeldStartX;
+    int m_mouseHeldStartY;
+    inline static bool m_mouseButtonHeld = false;
+    inline static bool m_mousePOScaptured = false;
     Uint32 startMouseTime;
+
+    float fOffsetX = 0.0f;
+    float fOffsetY = 0.0f;
 
 
     //SDL_Timer report stuff
@@ -86,8 +97,20 @@ private:
     std::stringstream timeText;
 
     // Animation adv;
-    // Adventurer adveturer;
+    Adventurer adveturer;
 
+    ////test stuff////
+
+    int c_worldx = 50;
+    int c_worldy = 50;
+    int c_screenx = 50;
+    int c_screeny = 50;
+
+
+    int c2_worldx = 10;
+    int c2_worldy = 10;
+    int c2_screenx = 10;
+    int c2_screeny = 10;
 
 
     //---------------------------------Nuklear GUI components---------------------------------//

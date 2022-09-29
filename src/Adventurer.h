@@ -4,9 +4,8 @@
 
 #include <SDL.h>
 
-#include "Game.h"
 //#include "InputManager.h"
-#include "Animation.h"
+//#include "Animation.h"
 
 #include <string>
 
@@ -18,8 +17,10 @@ class Adventurer
 {
 
 public:
+    Adventurer();
     Adventurer(std::string textureID, int spriteRow, int frameCount, int spriteWidth, int spriteHeight, int animationSpeed, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    ~Adventurer(){}
+    ~Adventurer();
+    void SetProperties();
     void Draw();
     void Update();
     void Input();
@@ -27,12 +28,15 @@ public:
 
 private:
 
-    int m_x = 50;
-    int m_y = 50;
+    float m_worldX = 50;
+    float m_worldY = 50;
+
+    int m_screenX;
+    int m_screenY;
 
 
 
-    Animation m_anime;
+    //Animation m_anime;
 
 };
 
