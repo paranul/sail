@@ -14,7 +14,7 @@
 #include "./testSource/S_Draw.h" //Perhaps add to compiler -I include path? So you can swap them out easier when you want to test others
 #include "Shapes.h"
 #include "TextureManager.h"
-//#include "InputManager.h"
+#include "InputManager.h"
 //#include <sstream>
 
 
@@ -342,6 +342,25 @@ void Game::Input()
         nk_sdl_handle_event(&sdlEvent);
     }
     nk_input_end(m_nukCtxt);
+
+    if(InputManager::GetInstance().ReadMouseDown())
+    {
+        std::cout << "Mouse Press\n";
+    }
+
+
+    if(InputManager::GetInstance().MiddleMouseHeld())
+    {
+        m_mouseHeldStartX = m_mouseX;
+        m_mouseHeldStartY = m_mouseY;
+        m_mousePOScaptured = true;
+        std::cout << m_mouseHeldStartX;
+        fOffsetX -= (m_mouseX - m_mouseHeldStartX);
+        fOffsetY -= (m_mouseY - m_mouseHeldStartY);
+
+        m_mouseHeldStartX = m_mouseX;
+        m_mouseHeldStartY = m_mouseY;
+    }
 
 
 

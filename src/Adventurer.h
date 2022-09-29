@@ -28,11 +28,11 @@ public:
 
 private:
 
-    float m_worldX = 50;
-    float m_worldY = 50;
+    float m_worldX = 0.0f;
+    float m_worldY = 0.0f;
 
-    int m_screenX;
-    int m_screenY;
+    int m_screenX = 0;
+    int m_screenY = 0;
 
 
 

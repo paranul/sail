@@ -34,6 +34,11 @@ void Adventurer::Update()
     {
         m_worldY -= 1;
     }
+
+    if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_SPACE))
+    {
+        std::cout << "Space pressed\n";
+    }
     
 
 }
