@@ -230,6 +230,7 @@ void Game::Input()
     {
         switch (sdlEvent.type)
         {
+
             case SDL_QUIT:
             {
                 m_Active = false;
@@ -301,6 +302,9 @@ void Game::Input()
                     break;
                 }
             case SDL_MOUSEBUTTONDOWN:
+
+                adveturer.ReadEvent(&sdlEvent);
+
                 if(sdlEvent.button.button == SDL_BUTTON_MIDDLE)
                 {
                     printf("Middle mouse pressed\n");
@@ -343,12 +347,6 @@ void Game::Input()
     }
     nk_input_end(m_nukCtxt);
 
-    
-
-    if(InputManager::GetInstance().ReadMouseDown())
-    {
-        std::cout << "Mouse Press\n";
-    }
 
 
     if(InputManager::GetInstance().MiddleMouseHeld())
@@ -398,6 +396,8 @@ void Game::Update()
     WorldToScreen(c_worldx, c_worldy, c_screenx, c_screeny);
     WorldToScreen(c2_worldx, c2_worldy, c2_screenx, c2_screeny);
 
+    WorldToScreen(map_worldx, map_worldy, map_screenx, map_screeny);
+
     //c2_worldx +=1;
     
 }
@@ -429,7 +429,7 @@ void Game::Render()
 
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
-    //POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", -1000, -1000);
+    POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", map_screenx, map_screeny);
 
 
 
@@ -495,7 +495,9 @@ void Game::Render()
                 nk_value_int(m_nukCtxt, "treeAdventurer screenX", adveturer.m_screenX);       
                 nk_value_int(m_nukCtxt, "treeAdventurer screenY", adveturer.m_screenY);  
                 nk_value_int(m_nukCtxt, "treeAdventurer WorldX", adveturer.m_worldX);
-                nk_value_int(m_nukCtxt, "treeAdventurer WorldY", adveturer.m_worldY);                 
+                nk_value_int(m_nukCtxt, "treeAdventurer WorldY", adveturer.m_worldY);  
+                // nk_value_int(m_nukCtxt, "adventurer Event", adveturer.evTest);   
+
 
             }
 

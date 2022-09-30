@@ -116,6 +116,12 @@ private:
     int c2_screenx = 10;
     int c2_screeny = 10;
 
+    int map_worldx = 0;
+    int map_worldy = 0;
+    int map_screenx = 0;
+    int map_screeny = 0;
+
+
 
     //---------------------------------Nuklear GUI components---------------------------------//
     struct nk_context *m_nukCtxt;

@@ -112,6 +112,8 @@ void InputManager::Listen()
                 printf("Middle mouse released!\n");
             }
 
+            
+
 
         }
 

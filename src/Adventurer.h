@@ -27,6 +27,7 @@ public:
     void WorldToScreen(float worldX, float worldY, int &screenX, int &screenY);
     void ScreenToWorld(int screenX, int screenY, float &worldX, float &worldY);
     void WorldToScreenMouse(float worldX, float worldY, int &screenX, int &screenY);
+    void ReadEvent(SDL_Event *sdlEvent);
 
 
 public:
@@ -38,13 +39,14 @@ public:
     int m_screenX = 100;
     int m_screenY = 100;
 
-    bool m_DirectControl = true;
+    bool m_DirectControl = false;
 
     int moveToX;
     int moveToY;
 
 
-
+    SDL_Event m_sdlEvent;
+    // int evTest;
     //Animation m_anime;
 
 };

@@ -29,18 +29,28 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
 
         if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_D))
         {
+            //1440 width
+            //890 height ///turn the fOffset stuff off to disable camera centering
+            Game::GetInstance().fOffsetX = this->m_worldX - 800;
+            Game::GetInstance().fOffsetY = this->m_worldY - 400;
             m_worldX += m_speed;
         }
         if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_A))
         {
+            Game::GetInstance().fOffsetX = this->m_worldX - 800;
+            Game::GetInstance().fOffsetY = this->m_worldY - 400;
             m_worldX -= m_speed;
         }
         if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_S))
         {
+            Game::GetInstance().fOffsetX = this->m_worldX - 800;
+            Game::GetInstance().fOffsetY = this->m_worldY - 400;
             m_worldY += m_speed;
         }
         if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_W))
         {
+            Game::GetInstance().fOffsetX = this->m_worldX - 800;
+            Game::GetInstance().fOffsetY = this->m_worldY - 400;
             m_worldY -= m_speed;
         }
 
@@ -55,25 +65,36 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
 
     else if(!m_DirectControl)
     {
-        
+
+
+        // if(m_sdlEvent.button.button == SDL_BUTTON_LEFT)
         if(InputManager::GetInstance().ReadMouseDown())
         {
             m_worldX = mouseX + Game::GetInstance().fOffsetX;
             m_worldY = mouseY + Game::GetInstance().fOffsetY;
-        }
 
+
+
+
+        }
         WorldToScreen(m_worldX, m_worldY, m_screenX, m_screenY);
 
-        
-
-        // m_screenX = mouseX;
-        // m_screenY = mouseY;
     }
-
-
-    //WorldToScreen(m_worldX, m_worldY, m_screenX, m_screenY);
-
 }
+
+void Adventurer::ReadEvent(SDL_Event *sdlEvent)
+{
+    m_sdlEvent = *sdlEvent;
+    if(m_sdlEvent.button.button == SDL_BUTTON_RIGHT)
+    {
+        printf("HELLO FROM ADVENTUERE\n");
+    }
+    if(m_sdlEvent.button.button == SDL_BUTTON_LEFT)
+    {
+        printf("HELLO FROM ADVENTUEREWITH THE LEFT\n");
+    }
+}
+
 
 void Adventurer::Draw()
 {
