@@ -68,6 +68,12 @@
         "chrono": "cpp",
         "filesystem": "cpp",
         "format": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "codecvt": "cpp",
+        "condition_variable": "cpp",
+        "fstream": "cpp",
+        "mutex": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     }
 }

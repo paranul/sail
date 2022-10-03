@@ -18,12 +18,12 @@
 #include <iostream>
 
 #include "Game.h"
+#include "Point.h"
 
 
 
 int main(int argc, char* argv[])
 {
-
 
     //void __debugbreak();
 

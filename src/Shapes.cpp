@@ -79,7 +79,7 @@ void Shape::DrawCircleF(float centerX, float centerY, float radius)
     // Shape::GetInstance().DrawPixel(rightX, bottomY);
     // Shape::GetInstance().DrawPixel(LeftX, bottomY);
 
-    Shape::GetInstance().DrawPixel(centerX, centerY);
+    Shape::GetInstance().DrawPixel(int(centerX), int(centerY));
 
     float c = radius * radius;
 
@@ -94,7 +94,7 @@ void Shape::DrawCircleF(float centerX, float centerY, float radius)
             if( ((a*a) + (b*b) == c) || (((a*a) + (b*b) <= c) && ((a*a) + (b*b) >= c)) )
             {
                 //printf("Drawing at: %f, %f\n",x,y);
-                Shape::GetInstance().DrawPixel(float(x), float(y));
+                Shape::GetInstance().DrawPixel(int(x), int(y));
             }
         }
 

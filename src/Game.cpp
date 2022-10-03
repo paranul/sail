@@ -168,7 +168,8 @@ void Game::Setup()
     TextureManager::GetInstance().Load("../assets/tree_0.png");
     TextureManager::GetInstance().Load("../assets/adventurer_sheet.png");
 
-    //adv.SetProperties("adventurer_sheet", 0, 13, 32, 32, 200);
+
+    adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
 
     text.LoadFont("../assets/arial.ttf", 12);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
@@ -302,7 +303,7 @@ void Game::Input()
                     break;
                 }
             case SDL_MOUSEBUTTONDOWN:
-
+                SDL_PumpEvents();
                 adveturer.ReadEvent(&sdlEvent);
 
                 if(sdlEvent.button.button == SDL_BUTTON_MIDDLE)
@@ -392,9 +393,11 @@ void Game::Update()
     // }
 
 
+
+
     adveturer.Update(m_mouseX, m_mouseY);
-    WorldToScreen(c_worldx, c_worldy, c_screenx, c_screeny);
-    WorldToScreen(c2_worldx, c2_worldy, c2_screenx, c2_screeny);
+    WorldToScreen(float(c_worldx), float(c_worldy), c_screenx, c_screeny);
+    WorldToScreen(float(c2_worldx), float(c2_worldy), c2_screenx, c2_screeny);
 
     WorldToScreen(map_worldx, map_worldy, map_screenx, map_screeny);
 
@@ -463,8 +466,9 @@ void Game::Render()
     text.LoadFromRenderedText("MOARRR TEXT");
     text.Render(200,200);
 
+    //struct nk_rect(0.0f,0.0f,10.0f,10.0f);
 
-
+    //nk_rect nkrt{0.0f,0.0f,10.0f,10.0f};
 
     //VLAD::::::The start of a nuklear window
     if(nk_begin(m_nukCtxt, "TITLE", nk_rect(0, 300, 300, 250),NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
@@ -472,7 +476,7 @@ void Game::Render()
             {
                 nk_layout_row_static(m_nukCtxt, 30, 80, 2);
                 //nk_layout_row_dynamic(m_nukCtxt, 3, 2);
-                nk_label(m_nukCtxt, "WTFFFFFF\n\n\n\n\n", NK_TEXT_LEFT);
+                nk_label(m_nukCtxt, "OUTPUTTESTING\n\n\n\n\n", NK_TEXT_LEFT);
                 //nk_layout_row_static(m_nukCtxt, 30, 30, 2);
                 nk_layout_row_dynamic(m_nukCtxt, 8, 1);
                 nk_value_int(m_nukCtxt, "SDL_GetTicks", SDL_GetTicks());
@@ -492,10 +496,21 @@ void Game::Render()
                 nk_value_int(m_nukCtxt, "fOffsetX", fOffsetX);   
                 nk_value_int(m_nukCtxt, "fOffsetY", fOffsetY);
                 nk_value_int(m_nukCtxt, "mouseState", buttons);  
-                nk_value_int(m_nukCtxt, "treeAdventurer screenX", adveturer.m_screenX);       
-                nk_value_int(m_nukCtxt, "treeAdventurer screenY", adveturer.m_screenY);  
-                nk_value_int(m_nukCtxt, "treeAdventurer WorldX", adveturer.m_worldX);
-                nk_value_int(m_nukCtxt, "treeAdventurer WorldY", adveturer.m_worldY);  
+                nk_value_int(m_nukCtxt, "Adventurer centerX", adveturer.m_center.x);
+                nk_value_int(m_nukCtxt, "Adventurer centerY", adveturer.m_center.y);
+                nk_value_int(m_nukCtxt, "Adventurer screenX", adveturer.m_screenPos.x);       
+                nk_value_int(m_nukCtxt, "Adventurer screenY", adveturer.m_screenPos.y);  
+                nk_value_int(m_nukCtxt, "Adventurer WorldX", adveturer.m_worldPos.x);
+                nk_value_int(m_nukCtxt, "Adventurer WorldY", adveturer.m_worldPos.y);
+                nk_layout_row_static(m_nukCtxt, 30, 80, 1);
+                if(nk_button_label(m_nukCtxt, "Direct Control"))
+                {
+                    adveturer.m_DirectControl = !adveturer.m_DirectControl;
+                }
+
+                //nk_widget(nk_rect(0.0f,0.0f,100.0f,100.0f), m_nukCtxt);
+
+
                 // nk_value_int(m_nukCtxt, "adventurer Event", adveturer.evTest);   
 
 
