@@ -14,7 +14,9 @@
 #include "Animation.h"
 
 #include <string>
+#include <fstream>
 
+// Usage Examples at the bottom of the page
 
 
 /// SetProperties("adventurer_sheet", 0, 13, 32, 32, 200);
@@ -38,7 +40,7 @@ public:
 
 public:
 
-    float m_speed = 0.3f;
+    float m_speed = 0.2f;
 
 
     Point<float> m_worldPos{100.0f, 100.0f};
@@ -48,12 +50,7 @@ public:
     //its more of the physical foot placement in the world
     Point<int> m_center = {(m_screenPos.x), (m_screenPos.y) };
 
-
-
-    // int m_screenX = 100;
-    // int m_screenY = 100;
-
-    bool m_DirectControl = false;
+    bool m_DirectControl = true;
 
 
 
@@ -62,6 +59,32 @@ public:
     // int evTest;
     Animation m_anime;
 
+
+
+    std::ofstream oFile;
+
 };
 
 #endif
+
+
+/////////////////////////////   HOW TO  /////////////////////////////
+//  
+//  Create object with either blank constructor or with the properties in the constructor:
+//  -Adventurer adventurer();
+//  -Adventurer adventurer("adventurer_sheet", 0, 13, 32, 32, 200);
+//  --  The "adventurer_sheet" must come from a previously loaded TextureManger::GetInstance().Load("path/to/asset.png");
+//  --  The Path and file extension will be automatically stripped after the asset is loaded into a std::map
+//  --  So just enter the name of the textureID to load that asset into the object
+//  
+//
+//  -   Update(const int &mouesX, const int &mouseY);
+//      --The Update function needs to be pointed to the mouse (x,y) variable from the game class
+//      --Passed by const &, it will update the mouse position for the Adventurer object every frame
+//
+//
+//
+//
+//
+//
+//

@@ -43,8 +43,8 @@ Game::Game()
     :
     m_window(NULL),
     m_renderer(NULL),
-    m_Active(false)
-    //adveturer("adventurer_sheet", 0, 13, 32, 32, 200)
+    m_Active(false),
+    adveturer("adventurer_sheet", 0, 13, 32, 32, 200)
 
 {
     std::cout << "Game Object Constructed!\n";
@@ -169,7 +169,7 @@ void Game::Setup()
     TextureManager::GetInstance().Load("../assets/adventurer_sheet.png");
 
 
-    adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
+    //adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
 
     text.LoadFont("../assets/arial.ttf", 12);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 

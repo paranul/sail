@@ -6,6 +6,8 @@
 #include "Shapes.h"
 
 #include <iostream>
+#include <vector>
+
 
 
 
@@ -13,6 +15,71 @@
 Adventurer::Adventurer()
 {
     std::cout << "Adventurer Properties not set! Use Adventurer.SetProperties() \n";
+
+
+    //Test respawn at same location;
+
+    std::ifstream file;
+    file.open("../assets/testData.txt");
+
+    std::string contents;
+
+    std::vector<std::string> v_contents;
+
+    //this will only read the first line
+    // if(file.is_open())
+    // {
+    //     file >> s;
+
+    //     std::cout  << "file Contents: "<< s;
+    // }
+
+    if(file.is_open())
+    {
+        while(file.good())
+        {
+            file >> contents;
+            v_contents.push_back(contents);
+            //std::cout  << "file Contents: "<< contents << '\n';
+        }
+    }
+
+    for(auto& i : v_contents)
+    {
+        std::cout  << "v_contents: "<< i << '\n';
+    }
+
+    m_worldPos.x = std::stof(v_contents[0]);
+    m_worldPos.y = std::stof(v_contents[1]);
+
+    // for(int i = 0; i < v_contents.size(); i++)
+    // {
+    //     m_worldPos.x = std::stof(v_contents[i]);
+
+    // }
+    
+
+
+
+
+    /////   C style needs work (aka no idea what im doing wrong)  /////
+
+    //oFile.open("../assets/testData.txt");
+
+    //std::ifstream file("../assets/testData.txt");
+    // FILE* fp = fopen("../assets/testData.txt", "r");
+    // if( fp = NULL)
+    // {
+    //     printf("File reading (\"../assets/testData.txt\") failed\n");
+    // }
+
+    // char buf[100];
+    // while(fscanf(fp, "%*s %*s %*s ", buf) == 1)
+    // {
+    //     printf("%s\n", buf);
+    // }
+
+
 }
 
 Adventurer::Adventurer(std::string textureID, int spriteRow, int frameCount, int spriteWidth, int spriteHeight, int animationSpeed, SDL_RendererFlip flip)
@@ -37,12 +104,14 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
         {
             //1440 width
             //890 height ///turn the fOffset stuff off to disable camera centering
+            m_anime.SetProperties("adventurer_sheet", 1, 8, 32, 32, 100);
             Game::GetInstance().fOffsetX = this->m_worldPos.x - 800;
             Game::GetInstance().fOffsetY = this->m_worldPos.y - 400;
             m_worldPos.x += m_speed;
         }
         if(InputManager::GetInstance().ReadKeyDown(SDL_SCANCODE_A))
         {
+            m_anime.SetProperties("adventurer_sheet", 1, 8, 32, 32, 100,SDL_FLIP_HORIZONTAL);
             Game::GetInstance().fOffsetX = this->m_worldPos.x - 800;
             Game::GetInstance().fOffsetY = this->m_worldPos.y - 400;
             m_worldPos.x -= m_speed;
@@ -64,11 +133,6 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
         {
             std::cout << "Space pressed\n";
         }
-
-        WorldToScreen(m_worldPos.x, m_worldPos.y, m_screenPos.x, m_screenPos.y);
-
-
-
         
     }
 
@@ -95,11 +159,25 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
 
 
         }
-        WorldToScreen(m_worldPos.x, m_worldPos.y, m_screenPos.x, m_screenPos.y);
 
     }
 
+    uint32_t currentTime = SDL_GetTicks();
+    static uint32_t lastTime = 0;
 
+    //Do whats in this statement once a second
+    if(currentTime > lastTime + 1000)
+    {
+        m_anime.SetProperties("adventurer_sheet", 0, 13, 32, 32, 100);
+
+        lastTime = currentTime;
+    }
+        //TODO: Reset animation to idle
+        //m_anime.SetProperties("adventurer_sheet", 0, 13, 32, 32, 100);
+
+
+        //Wether in direct control or mouse input control, and future controller control, need to Keep updating this
+        WorldToScreen(m_worldPos.x, m_worldPos.y, m_screenPos.x, m_screenPos.y);
         //Animation Update //TODO:: What about if frozen? dead? 
         m_anime.Update();
 }
@@ -158,5 +236,8 @@ void Adventurer::WorldToScreenMouse(float worldX, float worldY, int &screenX, in
 
 Adventurer::~Adventurer()
 {
+    oFile.open("../assets/testData.txt");
 
+    oFile << m_worldPos.x << '\n';
+    oFile << m_worldPos.y;
 }
