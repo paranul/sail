@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 //Just a simple templated collection for X and Y coordinates....
 template<typename T>
 class Point
