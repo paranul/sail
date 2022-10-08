@@ -18,6 +18,7 @@ public:
     void Listen();
 
     bool ReadKeyDown(SDL_Scancode key);
+    bool ReadKeyUp(SDL_Scancode key);
     //Super testing and probably done incorretlly only reads Left mouse button for now
     bool ReadMouseDown();
     bool MiddleMouseHeld();

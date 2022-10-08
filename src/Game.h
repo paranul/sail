@@ -13,6 +13,7 @@
 #include "./testSource/Tile.h"
 //#include "Animation.h"
 #include "Adventurer.h"
+#include "./testSource/Nyctimus.h"
 
 #include <sstream>
 
@@ -48,6 +49,8 @@ public:
     bool IsRunning();
 
     void WorldToScreen(float worldX, float worldY, int &screenX, int &screenY);
+
+    Point<float> Normalize(Point<float> start, Point<float> end);
 
 
 
@@ -121,6 +124,17 @@ private:
     int map_screenx = 0;
     int map_screeny = 0;
 
+
+    
+
+    
+
+    
+
+
+
+
+    Nyctimus nyc;
 
 
     //---------------------------------Nuklear GUI components---------------------------------//

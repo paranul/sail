@@ -75,3 +75,8 @@ std::string POINTER::S_Draw::StripFilenameExtension(std::string filename)
 
     return filename;
 }
+
+SDL_Texture* POINTER::S_Draw::GetTexture(std::string id)
+{
+    return (m_textures[id]);
+}

@@ -17,6 +17,8 @@
 #include "InputManager.h"
 //#include <sstream>
 
+#include <math.h>
+
 
 
 
@@ -161,6 +163,12 @@ void Game::Init()
 void Game::Setup()
 {
 
+    ////Nyc item stuff////
+    TextureManager::GetInstance().Load("../assets/head.png");
+    TextureManager::GetInstance().Load("../assets/half_leather_chest_front.png");
+    TextureManager::GetInstance().Load("../assets/leg_walk.png");
+    TextureManager::GetInstance().Load("../assets/arm_walk.png");
+
 
     //POINTER::S_Draw::GetInstance()->Load("spear", "../assets/spear.png");
     POINTER::S_Draw::GetInstance()->LoadID("../assets/spear.png");
@@ -168,8 +176,10 @@ void Game::Setup()
     TextureManager::GetInstance().Load("../assets/tree_0.png");
     TextureManager::GetInstance().Load("../assets/adventurer_sheet.png");
 
+    POINTER::S_Draw::GetInstance()->LoadID("../assets/light3.png");
 
-    //adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
+
+    adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
 
     text.LoadFont("../assets/arial.ttf", 12);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
@@ -367,6 +377,9 @@ void Game::Input()
 void Game::Update()
 {
     SDL_GetWindowSize(m_window, &m_windowWidth, &m_windowHeight);
+
+
+
     
     // currentTime = SDL_GetTicks();
 
@@ -394,7 +407,7 @@ void Game::Update()
 
 
 
-
+    nyc.Update();
     adveturer.Update(m_mouseX, m_mouseY);
     WorldToScreen(float(c_worldx), float(c_worldy), c_screenx, c_screeny);
     WorldToScreen(float(c2_worldx), float(c2_worldy), c2_screenx, c2_screeny);
@@ -427,9 +440,15 @@ void Game::Render()
     //unicode 
     //РУСКИЙ
 
+    //SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_MUL);
 
 
+    Shape::GetInstance().DrawCircle(c_screenx, c_screeny, 20);
 
+    Shape::GetInstance().DrawRect(c2_screenx, c2_screeny, 20,20);
+
+    //SDL_SetTextureBlendMode(POINTER::S_Draw::GetInstance()->GetTexture("oot-2d-map"), SDL_BLENDMODE_NONE);
+    //SDL_SetTextureColorMod(POINTER::S_Draw::GetInstance()->GetTexture("oot-2d-map"), red, blue, green);
 
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("spear", 500, 100);
     POINTER::S_Draw::GetInstance()->DrawQueriedTexture("oot-2d-map", map_screenx, map_screeny);
@@ -449,11 +468,16 @@ void Game::Render()
     //adv.Draw(50,50);
     adveturer.Draw();
 
+    nyc.Draw();
 
 
-    Shape::GetInstance().DrawCircle(c_screenx, c_screeny, 20);
+    //SDL_SetRenderTarget(m_renderer, )
 
-    Shape::GetInstance().DrawRect(c2_screenx, c2_screeny, 20,20);
+    //SDL_SetTextureAlphaMod(POINTER::S_Draw::GetInstance()->GetTexture("light3"), 0);
+    //SDL_SetTextureBlendMode(POINTER::S_Draw::GetInstance()->GetTexture("light3"), SDL_BLENDMODE_MUL);
+    //SDL_SetTextureAlphaMod()
+
+    //POINTER::S_Draw::GetInstance()->DrawQueriedTexture("light3", 100, 100);
 
     // timeText.str("");
     // timeText << "milliseconds since start time " << SDL_GetTicks();
@@ -471,7 +495,7 @@ void Game::Render()
     //nk_rect nkrt{0.0f,0.0f,10.0f,10.0f};
 
     //VLAD::::::The start of a nuklear window
-    if(nk_begin(m_nukCtxt, "TITLE", nk_rect(0, 300, 300, 250),NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
+    if(nk_begin(m_nukCtxt, "TITLE", nk_rect(0, 0, 300, 350),NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
             NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE | NK_WINDOW_CLOSABLE ))
             {
                 nk_layout_row_static(m_nukCtxt, 30, 80, 2);
@@ -507,6 +531,20 @@ void Game::Render()
                 {
                     adveturer.m_DirectControl = !adveturer.m_DirectControl;
                 }
+                nk_layout_row_static(m_nukCtxt, 30, 200, 2);
+                nk_value_float(m_nukCtxt, "adventurer direction X", adveturer.m_direction.x);
+                nk_value_float(m_nukCtxt, "Y", adveturer.m_direction.y);
+                // nk_layout_row_static(m_nukCtxt, 30, 200, 2);
+                // nk_value_float(m_nukCtxt, "Character Vector X", characterVector.x);
+                // nk_value_float(m_nukCtxt, "Y", characterVector.y);
+                // nk_layout_row_static(m_nukCtxt, 30, 100, 2);
+                // nk_value_float(m_nukCtxt, "magnitude", magnitude);
+                // nk_layout_row_static(m_nukCtxt, 30, 200, 2);
+                // nk_value_float(m_nukCtxt, "unitVector X", unitVector.x);
+                // nk_value_float(m_nukCtxt, "Y", unitVector.y);
+
+
+
 
                 //nk_widget(nk_rect(0.0f,0.0f,100.0f,100.0f), m_nukCtxt);
 
@@ -521,49 +559,49 @@ void Game::Render()
     //NOTE:: might fail to read info after nk_end()
     nk_end(m_nukCtxt);
 
-    if (nk_begin(m_nukCtxt, "Demo", nk_rect(50, 50, 230, 250),
-            NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
-            NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE))
-        {
-            enum {EASY, HARD};
-            static int op = EASY;
-            static int property = 20;
+    // if (nk_begin(m_nukCtxt, "Demo", nk_rect(50, 50, 230, 250),
+    //         NK_WINDOW_BORDER|NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
+    //         NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE))
+    //     {
+    //         enum {EASY, HARD};
+    //         static int op = EASY;
+    //         static int property = 20;
 
-            nk_layout_row_static(m_nukCtxt, 30, 80, 2);
-            if (nk_button_label(m_nukCtxt, "novsynv"))
-            {
-                fprintf(stdout, "button pressed\n");
-                printf("BUTTON PRESSED\n");
-                printf("Easy label: %i", op);
-                printf("property value: %i", property);
-            }
-            nk_layout_row_dynamic(m_nukCtxt, 30, 2);
-
-            
-            nk_label(m_nukCtxt, "TEST: TEXT LABEL\n", NK_TEXT_LEFT);
-
+    //         nk_layout_row_static(m_nukCtxt, 30, 80, 2);
+    //         if (nk_button_label(m_nukCtxt, "novsynv"))
+    //         {
+    //             fprintf(stdout, "button pressed\n");
+    //             printf("BUTTON PRESSED\n");
+    //             printf("Easy label: %i", op);
+    //             printf("property value: %i", property);
+    //         }
+    //         nk_layout_row_dynamic(m_nukCtxt, 30, 2);
 
             
-            //if (nk_option_label(ctx, "easy", op == EASY)) op = EASY;
-            //if (nk_option_label(ctx, "hard", op == HARD)) op = HARD;
-            nk_layout_row_dynamic(m_nukCtxt, 25, 1);
-            //nk_property_int(ctx, "Compression:", 0, &property, 100, 10, 1);
+    //         nk_label(m_nukCtxt, "TEST: TEXT LABEL\n", NK_TEXT_LEFT);
 
-            nk_layout_row_dynamic(m_nukCtxt, 20, 1);
-            nk_label(m_nukCtxt, "background:", NK_TEXT_LEFT);
-            nk_layout_row_dynamic(m_nukCtxt, 25, 1);
-            if (nk_combo_begin_color(m_nukCtxt, nk_rgb_cf(m_nukBG), nk_vec2(nk_widget_width(m_nukCtxt),400))) {
-                nk_layout_row_dynamic(m_nukCtxt, 120, 1);
-                m_nukBG = nk_color_picker(m_nukCtxt, m_nukBG, NK_RGBA);
-                nk_layout_row_dynamic(m_nukCtxt, 25, 1);
-                m_nukBG.r = nk_propertyf(m_nukCtxt, "#R:", 0, m_nukBG.r, 1.0f, 0.01f,0.005f);
-                m_nukBG.g = nk_propertyf(m_nukCtxt, "#G:", 0, m_nukBG.g, 1.0f, 0.01f,0.005f);
-                m_nukBG.b = nk_propertyf(m_nukCtxt, "#B:", 0, m_nukBG.b, 1.0f, 0.01f,0.005f);
-                m_nukBG.a = nk_propertyf(m_nukCtxt, "#A:", 0, m_nukBG.a, 1.0f, 0.01f,0.005f);
-                nk_combo_end(m_nukCtxt);
-            }
-        }
-        nk_end(m_nukCtxt);
+
+            
+    //         //if (nk_option_label(ctx, "easy", op == EASY)) op = EASY;
+    //         //if (nk_option_label(ctx, "hard", op == HARD)) op = HARD;
+    //         nk_layout_row_dynamic(m_nukCtxt, 25, 1);
+    //         //nk_property_int(ctx, "Compression:", 0, &property, 100, 10, 1);
+
+    //         nk_layout_row_dynamic(m_nukCtxt, 20, 1);
+    //         nk_label(m_nukCtxt, "background:", NK_TEXT_LEFT);
+    //         nk_layout_row_dynamic(m_nukCtxt, 25, 1);
+    //         if (nk_combo_begin_color(m_nukCtxt, nk_rgb_cf(m_nukBG), nk_vec2(nk_widget_width(m_nukCtxt),400))) {
+    //             nk_layout_row_dynamic(m_nukCtxt, 120, 1);
+    //             m_nukBG = nk_color_picker(m_nukCtxt, m_nukBG, NK_RGBA);
+    //             nk_layout_row_dynamic(m_nukCtxt, 25, 1);
+    //             m_nukBG.r = nk_propertyf(m_nukCtxt, "#R:", 0, m_nukBG.r, 1.0f, 0.01f,0.005f);
+    //             m_nukBG.g = nk_propertyf(m_nukCtxt, "#G:", 0, m_nukBG.g, 1.0f, 0.01f,0.005f);
+    //             m_nukBG.b = nk_propertyf(m_nukCtxt, "#B:", 0, m_nukBG.b, 1.0f, 0.01f,0.005f);
+    //             m_nukBG.a = nk_propertyf(m_nukCtxt, "#A:", 0, m_nukBG.a, 1.0f, 0.01f,0.005f);
+    //             nk_combo_end(m_nukCtxt);
+    //         }
+    //     }
+    //     nk_end(m_nukCtxt);
 
     countedUpdateFrames++;
     rotation += 0.01f;
@@ -587,4 +625,22 @@ void Game::WorldToScreen(float worldX, float worldY, int &screenX, int &screenY)
 {
     screenX = (int)(worldX - fOffsetX);
     screenY = (int)(worldY - fOffsetY);
+}
+
+Point<float> Game::Normalize(Point<float> start, Point<float> end)
+{
+    Point<float> begin;
+    float magnitude;
+    Point<float> unitVector;
+
+    begin.x = float(m_mouseX - start.x);
+    begin.y = float(m_mouseY - start.y);
+
+    magnitude = sqrt((begin.x * begin.x) + (begin.y * begin.y));
+
+    unitVector.x = (begin.x / magnitude);
+    unitVector.y = (begin.y / magnitude);
+
+    return unitVector;
+
 }

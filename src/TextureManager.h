@@ -38,7 +38,10 @@ public:
 TextureManager();
 ~TextureManager() {}
 
-//const char* id, SDL_Texture* texture
+
+//TODO: Experiment with char id for possibly faster texture reading / loading
+//  const char* id, SDL_Texture* texture
+
 std::map<std::string, SDL_Texture*> m_textureMap;
 
 };
@@ -46,14 +49,13 @@ std::map<std::string, SDL_Texture*> m_textureMap;
 
 /*              To Use
 
-->Inside game.cpp ->> Setup()
+        Inside game.cpp ->> Setup()
+            TextureManager::GetInstance().Load("C:/path/to/Name_of_texture.png") 
+            this will strip the filename extension 
+            and your texture will be saved as "Name_of_texture" in std::map<string, SDL_Texture*>
 
-->  TextureManager::GetInstance().Load("C:/path/to/Name_of_texture.png") 
 
-<---->this will strip the filename extension 
-        and your texture will be saved as "Name_of_texture" in std::map<string, SDL_Texture*>
-
--> Inside game.cpp ->> Render() --> TextureManager::GetInstance().DrawObject("Name_of_texture", x_pos, y_pos);
+    Inside game.cpp ->> Render() --> TextureManager::GetInstance().DrawObject("Name_of_texture", x_pos, y_pos);
 
 
 

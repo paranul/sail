@@ -24,6 +24,16 @@ bool InputManager::ReadKeyDown(SDL_Scancode key)
     return (m_keystate[key]);
 }
 
+bool InputManager::ReadKeyUp(SDL_Scancode key)
+{
+    if(m_keystate[key] == 0)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 bool InputManager::ReadMouseDown()
 {
     m_buttonState = SDL_GetMouseState(&m_mouseX, &m_mouseX);

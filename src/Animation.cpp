@@ -21,14 +21,9 @@ void Animation::SetProperties(std::string textureID, int spriteRow, int frameCou
 //TODO:: Need to add protections so this is not used without proper setup
 void Animation::Update()
 {
-        if(m_textureID != "NULL")
-        {
-            m_spriteFrame = (SDL_GetTicks() / m_animationSpeed) % m_frameCount;
-        }
-    else
-    {
-        std::cout << "\tERROR: Update Not Running\n";
-    }
+
+    m_spriteFrame = (SDL_GetTicks() / m_animationSpeed) % m_frameCount;
+
 
     //SDL_GetTicks() / # of milliseconds == a timer for that amount of milliseconds.
     //std::cout << SDL_GetTicks() / 500 << '\n'; // will be incrementing every 500 miliseconds
@@ -39,17 +34,18 @@ void Animation::Update()
 //TODO:: Need to add protections so this is not used without proper setup
 void Animation::Draw(int x, int y, int spriteWidth, int spriteHeight)
 {
-    if(m_textureID != "NULL")
-    {
-        TextureManager::GetInstance().DrawFrame(m_textureID, x, y, spriteWidth, spriteHeight, m_spriteRow, m_spriteFrame, m_flip);
-    }
-    else
-    {
-        std::cout << "\tERROR: textureID Not set\n";
-    }
+
+    TextureManager::GetInstance().DrawFrame(m_textureID, x, y, spriteWidth, spriteHeight, m_spriteRow, m_spriteFrame, m_flip);
+
 }
 
 void Animation::Draw(int x, int y)
 {
     TextureManager::GetInstance().DrawFrame(m_textureID, x, y, m_spriteWidth, m_spriteHeight, m_spriteRow, m_spriteFrame, m_flip);
+}
+
+
+const int Animation::GetFrame()
+{
+    return m_spriteFrame;
 }

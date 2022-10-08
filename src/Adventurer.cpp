@@ -8,6 +8,8 @@
 #include <iostream>
 #include <vector>
 
+#include <math.h>
+
 
 
 
@@ -96,6 +98,8 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
     //TODO: Or figure out some formula for the ratio of arbitrary numbers to add based on the full object image
     m_center.x = m_screenPos.x + 14;
     m_center.y = m_screenPos.y + 29;
+
+    m_direction = Normalize(Point<float>((float)m_center.x, float(m_center.y)), Point<float>(mouseX, mouseY));
     
     if(m_DirectControl)
     {
@@ -162,6 +166,10 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
 
     }
 
+        //TODO: Reset animation to idle
+        //  ------For now this is just a hacky way to do this without much effort (Wait 1 sec and set property to idle)
+    //m_anime.SetProperties("adventurer_sheet", 0, 13, 32, 32, 100);
+
     uint32_t currentTime = SDL_GetTicks();
     static uint32_t lastTime = 0;
 
@@ -172,8 +180,7 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
 
         lastTime = currentTime;
     }
-        //TODO: Reset animation to idle
-        //m_anime.SetProperties("adventurer_sheet", 0, 13, 32, 32, 100);
+
 
 
         //Wether in direct control or mouse input control, and future controller control, need to Keep updating this
@@ -205,11 +212,34 @@ void Adventurer::Draw()
 
     if(!m_DirectControl)
     {
+        //normalize
+        float magnitude;
+        float X = (float)Game::GetInstance().m_mouseX - (float)m_center.x;
+        float Y = (float)Game::GetInstance().m_mouseY - (float)m_center.y;
+
+        float uX;
+        float uY;
+
+
+        magnitude = sqrt((X * X) + (Y * Y));
+
+        uX = (X / magnitude);
+        uY = (Y / magnitude);
+
+
+
 
         Shape::GetInstance().DrawLine(m_center.x, m_center.y, Game::GetInstance().m_mouseX,Game::GetInstance().m_mouseY);
     }
     
 }
+
+
+
+// float Adventurer::Magnitude(float x, float y)
+// {
+
+// }
 
 void Adventurer::SetProperties(std::string textureID, int spriteRow, int frameCount, int spriteWidth, int spriteHeight, int animationSpeed, SDL_RendererFlip flip)
 {
@@ -240,4 +270,21 @@ Adventurer::~Adventurer()
 
     oFile << m_worldPos.x << '\n';
     oFile << m_worldPos.y;
+}
+
+Point<float> Adventurer::Normalize(Point<float> start, Point<float> end)
+{
+    Point<float> begin;
+    float magnitude;
+    Point<float> unitVector;
+
+    begin.x = float(end.x - start.x);
+    begin.y = float(end.y - start.y);
+
+    magnitude = sqrt((begin.x * begin.x) + (begin.y * begin.y));
+
+    unitVector.x = (begin.x / magnitude);
+    unitVector.y = (begin.y / magnitude);
+
+    return unitVector;
 }

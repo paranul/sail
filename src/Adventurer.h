@@ -36,6 +36,9 @@ public:
     void ScreenToWorld(int screenX, int screenY, float &worldX, float &worldY);
     void WorldToScreenMouse(float worldX, float worldY, int &screenX, int &screenY);
     void ReadEvent(SDL_Event *sdlEvent);
+    // float Normalize(float x, float y);
+    // float Magnitude(float x, float y);
+    Point<float> Normalize(Point<float> start, Point<float> end);
 
 
 public:
@@ -50,6 +53,8 @@ public:
     //its more of the physical foot placement in the world
     Point<int> m_center = {(m_screenPos.x), (m_screenPos.y) };
 
+    Point<float> m_direction;
+
     bool m_DirectControl = true;
 
 
@@ -62,6 +67,9 @@ public:
 
 
     std::ofstream oFile;
+
+
+
 
 };
 

@@ -19,13 +19,13 @@ public:
         this->y = y_in;
     }
 
-    Point operator =(Point &rhs)
+    Point& operator =(const Point& rhs)
     {
-        Point lhs;
-        lhs.x = rhs.x;
-        lhs.y = rhs.y;
+        ////Point lhs;
+        this->x = rhs.x;
+        this->y = rhs.y;
 
-        return lhs;
+        return *this;
     }
 
     void Print()

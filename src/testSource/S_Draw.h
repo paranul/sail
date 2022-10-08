@@ -40,6 +40,7 @@ namespace POINTER
         void Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
         //INFO: Draw a texture, width and height is automatically calculated by SDL_QueryTexture()
         void DrawQueriedTexture(std::string id, int x, int y, SDL_RendererFlip flip = SDL_FLIP_NONE);
+        SDL_Texture* GetTexture(std::string id);
 
 
        //bool FooLoadFromRendererdText(std::string textureText, SDL_Color textColor);
