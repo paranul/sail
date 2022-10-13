@@ -52,6 +52,9 @@ public:
 
     Point<float> Normalize(Point<float> start, Point<float> end);
 
+    //generate floats between [-1.0f, 1.0f]
+    float negRNG();
+
 
 
     void Kill();
@@ -105,6 +108,10 @@ private:
 
     // Animation adv;
     Adventurer adveturer;
+    Adventurer adventurer2;
+
+
+
 
     ////test stuff////
 

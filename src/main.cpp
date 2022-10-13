@@ -13,7 +13,7 @@
 //#include "../external/glm/vec2.hpp"
 
 //#include "ECS/ECS.h" //not being used right now
-
+#pragma warning(4:4596)
 
 #include <iostream>
 

@@ -28,6 +28,12 @@ void Shape::DrawLine(int x1, int y1, int x2, int y2)
     SDL_RenderDrawLine(Game::GetInstance().GetRenderer(), x1, y1, x2, y2);
 }
 
+void Shape::DrawLine(float x1, float y1, float x2, float y2)
+{
+    SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 255,0,0,255);
+    SDL_RenderDrawLineF(Game::GetInstance().GetRenderer(), x1, y1, x2, y2);
+}
+
 void Shape::DrawPixel(int x, int y)
 {
     SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 255,0,0,255);
@@ -42,12 +48,12 @@ void Shape::DrawCircle(int centerX, int centerY, int radius)
     int rightX = centerX + radius;
     int bottomY = centerY + radius;
 
-    Shape::GetInstance().DrawPixel(LeftX, topY);
-    Shape::GetInstance().DrawPixel(rightX, topY);
-    Shape::GetInstance().DrawPixel(rightX, bottomY);
-    Shape::GetInstance().DrawPixel(LeftX, bottomY);
+    // Shape::GetInstance().DrawPixel(LeftX, topY);
+    // Shape::GetInstance().DrawPixel(rightX, topY);
+    // Shape::GetInstance().DrawPixel(rightX, bottomY);
+    // Shape::GetInstance().DrawPixel(LeftX, bottomY);
 
-    Shape::GetInstance().DrawPixel(centerX, centerY);
+    // Shape::GetInstance().DrawPixel(centerX, centerY);
 
     for(int x = LeftX; x <= rightX; x++)
     {
@@ -57,13 +63,30 @@ void Shape::DrawCircle(int centerX, int centerY, int radius)
             int a = centerX - x;
             int b = centerY - y;
 
-            if( sqrt((a*a) + (b*b)) == radius)
+            if( sqrt((a*a) + (b*b)) <= radius)
             {
                 Shape::GetInstance().DrawPixel(x, y);
             }
         }
 
     }
+
+}
+
+void Shape::DrawMark(Point<int> center, int radius, SDL_Color c)
+{
+    SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), c.r, c.g, c.b, 255);
+
+    for(int i = 0; i <= (radius * 2); i ++)
+    {
+        SDL_RenderDrawPoint(Game::GetInstance().GetRenderer(),center.x - (i - radius), center.y);
+    }
+
+    for(int i = 0; i <= (radius * 2); i ++)
+    {
+        SDL_RenderDrawPoint(Game::GetInstance().GetRenderer(),center.x, center.y - (i-radius));
+    }
+
 
 }
 

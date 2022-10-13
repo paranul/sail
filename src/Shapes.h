@@ -7,6 +7,8 @@
 #include <SDL2/SDL.h>
 #endif
 
+#include "Point.h"
+
 //INFO: Static Shape Class
 //INFO: Wrapper around some common SDL shapes and a few extensions, call with Shape::GetInstace().
 class Shape
@@ -21,7 +23,10 @@ public:
     void DrawCircle(int centerX, int centerY, int radius);
     void DrawCircleF(float centerX, float centerY, float radius);
     void DrawLine(int x1, int y1, int x2, int y2);
+    void DrawLine(float x1, float y1, float x2, float y2);
+    void DrawMark(Point<int> center, int radius, SDL_Color c);
 
+    //SDL_Color c = {255,255,255, 255};
 
 private:
 

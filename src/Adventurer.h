@@ -21,6 +21,10 @@
 
 /// SetProperties("adventurer_sheet", 0, 13, 32, 32, 200);
 
+//Flip these two to enable / disable debug code
+#undef debug
+#define debug 
+
 class Adventurer
 {
 
@@ -36,14 +40,26 @@ public:
     void ScreenToWorld(int screenX, int screenY, float &worldX, float &worldY);
     void WorldToScreenMouse(float worldX, float worldY, int &screenX, int &screenY);
     void ReadEvent(SDL_Event *sdlEvent);
+    void DoRandomMovement();
     // float Normalize(float x, float y);
     // float Magnitude(float x, float y);
     Point<float> Normalize(Point<float> start, Point<float> end);
 
+    void SetControl(bool isOwned);
+    void SetSpeed(float speed);
+    void SetPosition(float x, float y);
+
+    float negRNG();
+    float rngPlus();
+    bool WithinRange(float num1, float num2, float deviation);
+    bool WithinRange(int num1, int num2, int deviation);
+
+
+
 
 public:
 
-    float m_speed = 0.2f;
+    float m_speed = 1.f;
 
 
     Point<float> m_worldPos{100.0f, 100.0f};
@@ -53,10 +69,17 @@ public:
     //its more of the physical foot placement in the world
     Point<int> m_center = {(m_screenPos.x), (m_screenPos.y) };
 
+
     Point<float> m_direction;
 
-    bool m_DirectControl = true;
+    bool m_Control = false;
+    //Keyboard controlls = m_DirectControl = true:: mouse controls = m_DirectControl = false
+    bool m_DirectControl = false;
+    bool m_moving;
+    Point<float> m_lastPosition;
 
+    //The mouse position to go to
+    Point<int> m_goToPosition = m_center;
 
 
 
@@ -67,6 +90,11 @@ public:
 
 
     std::ofstream oFile;
+
+
+
+    uint32_t currentTime;
+    uint32_t lastTime = 0;
 
 
 

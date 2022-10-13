@@ -18,6 +18,7 @@
 //#include <sstream>
 
 #include <math.h>
+#include <random>
 
 
 
@@ -45,8 +46,8 @@ Game::Game()
     :
     m_window(NULL),
     m_renderer(NULL),
-    m_Active(false),
-    adveturer("adventurer_sheet", 0, 13, 32, 32, 200)
+    m_Active(false)
+    //adveturer("adventurer_sheet", 0, 13, 32, 32, 200)
 
 {
     std::cout << "Game Object Constructed!\n";
@@ -118,8 +119,8 @@ void Game::Init()
     }
 
     //https://wiki.libsdl.org/SDL_CreateRenderer
-    //m_renderer = SDL_CreateRenderer( m_window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-    m_renderer = SDL_CreateRenderer( m_window, -1, SDL_RENDERER_ACCELERATED );
+    m_renderer = SDL_CreateRenderer( m_window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+    //m_renderer = SDL_CreateRenderer( m_window, -1, SDL_RENDERER_ACCELERATED );
 
     if(m_renderer == NULL)
     {
@@ -163,6 +164,31 @@ void Game::Init()
 void Game::Setup()
 {
 
+    srand(time(NULL));
+
+    ///rng test float [0 , 1]
+    // for(int i = 0; i < 10; i++)
+    // {
+    //     std::cout << static_cast<float> ( rand() ) / static_cast<float>(RAND_MAX) << "\n";
+    // }
+
+    const float min = -1.0f;
+    const float max = 1.0f;
+
+
+    std::random_device rand_dev;
+
+    std::mt19937  generator(rand_dev());
+
+    std::uniform_real_distribution<float> dist(min, max);
+    for(int i = 0; i < 1; i++)
+    {
+        std::cout << dist(generator) << "\n";
+    }
+
+
+
+
     ////Nyc item stuff////
     TextureManager::GetInstance().Load("../assets/head.png");
     TextureManager::GetInstance().Load("../assets/half_leather_chest_front.png");
@@ -180,6 +206,12 @@ void Game::Setup()
 
 
     adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
+
+    adveturer.SetControl(true);
+
+    adventurer2.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
+    adventurer2.m_worldPos.x += 100.0f;
+    adventurer2.m_worldPos.y += 100.0f;
 
     text.LoadFont("../assets/arial.ttf", 12);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
@@ -408,7 +440,13 @@ void Game::Update()
 
 
     nyc.Update();
+
     adveturer.Update(m_mouseX, m_mouseY);
+
+
+
+    adventurer2.Update(m_mouseX, m_mouseY);
+
     WorldToScreen(float(c_worldx), float(c_worldy), c_screenx, c_screeny);
     WorldToScreen(float(c2_worldx), float(c2_worldy), c2_screenx, c2_screeny);
 
@@ -436,16 +474,14 @@ void Game::Render()
     SDL_SetRenderDrawColor(m_renderer, 50, 50, 50, 255);
     SDL_RenderClear(m_renderer);
 
-    TestTile tile1;
+    //TestTile tile1;
     //unicode 
     //РУСКИЙ
 
     //SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_MUL);
 
 
-    Shape::GetInstance().DrawCircle(c_screenx, c_screeny, 20);
 
-    Shape::GetInstance().DrawRect(c2_screenx, c2_screeny, 20,20);
 
     //SDL_SetTextureBlendMode(POINTER::S_Draw::GetInstance()->GetTexture("oot-2d-map"), SDL_BLENDMODE_NONE);
     //SDL_SetTextureColorMod(POINTER::S_Draw::GetInstance()->GetTexture("oot-2d-map"), red, blue, green);
@@ -464,11 +500,20 @@ void Game::Render()
 
     TextureManager::GetInstance().DrawObjectDimensions("adventurer_sheet", 300,200,25,40);
 
+    Shape::GetInstance().DrawCircle(c_screenx, c_screeny, 20);
+
+    Shape::GetInstance().DrawRect(c2_screenx, c2_screeny, 20,20);
+
 
     //adv.Draw(50,50);
     adveturer.Draw();
 
+
+    adventurer2.Draw();
+
     nyc.Draw();
+
+
 
 
     //SDL_SetRenderTarget(m_renderer, )
@@ -490,17 +535,19 @@ void Game::Render()
     text.LoadFromRenderedText("MOARRR TEXT");
     text.Render(200,200);
 
-    //struct nk_rect(0.0f,0.0f,10.0f,10.0f);
 
-    //nk_rect nkrt{0.0f,0.0f,10.0f,10.0f};
+
+    struct nk_rect nkrct = {0, 0, 300, 450};
 
     //VLAD::::::The start of a nuklear window
-    if(nk_begin(m_nukCtxt, "TITLE", nk_rect(0, 0, 300, 350),NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
+    if(nk_begin(m_nukCtxt, "Adventurer Properties", nkrct,NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
             NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE | NK_WINDOW_CLOSABLE ))
             {
                 nk_layout_row_static(m_nukCtxt, 30, 80, 2);
                 //nk_layout_row_dynamic(m_nukCtxt, 3, 2);
-                nk_label(m_nukCtxt, "OUTPUTTESTING\n\n\n\n\n", NK_TEXT_LEFT);
+                nk_label(m_nukCtxt, "nk_Rect Dimensions", NK_TEXT_LEFT);
+                nk_value_int(m_nukCtxt, "Width", nkrct.w);
+                nk_value_int(m_nukCtxt, "Height", nkrct.h);
                 //nk_layout_row_static(m_nukCtxt, 30, 30, 2);
                 nk_layout_row_dynamic(m_nukCtxt, 8, 1);
                 nk_value_int(m_nukCtxt, "SDL_GetTicks", SDL_GetTicks());
@@ -524,8 +571,10 @@ void Game::Render()
                 nk_value_int(m_nukCtxt, "Adventurer centerY", adveturer.m_center.y);
                 nk_value_int(m_nukCtxt, "Adventurer screenX", adveturer.m_screenPos.x);       
                 nk_value_int(m_nukCtxt, "Adventurer screenY", adveturer.m_screenPos.y);  
-                nk_value_int(m_nukCtxt, "Adventurer WorldX", adveturer.m_worldPos.x);
-                nk_value_int(m_nukCtxt, "Adventurer WorldY", adveturer.m_worldPos.y);
+                nk_value_float(m_nukCtxt, "Adventurer WorldX", adveturer.m_worldPos.x);
+                nk_value_float(m_nukCtxt, "Adventurer WorldY", adveturer.m_worldPos.y);
+                nk_value_float(m_nukCtxt, "Adventurer last Y", adveturer.m_lastPosition.y);
+                nk_value_float(m_nukCtxt, "X", adveturer.m_lastPosition.x);
                 nk_layout_row_static(m_nukCtxt, 30, 80, 1);
                 if(nk_button_label(m_nukCtxt, "Direct Control"))
                 {
@@ -534,6 +583,7 @@ void Game::Render()
                 nk_layout_row_static(m_nukCtxt, 30, 200, 2);
                 nk_value_float(m_nukCtxt, "adventurer direction X", adveturer.m_direction.x);
                 nk_value_float(m_nukCtxt, "Y", adveturer.m_direction.y);
+                nk_value_bool(m_nukCtxt,"m_moving", adveturer.m_moving);
                 // nk_layout_row_static(m_nukCtxt, 30, 200, 2);
                 // nk_value_float(m_nukCtxt, "Character Vector X", characterVector.x);
                 // nk_value_float(m_nukCtxt, "Y", characterVector.y);
@@ -642,5 +692,22 @@ Point<float> Game::Normalize(Point<float> start, Point<float> end)
     unitVector.y = (begin.y / magnitude);
 
     return unitVector;
+
+}
+
+float Game::negRNG()
+{
+
+    srand(time(NULL));
+
+    float LO = -1.0f;
+    float HI = 1.0f;
+
+    return (( (LO + static_cast<float> (rand()) ) / static_cast<float>(RAND_MAX / (HI-LO) ) ) - 0.5f );
+
+    // for(int i = 0; i < 10; i++)
+    // {
+    //     std::cout << ( (LO + static_cast<float> ( rand() ) ) / static_cast<float>(RAND_MAX / (HI-LO)) )  - 0.5f<< "\n";
+    // }
 
 }

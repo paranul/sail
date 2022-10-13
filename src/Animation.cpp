@@ -19,6 +19,8 @@ void Animation::SetProperties(std::string textureID, int spriteRow, int frameCou
 
 
 //TODO:: Need to add protections so this is not used without proper setup
+//WARNING: SDL_GetTicks() continues to run even if the application is "Paused"
+//making it unsuitable for some specific game logic which requires a start / stop timer
 void Animation::Update()
 {
 

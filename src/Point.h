@@ -28,6 +28,17 @@ public:
         return *this;
     }
 
+    bool operator==(const Point& rhs)
+    {
+        return (this->x == rhs.x) && (this->y == rhs.y);
+    }
+
+    //DOING SOMETHING WRONG HERE
+    bool Point::operator !=(const Point& rhs)
+    {
+        return !operator==(rhs);
+    }
+
     void Print()
     {
         std::cout << "(" << Point<T>::x <<"," << Point<T>::y << ")\n";
