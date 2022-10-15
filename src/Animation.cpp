@@ -46,6 +46,11 @@ void Animation::Draw(int x, int y)
     TextureManager::GetInstance().DrawFrame(m_textureID, x, y, m_spriteWidth, m_spriteHeight, m_spriteRow, m_spriteFrame, m_flip);
 }
 
+void Animation::Draw(float x, float y)
+{
+    TextureManager::GetInstance().DrawFrame(m_textureID, x, y, m_spriteWidth, m_spriteHeight, m_spriteRow, m_spriteFrame, m_flip);
+}
+
 
 const int Animation::GetFrame()
 {

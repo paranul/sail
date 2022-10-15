@@ -35,12 +35,14 @@ public:
     void SetProperties(std::string textureID, int spriteRow, int frameCount, int spriteWidth, int spriteHeight, int animationSpeed, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void Draw();
     void Update(const int &mouesX, const int &mouseY);
+    void UpdateCollision(Adventurer& adv2);
     void Input();
     void WorldToScreen(float worldX, float worldY, int &screenX, int &screenY);
     void ScreenToWorld(int screenX, int screenY, float &worldX, float &worldY);
     void WorldToScreenMouse(float worldX, float worldY, int &screenX, int &screenY);
     void ReadEvent(SDL_Event *sdlEvent);
     void DoRandomMovement();
+    bool CheckCollisionAABB(Adventurer& adv2);
     // float Normalize(float x, float y);
     // float Magnitude(float x, float y);
     Point<float> Normalize(Point<float> start, Point<float> end);
@@ -58,6 +60,8 @@ public:
 
 
 public:
+
+    bool rndMove = false;
 
     float m_speed = 1.f;
 
@@ -96,7 +100,7 @@ public:
     uint32_t currentTime;
     uint32_t lastTime = 0;
 
-
+    SDL_Color m_color{255,255,255};
 
 
 };

@@ -26,12 +26,12 @@ public:
     i.e the first (row # 0) will be the IDLE animation, the second (row # 1) will be WALK animation pointing right
     the 3rd (row # 2) will be RUN animation poiting to the right e.t.c
 */
-static enum State
-{
-    IDLE,
-    WALK,
-    RUN
-};
+// static enum State
+// {
+//     IDLE,
+//     WALK,
+//     RUN
+// };
 
 public:
     Animation() {}
@@ -43,6 +43,7 @@ public:
     void Update();
     void Draw(int x, int y, int spriteWidth, int spriteHeight);
     void Draw(int x, int y);
+    void Draw(float x, float y);
     const int GetFrame();
 
 private:

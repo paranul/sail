@@ -37,7 +37,7 @@ void Nyctimus::Draw()
 {
 
 
-    m_legAnime.Draw((float)m_worldPos.x, (float)m_worldPos.y);
+    m_legAnime.Draw(m_worldPos.x, m_worldPos.y);
 
     //Frame number 1 and 5 are the frames that the whole character shifts down 1 pixel, so need to update that here
     if(m_legAnime.GetFrame() == 1 || m_legAnime.GetFrame() == 5)

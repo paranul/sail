@@ -10,8 +10,8 @@ class Point
 public:
     Point()
     {
-        T x = 0;
-        T y = 0;
+        x = 0;
+        y = 0;
     }
     Point(T x_in, T y_in)
     {
@@ -34,7 +34,7 @@ public:
     }
 
     //DOING SOMETHING WRONG HERE
-    bool Point::operator !=(const Point& rhs)
+    bool operator !=(const Point& rhs)
     {
         return !operator==(rhs);
     }

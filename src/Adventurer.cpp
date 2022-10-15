@@ -86,8 +86,27 @@ Adventurer::Adventurer()
 
 Adventurer::Adventurer(std::string textureID, int spriteRow, int frameCount, int spriteWidth, int spriteHeight, int animationSpeed, SDL_RendererFlip flip)
 {
-    m_anime.SetProperties(textureID, spriteRow, frameCount, spriteWidth, spriteHeight, animationSpeed);
+    m_anime.SetProperties(textureID, spriteRow, frameCount, spriteWidth, spriteHeight, animationSpeed, SDL_FLIP_NONE);
     //m_anime.SetProperties("adventurer_sheet", 0, 8, 32, 32, 100);
+}
+
+void Adventurer::UpdateCollision(Adventurer& adv2)
+{
+    if(CheckCollisionAABB(adv2))
+    {
+        if(!adv2.m_Control || !this->m_Control)
+        {
+            adv2.rndMove = true;
+            this->rndMove = true;
+            //adv2.DoRandomMovement();
+        }
+    }
+    else if(!CheckCollisionAABB(adv2))
+    {
+        adv2.rndMove = false;
+        this->rndMove = false;
+    }
+
 }
 
 void Adventurer::Update(const int &mouseX, const int &mouseY)
@@ -103,9 +122,18 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
     m_center.x = m_screenPos.x + 15;
     m_center.y = m_screenPos.y + 29;
 
+
+
+
+
     if(!m_Control)
     {
-        DoRandomMovement();
+        //DoRandomMovement();
+        if(rndMove == true)
+        {
+            DoRandomMovement();
+        }
+
     }
     
     else if(m_Control)
@@ -180,7 +208,7 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
             // if(m_sdlEvent.button.button == SDL_BUTTON_LEFT)
             if(InputManager::GetInstance().ReadMouseDown())
             {
-                m_direction = Normalize( Point<float>((float)m_center.x, float(m_center.y)) , Point<float>(mouseX, mouseY) );
+                m_direction = Normalize( Point<float>((float)m_center.x, float(m_center.y)) , Point<float>(float(mouseX), float(mouseY)) );
                 m_goToPosition.x = mouseX;
                 m_goToPosition.y = mouseY;
 
@@ -302,9 +330,9 @@ void Adventurer::Draw()
     //rect around full pictue shape
     Shape::GetInstance().DrawRect(m_screenPos.x, m_screenPos.y, 32, 32);
     //mark of world position on screen (0,0) of picture
-    Shape::GetInstance().DrawMark(Point<int>{m_screenPos.x,m_screenPos.y}, 3,  SDL_Color{0,255,0});
+    Shape::GetInstance().DrawMark(Point<int>{m_screenPos.x,m_screenPos.y}, 3,  m_color);
     //Mark Center Position
-    Shape::GetInstance().DrawMark(Point<int>{m_center.x, m_center.y}, 3, SDL_Color{255,255,0});
+    Shape::GetInstance().DrawMark(Point<int>{m_center.x, m_center.y}, 3, m_color);
 #endif
 
     if(m_goToPosition != m_center)
@@ -361,7 +389,7 @@ void Adventurer::Draw()
 
 void Adventurer::SetProperties(std::string textureID, int spriteRow, int frameCount, int spriteWidth, int spriteHeight, int animationSpeed, SDL_RendererFlip flip)
 {
-    m_anime.SetProperties(textureID, spriteRow, frameCount, spriteWidth, spriteHeight, animationSpeed); 
+    m_anime.SetProperties(textureID, spriteRow, frameCount, spriteWidth, spriteHeight, animationSpeed, SDL_FLIP_NONE); 
 }
 
 void Adventurer::WorldToScreen(float worldX, float worldY, int &screenX, int &screenY)
@@ -499,4 +527,14 @@ bool Adventurer::WithinRange(float num1, float num2, float deviation)
 bool Adventurer::WithinRange(int num1, int num2, int deviation)
 {
     return (abs(num1 - num2) <= deviation);
+}
+
+bool Adventurer::CheckCollisionAABB(Adventurer& adv2)
+{
+    //if adv1.x + width >= adv2.x || adv1.x <= adv2.x + width || adv1.y <= adv2.y + height || adv1.y + height >= adv2.y
+
+    return (this->m_worldPos.x + 32 >= adv2.m_worldPos.x && 
+            this->m_worldPos.x <= adv2.m_worldPos.x + 32 &&
+            this->m_worldPos.y <= adv2.m_worldPos.y + 32 &&
+            this->m_worldPos.y + 32 >= adv2.m_worldPos.y);
 }

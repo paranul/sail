@@ -111,6 +111,10 @@ private:
     Adventurer adventurer2;
 
 
+    static constexpr int advMAX = 10;
+    Adventurer adventurers[advMAX];
+
+
 
 
     ////test stuff////

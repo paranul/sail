@@ -187,6 +187,13 @@ void Game::Setup()
     }
 
 
+    adventurers[0].m_color = {255,255,255};
+    adventurers[1].m_color = {255,0,0};
+    adventurers[2].m_color = {0,255,0};
+    adventurers[3].m_color = {0,0,255};
+
+
+
 
 
     ////Nyc item stuff////
@@ -201,17 +208,29 @@ void Game::Setup()
     POINTER::S_Draw::GetInstance()->LoadID("../assets/oot-2d-map.png");
     TextureManager::GetInstance().Load("../assets/tree_0.png");
     TextureManager::GetInstance().Load("../assets/adventurer_sheet.png");
+    TextureManager::GetInstance().Load("../assets/horse_base_walk.png");
 
     POINTER::S_Draw::GetInstance()->LoadID("../assets/light3.png");
 
+    //CNTRL twice to toggle inline hints
 
     adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
+    adveturer.m_worldPos.x += 200.f;
+    adveturer.m_worldPos.y += 200.f;
 
     adveturer.SetControl(true);
 
     adventurer2.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
     adventurer2.m_worldPos.x += 100.0f;
     adventurer2.m_worldPos.y += 100.0f;
+
+    for (int i = 0; i < advMAX; i++)
+    {
+        adventurers[i].SetProperties("adventurer_sheet", 0, 13, 32, 32, 100);
+        adventurers[i].m_worldPos.x = i * 10.0f;
+        adventurers[i].m_color = { Uint8( i * 50), Uint8(i * 550), Uint8(i * 150)};
+    }
+    
 
     text.LoadFont("../assets/arial.ttf", 12);
     text.LoadFromRenderedText("Testing with writing...testing 1 2 3 4 5 6 7 \none two three four  five six seven how far is tTHIS thing going to go off screen"); 
@@ -442,10 +461,96 @@ void Game::Update()
     nyc.Update();
 
     adveturer.Update(m_mouseX, m_mouseY);
+    adveturer.UpdateCollision(adventurer2);
 
 
 
     adventurer2.Update(m_mouseX, m_mouseY);
+    adventurer2.UpdateCollision(adveturer);
+    
+
+    for (int i = 0; i < advMAX; i++)
+    {
+        adventurers[i].Update(m_mouseX, m_mouseY);
+    }
+
+    for(auto& adv : adventurers)
+    {
+        for(auto& target : adventurers)
+        {
+            if(adv.CheckCollisionAABB(target))
+            {
+
+                if(adv.m_color.r != target.m_color.r)
+                {
+                    // adv.rndMove = true;
+                    // target.rndMove = true;
+
+                    //adv.UpdateCollision(target);
+
+                    //LIKE THIS IT WORKS ---- NOW need to re implement inside the actual class to make sure the proper animations are running
+                    adv.DoRandomMovement();
+                    target.DoRandomMovement();
+                    //THIS WORKS ^^^^^^^
+                }
+                
+
+                    // adv.DoRandomMovement();
+                    // target.DoRandomMovement();
+            }
+            // if(!adv.CheckCollisionAABB(target))
+            // {
+            //     if(adv.m_color.r != target.m_color.r)
+            //     {
+            //         adv.rndMove = false;
+            //         target.rndMove = false;
+            //     }
+
+            // }
+
+
+
+        }
+    }
+
+    // for(int i = 0; i < advMAX; i++)
+    // {
+    //     for(int j = i+1; j < advMAX; j++)
+    //     {
+    //         adventurers[i].UpdateCollision(adventurers[j]);
+    //         if (j == advMAX)
+    //         {
+    //             adventurers[i].UpdateCollision(adventurers[0]);
+    //         }
+    //     }
+    // }
+
+    //for (int i = advMAX; i == 0; i--)
+    //{
+    //    for (int j = advMAX-1; j < 0; j++)
+    //    {
+    //        adventurers[i].UpdateCollision(adventurers[j]);
+    //        if (j == advMAX)
+    //        {
+    //            adventurers[i].UpdateCollision(adventurers[0]);
+    //        }
+    //    }
+    //}
+
+    // for(int i = 0; i < advMAX; i++)
+    // {
+    //     if(i == advMAX)
+    //     {
+    //         adventurers[i].UpdateCollision(adventurers[0]);
+    //     }
+    //     else
+    //     {
+
+    //         adventurers[i].UpdateCollision(adventurers[i+1]);
+    //     }
+    // }
+
+
 
     WorldToScreen(float(c_worldx), float(c_worldy), c_screenx, c_screeny);
     WorldToScreen(float(c2_worldx), float(c2_worldy), c2_screenx, c2_screeny);
@@ -513,7 +618,10 @@ void Game::Render()
 
     nyc.Draw();
 
-
+    for (int i = 0; i < advMAX; i++)
+    {
+        adventurers[i].Draw();
+    }
 
 
     //SDL_SetRenderTarget(m_renderer, )
@@ -529,11 +637,11 @@ void Game::Render()
     // text.LoadFromRenderedText(timeText.str().c_str());
     // text.Render(0,0);
 
-    text.LoadFromRenderedText("ANOTHER TEXT");
-    text.Render(200,100, nullptr,-.9);
+    //text.LoadFromRenderedText("ANOTHER TEXT");
+    //text.Render(200,100, nullptr,-.9);
 
-    text.LoadFromRenderedText("MOARRR TEXT");
-    text.Render(200,200);
+    //text.LoadFromRenderedText("MOARRR TEXT");
+    //text.Render(200,200);
 
 
 
@@ -541,7 +649,7 @@ void Game::Render()
 
     //VLAD::::::The start of a nuklear window
     if(nk_begin(m_nukCtxt, "Adventurer Properties", nkrct,NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
-            NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE | NK_WINDOW_CLOSABLE ))
+            NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE | NK_WINDOW_CLOSABLE | NK_WINDOW_MINIMIZED ))
             {
                 nk_layout_row_static(m_nukCtxt, 30, 80, 2);
                 //nk_layout_row_dynamic(m_nukCtxt, 3, 2);

@@ -25,8 +25,10 @@ public:
     void Load(std::string fileName);
     //DrawObject is subject to zoom level and camera position, int x & y = screen space
     void DrawObject(std::string id, int x, int y, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void DrawObject(std::string id, float x, float y, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void DrawRotatingObject(std::string id, int x, int y, double angle, const SDL_Point *center,  SDL_RendererFlip flip = SDL_FLIP_NONE);
     void DrawFrame(std::string id, int x, int y, int width, int height, int row, int frame, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void DrawFrame(std::string id, float x, float y, int width, int height, int row, int frame, SDL_RendererFlip flip = SDL_FLIP_NONE);
     //Draw a part of a texture by specifying with and height
     void DrawObjectDimensions(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
 

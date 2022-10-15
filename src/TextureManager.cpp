@@ -48,6 +48,19 @@ void TextureManager::DrawObject(std::string id, int x, int y, SDL_RendererFlip f
     SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), m_textureMap[id], &srcRect, &dstRect, 0, NULL, flip);
 }
 
+void TextureManager::DrawObject(std::string id, float x, float y, SDL_RendererFlip flip)
+{
+    int width = 0;
+    int height = 0;
+
+    SDL_QueryTexture(m_textureMap[id], NULL, NULL, &width, &height);
+
+    SDL_Rect srcRect = {0, 0, width, height};
+    SDL_FRect dstRect = {x, y, width , height };
+
+    SDL_RenderCopyExF(Game::GetInstance().GetRenderer(), m_textureMap[id], &srcRect, &dstRect, 0, NULL, flip);
+}
+
 //TODO::Create a class that will act as a wrapper for the double angle but resets it to 0 when it goes past 360.
 void TextureManager::DrawRotatingObject(std::string id, int x, int y, double angle, const SDL_Point *center,  SDL_RendererFlip flip)
 {
@@ -94,6 +107,13 @@ void TextureManager::DrawObjectDimensions(std::string id, int x, int y, int widt
 }
 
 void TextureManager::DrawFrame(std::string id, int x, int y, int width, int height, int row, int frame, SDL_RendererFlip flip)
+{
+    SDL_Rect srcRect = {width * frame, height * row, width, height};
+    SDL_Rect dstRect = {x, y, width , height };
+    SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), m_textureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
+}
+
+void TextureManager::DrawFrame(std::string id, float x, float y, int width, int height, int row, int frame, SDL_RendererFlip flip)
 {
     SDL_Rect srcRect = {width * frame, height * row, width, height};
     SDL_Rect dstRect = {x, y, width , height };
