@@ -25,6 +25,7 @@ public:
     void DrawLine(int x1, int y1, int x2, int y2);
     void DrawLine(float x1, float y1, float x2, float y2);
     void DrawMark(Point<int> center, int radius, SDL_Color c);
+    void DrawPGECircle(int centerX, int centerY, int radius);
 
     //SDL_Color c = {255,255,255, 255};
 

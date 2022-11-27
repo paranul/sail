@@ -4,6 +4,8 @@
 #include "../external/glm/glm.hpp"
 #include <cmath>
 
+#include <vector>
+
 
 
 Shape& Shape::GetInstance()
@@ -123,4 +125,13 @@ void Shape::DrawCircleF(float centerX, float centerY, float radius)
 
     }
 
+}
+
+void Shape::DrawPGECircle(int centerX, int centerY, int radius)
+{
+    std::vector<std::pair<int, int>> modelCircle;
+
+    modelCircle.push_back({centerX,centerY});
+
+    int nPoints = 20;
 }

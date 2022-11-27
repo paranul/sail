@@ -1,11 +1,12 @@
 
-#ifdef _WIN32
-#include <SDL.h>
-#elif __linux__
-#include <SDL2/SDL.h>
-#endif
+// #ifdef _WIN32
+// #include <SDL.h>
+// #elif __linux__
+// #include <SDL2/SDL.h>
+// #endif
 
 #include "Tile.h"
+#include "../Game.h"
 
 TestTile::TestTile()
 :
@@ -55,7 +56,7 @@ void TestTile::DrawUknownTile()
 }
 
 
-int TestTile::GetSize()
-{
-    return m_size;
-}
+// int TestTile::GetSize()
+// {
+//     return m_size;
+// }

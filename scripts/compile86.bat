@@ -31,6 +31,6 @@ set lua536_lib="C:\libs\LUA-5.3.6_WIN32"
 ::INCLUDE SUB-DIRECTORIES
 
 ::SOURCE FILES
-set SRC_FILES=../src/*.cpp ../src/ECS/*.cpp ../src/ECSComponents/*.cpp ../src/testSource/*.cpp
+set SRC_FILES= ../src/*.cpp ../src/ECS/*.cpp ../src/ECSComponents/*.cpp ../src/testSource/*.cpp ../src/input/*.cpp
 
 call cl %SRC_FILES% /std:c++17 /EHsc -W4 -I%SDL2% -I%SDL2_image% -I%SDL2_ttf% -I%SDL2_mixer% -I%glm% -link -LIBPATH:%SDL2_lib% -LIBPATH:%SDL2_image_lib% -LIBPATH:%SDL2_ttf_lib% -LIBPATH:%SDL2_mixer_lib% -LIBPATH:%lua536_lib% user32.lib SDL2main.lib SDL2.lib SDL2_image.lib SDL2_ttf.lib liblua53.a shell32.lib /SUBSYSTEM:CONSOLE /out:../bin/main.exe

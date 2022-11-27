@@ -15,6 +15,7 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
 
 // Usage Examples at the bottom of the page
 
@@ -22,8 +23,8 @@
 /// SetProperties("adventurer_sheet", 0, 13, 32, 32, 200);
 
 //Flip these two to enable / disable debug code
-#undef debug
 #define debug 
+#undef debug
 
 class Adventurer
 {
@@ -43,6 +44,7 @@ public:
     void ReadEvent(SDL_Event *sdlEvent);
     void DoRandomMovement();
     bool CheckCollisionAABB(Adventurer& adv2);
+    bool MouseInsideRect();
     // float Normalize(float x, float y);
     // float Magnitude(float x, float y);
     Point<float> Normalize(Point<float> start, Point<float> end);
@@ -65,6 +67,9 @@ public:
 
     float m_speed = 1.f;
 
+    bool m_attacking;
+    bool m_idle;
+
 
     Point<float> m_worldPos{100.0f, 100.0f};
 
@@ -85,6 +90,8 @@ public:
     //The mouse position to go to
     Point<int> m_goToPosition = m_center;
 
+    Point<int> m_MousePos;
+
 
 
     SDL_Event m_sdlEvent;
@@ -101,6 +108,11 @@ public:
     uint32_t lastTime = 0;
 
     SDL_Color m_color{255,255,255};
+
+    static inline std::vector<Adventurer*> m_allAdventurers;
+
+    uint32_t m_id = 0;
+    static inline uint32_t nextID = 0;
 
 
 };

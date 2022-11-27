@@ -47,6 +47,7 @@ public:
 
     SDL_Renderer* GetRenderer();
     bool IsRunning();
+    bool IsPaused();
 
     void WorldToScreen(float worldX, float worldY, int &screenX, int &screenY);
 
@@ -85,6 +86,8 @@ public:
     unsigned int currentTime;
     int countedUpdateFrames = 0;
 
+    int frames = 0;
+
 
 
 private:
@@ -96,6 +99,7 @@ private:
     SDL_Renderer* m_renderer;
 
     bool m_Active;
+    bool m_paused;
 
     SDL_Event sdlEvent;
 
@@ -115,7 +119,8 @@ private:
     Adventurer adventurers[advMAX];
 
 
-
+    //tile
+    TestTile tile1;
 
     ////test stuff////
 

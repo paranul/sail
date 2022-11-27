@@ -46,15 +46,28 @@ public:
     void Draw(float x, float y);
     const int GetFrame();
 
+    enum Speed
+    {
+        default = 200,
+        slower = 100        
+    };
+
 private:
     std::string m_textureID;
     int m_spriteRow;
+
+    //number of frames this animation will have, consider making default 8
     int m_frameCount;
+
+    //how fast this animation will play, higher number = slower, 100 - 200 is a good range
     int m_animationSpeed;
+
     int m_spriteWidth;
     int m_spriteHeight;
     SDL_RendererFlip m_flip;
     int m_spriteFrame;
+
+
 
     
     

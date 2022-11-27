@@ -23,13 +23,15 @@ void Animation::SetProperties(std::string textureID, int spriteRow, int frameCou
 //making it unsuitable for some specific game logic which requires a start / stop timer
 void Animation::Update()
 {
-
+    
     m_spriteFrame = (SDL_GetTicks() / m_animationSpeed) % m_frameCount;
+
 
 
     //SDL_GetTicks() / # of milliseconds == a timer for that amount of milliseconds.
     //std::cout << SDL_GetTicks() / 500 << '\n'; // will be incrementing every 500 miliseconds
     //std::cout << SDL_GetTicks() / 1000 << '\n'; // will be incrementing every 1 second
+    //The higher you set it the slower it will go
 }
 
 

@@ -1,10 +1,13 @@
 #pragma once
 
-#include "../Game.h"
+
 
 
 ////NOTES////
 /*
+
+    dont include Game.h in header files... causes circular dependency
+
     This is seperate from the S_Draw class (Static Texture manager and whatever else comes after that, which will be affected by the camera)
     this will just draw differnt colored tiles in their appropriate screen space
 */
@@ -15,15 +18,16 @@ class TestTile
 public:
 
     TestTile();
+    //~TestTile();
     TestTile(int x, int y);
 
 
     void DrawUknownTileXY(int x, int y);
     void DrawUknownTile();
-    void DrawFloorTile(int x, int y);
-    void DrawWallTile(int x, int y);
-    void DrawRoofTile(int x, int y);
-    static int GetSize();
+    //void DrawFloorTile(int x, int y);
+    //void DrawWallTile(int x, int y);
+    //void DrawRoofTile(int x, int y);
+    //static int GetSize();
 
 
 
@@ -31,14 +35,14 @@ public:
 
 private:
 
-int m_x;
-int m_y;
+    int m_x;
+    int m_y;
 
-float m_scale = 1.0f;
-int m_offsetX = 0;
-int m_offsetY = 0;
+    // float m_scale = 1.0f;
+    // int m_offsetX = 0;
+    // int m_offsetY = 0;
 
-static constexpr int m_size = 32 ;
+    unsigned int m_size = 32 ;
 
 };
 
@@ -105,9 +109,9 @@ means that this pointer cannot
 be used to modify what its pointing to
            ^^
 int Sum(//const// int* //cosnt// p, int size)
-                    \/
-    means you cant retarget
-    the pointer
+                            \/
+            means you cant retarget
+            the pointer
 
 {
     int sum = 0;

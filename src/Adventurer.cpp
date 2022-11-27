@@ -15,7 +15,13 @@
 
 
 Adventurer::Adventurer()
+:
+    m_id(nextID++)
 {
+
+    m_allAdventurers.push_back(this);
+    //m_id = m_allAdventurers.size();
+
     std::cout << "Adventurer Properties not set! Use Adventurer.SetProperties() \n";
 
 
@@ -111,7 +117,8 @@ void Adventurer::UpdateCollision(Adventurer& adv2)
 
 void Adventurer::Update(const int &mouseX, const int &mouseY)
 {
-
+    m_MousePos.x = mouseX;
+    m_MousePos.y = mouseY;
     m_lastPosition = m_worldPos;
 
 
@@ -122,10 +129,14 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
     m_center.x = m_screenPos.x + 15;
     m_center.y = m_screenPos.y + 29;
 
+    if(m_attacking)
+    {
+        ///Do what? find target and move there and then attack
+    }
 
 
 
-
+//Each character is either in control or not in control
     if(!m_Control)
     {
         //DoRandomMovement();
@@ -135,11 +146,12 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
         }
 
     }
-    
+
+//Each character is either in control or not in control
     else if(m_Control)
     {
 
-        
+//m_DirectControl == keyboard        
         if(m_DirectControl)
         {
 
@@ -195,6 +207,7 @@ void Adventurer::Update(const int &mouseX, const int &mouseY)
             
         }
 
+// !m_DirectControl == mouse
         else if(!m_DirectControl)
         {
             //TODO: Should change this algorithm 
@@ -343,6 +356,7 @@ void Adventurer::Draw()
         //Shape::GetInstance().DrawPixel(int(m_goToPosition.x), int(m_goToPosition.y));
     }
 
+//moving animation
     if(m_moving)
     {
         if(m_direction.x > 0)   m_anime.SetProperties("adventurer_sheet", 1, 8, 32, 32, 100);
@@ -358,6 +372,12 @@ void Adventurer::Draw()
             m_anime.SetProperties("adventurer_sheet", 1, 8, 32, 32, 100);
         }
     }
+    else if(m_attacking) //should be different attack logic for direct control and mouse control
+    {
+        //1 - make sure facing in the proper direction of the enemy
+        m_anime.SetProperties("adventurer_sheet", 2, 10, 32, 32, 100);
+    }
+//else idle animation
     else
     {
         m_anime.SetProperties("adventurer_sheet", 0, 13, 32, 32, 100);
@@ -367,9 +387,15 @@ void Adventurer::Draw()
     //TextureManager::GetInstance().DrawFrame("adventurer_sheet", m_screenPos.x, m_screenPos.y, 32, 32, 0, 8);
 
 
-
     if(!m_DirectControl)
     {
+        if( MouseInsideRect() )
+        {
+            //do highlighting which character is howevered over by mouse here
+            Shape::GetInstance().DrawRect(m_screenPos.x, m_screenPos.y, 32, 32);
+
+        }
+
         //Shape::GetInstance().DrawLine(float(m_center.x), float(m_center.y), float(m_center.x) + (m_direction.x)*10 ,float(m_center.y) + (m_direction.y)*10);
 
 #ifdef debug
@@ -529,6 +555,8 @@ bool Adventurer::WithinRange(int num1, int num2, int deviation)
     return (abs(num1 - num2) <= deviation);
 }
 
+
+
 bool Adventurer::CheckCollisionAABB(Adventurer& adv2)
 {
     //if adv1.x + width >= adv2.x || adv1.x <= adv2.x + width || adv1.y <= adv2.y + height || adv1.y + height >= adv2.y
@@ -537,4 +565,10 @@ bool Adventurer::CheckCollisionAABB(Adventurer& adv2)
             this->m_worldPos.x <= adv2.m_worldPos.x + 32 &&
             this->m_worldPos.y <= adv2.m_worldPos.y + 32 &&
             this->m_worldPos.y + 32 >= adv2.m_worldPos.y);
+}
+
+bool Adventurer::MouseInsideRect()
+{
+return (m_MousePos.x >= m_screenPos.x && m_MousePos.x <= m_screenPos.x + 32 &&
+            m_MousePos.y >= m_screenPos.y && m_MousePos.y < m_screenPos.y + 32);
 }

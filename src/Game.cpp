@@ -15,6 +15,7 @@
 #include "Shapes.h"
 #include "TextureManager.h"
 #include "InputManager.h"
+#include "Timer.h"
 //#include <sstream>
 
 #include <math.h>
@@ -80,8 +81,17 @@ bool Game::IsRunning()
     return m_Active;
 }
 
+bool Game::IsPaused()
+{
+    return m_paused;
+}
+
+
 void Game::Init()
 {
+
+    //Uint32 sdlTStart;
+    //sdlTStart = SDL_GetTicks();
     //SDL_Init() = required
     //if error SDL will return negative flag
     if( SDL_Init(SDL_INIT_EVERYTHING) != 0 )
@@ -89,6 +99,7 @@ void Game::Init()
         printf( "SDL_Init() Failed! SDL_Error: %s\n", SDL_GetError() );
         return; 
     }
+
 
     if(TTF_Init() != 0)
     {
@@ -159,10 +170,19 @@ void Game::Init()
 
     m_Active = true;
 
+    //Uint32 sdlTEnd = SDL_GetTicks();
+    //uint32_t a;
+
+    //Uint32 sdlElapsed = sdlTEnd - sdlTStart;
+
+    
+    //std::cout <<"\nElapsed SDL Time Init() funciton: " << sdlTEnd;
+
 }
 
 void Game::Setup()
 {
+
 
     srand(time(NULL));
 
@@ -184,6 +204,11 @@ void Game::Setup()
     for(int i = 0; i < 1; i++)
     {
         std::cout << dist(generator) << "\n";
+    }
+
+    for( int i = 0; i < Adventurer::m_allAdventurers.size(); i++)
+    {
+        std::cout << "id: " << Adventurer::m_allAdventurers[i]->m_id << "\n";
     }
 
 
@@ -214,22 +239,26 @@ void Game::Setup()
 
     //CNTRL twice to toggle inline hints
 
-    adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
-    adveturer.m_worldPos.x += 200.f;
-    adveturer.m_worldPos.y += 200.f;
+    adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,Animation::Speed::slower);
+    adveturer.m_worldPos.x += 3000.f;
+    adveturer.m_worldPos.y += 0.f;
 
     adveturer.SetControl(true);
 
-    adventurer2.SetProperties("adventurer_sheet", 0, 13, 32, 32,100);
+    adventurer2.SetProperties("adventurer_sheet", 0, 13, 32, 32,Animation::Speed::slower);
     adventurer2.m_worldPos.x += 100.0f;
     adventurer2.m_worldPos.y += 100.0f;
 
+    //adveturer.m_attacking = true;
+
     for (int i = 0; i < advMAX; i++)
     {
-        adventurers[i].SetProperties("adventurer_sheet", 0, 13, 32, 32, 100);
+        adventurers[i].SetProperties("adventurer_sheet", 0, 13, 32, 32, 50000);
         adventurers[i].m_worldPos.x = i * 10.0f;
         adventurers[i].m_color = { Uint8( i * 50), Uint8(i * 550), Uint8(i * 150)};
     }
+
+    //adventurers[0].SetControl(true);
     
 
     text.LoadFont("../assets/arial.ttf", 12);
@@ -246,6 +275,8 @@ void Game::Setup()
         std::cout << path[i];
     }
 
+    std::cout <<"Adventurer vector size: "<< Adventurer::m_allAdventurers.size();
+
     //SDL_VERSION()
     SDL_version linked;
     SDL_GetVersion(&linked);
@@ -256,18 +287,28 @@ void Game::Setup()
     //https://stackoverflow.com/questions/19562103/uint8-t-cant-be-printed-with-cout
     std::cout << "\nSDL Version cout<<: " << +linked.major << "." << linked.minor + 0 <<"." << +linked.patch << "\n";
 
+
+
 }
+            
 
 void Game::Run()
 {
+    //CAUTION THIS IS NOT THE ACTUAL RUNNING LOOP, LEFT over from before
+    //while loop is in main.cpp
 
+
+    
     Setup();
 
     while( m_Active )
     {
+        
+
         Input();
         //start frametime timepoint here
         Update();
+
         //end frametime timepoint here
         //subtract to see the time one  frame took
         Render();
@@ -281,6 +322,8 @@ void Game::Run()
 
 void Game::Input()
 {
+    
+
     //pretty important to have SDL_PumpEvents before you get the state to make sure you get the correct state (Key state and mouse state)
     SDL_PumpEvents();
     
@@ -461,12 +504,12 @@ void Game::Update()
     nyc.Update();
 
     adveturer.Update(m_mouseX, m_mouseY);
-    adveturer.UpdateCollision(adventurer2);
+    //adveturer.UpdateCollision(adventurer2);
 
 
 
     adventurer2.Update(m_mouseX, m_mouseY);
-    adventurer2.UpdateCollision(adveturer);
+    //adventurer2.UpdateCollision(adveturer);
     
 
     for (int i = 0; i < advMAX; i++)
@@ -474,44 +517,68 @@ void Game::Update()
         adventurers[i].Update(m_mouseX, m_mouseY);
     }
 
-    for(auto& adv : adventurers)
+
+    for(int i = 0; i < Adventurer::m_allAdventurers.size(); i++)
     {
-        for(auto& target : adventurers)
+        for(int j = 0; j < Adventurer::m_allAdventurers.size(); j++)
         {
-            if(adv.CheckCollisionAABB(target))
+            if(Adventurer::m_allAdventurers[i]->CheckCollisionAABB(*Adventurer::m_allAdventurers[j]) )
             {
-
-                if(adv.m_color.r != target.m_color.r)
+                if(Adventurer::m_allAdventurers[i]->m_id != Adventurer::m_allAdventurers[j]->m_id)
                 {
-                    // adv.rndMove = true;
-                    // target.rndMove = true;
+                    if(Adventurer::m_allAdventurers[i]->m_Control)
+                    {
+                        //Adventurer::m_allAdventurers[j]->UpdateCollision(*Adventurer::m_allAdventurers[j]);
 
-                    //adv.UpdateCollision(target);
+                        Adventurer::m_allAdventurers[j]->DoRandomMovement();
+                    }
 
-                    //LIKE THIS IT WORKS ---- NOW need to re implement inside the actual class to make sure the proper animations are running
-                    adv.DoRandomMovement();
-                    target.DoRandomMovement();
-                    //THIS WORKS ^^^^^^^
                 }
-                
-
-                    // adv.DoRandomMovement();
-                    // target.DoRandomMovement();
             }
-            // if(!adv.CheckCollisionAABB(target))
-            // {
-            //     if(adv.m_color.r != target.m_color.r)
-            //     {
-            //         adv.rndMove = false;
-            //         target.rndMove = false;
-            //     }
-
-            // }
-
-
-
         }
     }
+    
+
+    // for(auto& adv : adventurers)
+    // {
+    //     for(auto& target : adventurers)
+    //     {
+    //         if(adv.CheckCollisionAABB(target) && adv.m_Control != true)
+    //         {
+
+    //             if(adv.m_color.r != target.m_color.r)
+    //             {
+    //                 // adv.rndMove = true;
+    //                 // target.rndMove = true;
+
+    //                 //adv.UpdateCollision(target);
+
+    //                 //LIKE THIS IT WORKS ---- NOW need to re implement inside the actual class to make sure the proper animations are running
+    //                 adv.DoRandomMovement();
+    //                 //adv.rndMove = true;
+                    
+    //                 //target.DoRandomMovement();
+    //                 //THIS WORKS ^^^^^^^
+    //             }
+                
+
+    //                 // adv.DoRandomMovement();
+    //                 // target.DoRandomMovement();
+    //         }
+    //         // if(!adv.CheckCollisionAABB(target))
+    //         // {
+    //         //     if(adv.m_color.r != target.m_color.r)
+    //         //     {
+    //         //         adv.rndMove = false;
+    //         //         target.rndMove = false;
+    //         //     }
+
+    //         // }
+
+
+
+    //     }
+    // }
 
     // for(int i = 0; i < advMAX; i++)
     // {
@@ -610,6 +677,9 @@ void Game::Render()
     Shape::GetInstance().DrawRect(c2_screenx, c2_screeny, 20,20);
 
 
+    
+
+
     //adv.Draw(50,50);
     adveturer.Draw();
 
@@ -640,8 +710,8 @@ void Game::Render()
     //text.LoadFromRenderedText("ANOTHER TEXT");
     //text.Render(200,100, nullptr,-.9);
 
-    //text.LoadFromRenderedText("MOARRR TEXT");
-    //text.Render(200,200);
+    text.LoadFromRenderedText("MOARRR TEXT");
+    text.Render(200,200);
 
 
 
@@ -649,10 +719,13 @@ void Game::Render()
 
     //VLAD::::::The start of a nuklear window
     if(nk_begin(m_nukCtxt, "Adventurer Properties", nkrct,NK_WINDOW_MOVABLE|NK_WINDOW_SCALABLE|
-            NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE | NK_WINDOW_CLOSABLE | NK_WINDOW_MINIMIZED ))
+            NK_WINDOW_MINIMIZABLE|NK_WINDOW_TITLE | NK_WINDOW_CLOSABLE ))
             {
                 nk_layout_row_static(m_nukCtxt, 30, 80, 2);
                 //nk_layout_row_dynamic(m_nukCtxt, 3, 2);
+                nk_layout_row_dynamic(m_nukCtxt, 8, 1);
+                nk_value_int(m_nukCtxt, "frames::", frames);  
+                nk_layout_row_dynamic(m_nukCtxt, 8, 1);
                 nk_label(m_nukCtxt, "nk_Rect Dimensions", NK_TEXT_LEFT);
                 nk_value_int(m_nukCtxt, "Width", nkrct.w);
                 nk_value_int(m_nukCtxt, "Height", nkrct.h);
@@ -712,6 +785,8 @@ void Game::Render()
 
             }
 
+            //nk_window_is_any_hovered(m_nukCtxt);
+
 
     //VLAD::::::Must include this after every window
     //NOTE:: might fail to read info after nk_end()
@@ -760,6 +835,11 @@ void Game::Render()
     //         }
     //     }
     //     nk_end(m_nukCtxt);
+
+    Shape::GetInstance().DrawRect(0,0,20,20);
+
+    //TestTile tile1;
+    //tile1.DrawUknownTile();
 
     countedUpdateFrames++;
     rotation += 0.01f;
@@ -818,4 +898,54 @@ float Game::negRNG()
     //     std::cout << ( (LO + static_cast<float> ( rand() ) ) / static_cast<float>(RAND_MAX / (HI-LO)) )  - 0.5f<< "\n";
     // }
 
+}
+
+
+void CollisionMovementFunctionToRemember()
+{
+//     for (int i = 0; i < advMAX; i++)
+//     {
+//         adventurers[i].Update(m_mouseX, m_mouseY);
+//     }
+
+//     for(auto& adv : adventurers)
+//     {
+//         for(auto& target : adventurers)
+//         {
+//             if(adv.CheckCollisionAABB(target) && adv.m_Control != true)
+//             {
+
+//                 if(adv.m_color.r != target.m_color.r)
+//                 {
+//                     // adv.rndMove = true;
+//                     // target.rndMove = true;
+
+//                     //adv.UpdateCollision(target);
+
+//                     //LIKE THIS IT WORKS ---- NOW need to re implement inside the actual class to make sure the proper animations are running
+//                     adv.DoRandomMovement();
+//                     //adv.rndMove = true;
+                    
+//                     //target.DoRandomMovement();
+//                     //THIS WORKS ^^^^^^^
+//                 }
+                
+
+//                     // adv.DoRandomMovement();
+//                     // target.DoRandomMovement();
+//             }
+//             // if(!adv.CheckCollisionAABB(target))
+//             // {
+//             //     if(adv.m_color.r != target.m_color.r)
+//             //     {
+//             //         adv.rndMove = false;
+//             //         target.rndMove = false;
+//             //     }
+
+//             // }
+
+
+
+//         }
+//     }
 }
