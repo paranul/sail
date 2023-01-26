@@ -18,11 +18,13 @@ public:
         Start();
     }
 
+    //  Start / Restart the timer, automatically called during construction
     void Start()
     {
         m_startPoint = std::chrono::high_resolution_clock::now();
     }
 
+    //  End the timer and return a long long int
     long long Elapsed()
     {
         using namespace std::chrono;

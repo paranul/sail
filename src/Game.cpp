@@ -240,7 +240,7 @@ void Game::Setup()
     //CNTRL twice to toggle inline hints
 
     adveturer.SetProperties("adventurer_sheet", 0, 13, 32, 32,Animation::Speed::slower);
-    adveturer.m_worldPos.x += 3000.f;
+    adveturer.m_worldPos.x += 30.f;
     adveturer.m_worldPos.y += 0.f;
 
     adveturer.SetControl(true);
@@ -285,7 +285,7 @@ void Game::Setup()
     //printf("\nSDL Version: %o", linked.major);
     //adding a + before a number will print it as a number otherwise cout tries to print as character
     //https://stackoverflow.com/questions/19562103/uint8-t-cant-be-printed-with-cout
-    std::cout << "\nSDL Version cout<<: " << +linked.major << "." << linked.minor + 0 <<"." << +linked.patch << "\n";
+    std::cout << "\nSDL Version: " << (int)linked.major << "." << linked.minor + 0 <<"." << +linked.patch << "\n";
 
 
 
@@ -395,14 +395,14 @@ void Game::Input()
                 if(sdlEvent.wheel.y > 0)
                 {
                    // printf("Mouse wheel going up!\n");
-                    POINTER::S_Draw::GetInstance()->m_scale += .1;
+                    POINTER::S_Draw::GetInstance()->m_scale += .1f;
                     std::cout << POINTER::S_Draw::GetInstance()->m_scale << std::endl;
                     break;
                 }
                 else if(sdlEvent.wheel.y < 0)
                 {
                     //printf("Mouse wheel down!\n");
-                    POINTER::S_Draw::GetInstance()->m_scale -= .1;
+                    POINTER::S_Draw::GetInstance()->m_scale -= .1f;
                     std::cout << POINTER::S_Draw::GetInstance()->m_scale << std::endl;
                     break;
                 }
@@ -518,9 +518,9 @@ void Game::Update()
     }
 
 
-    for(int i = 0; i < Adventurer::m_allAdventurers.size(); i++)
+    for(size_t i = 0; i < Adventurer::m_allAdventurers.size(); i++)
     {
-        for(int j = 0; j < Adventurer::m_allAdventurers.size(); j++)
+        for(size_t j = 0; j < Adventurer::m_allAdventurers.size(); j++)
         {
             if(Adventurer::m_allAdventurers[i]->CheckCollisionAABB(*Adventurer::m_allAdventurers[j]) )
             {
@@ -617,6 +617,8 @@ void Game::Update()
     //     }
     // }
 
+    SetWindowTitle(std::to_string(frames).c_str());
+
 
 
     WorldToScreen(float(c_worldx), float(c_worldy), c_screenx, c_screeny);
@@ -625,6 +627,8 @@ void Game::Update()
     WorldToScreen(map_worldx, map_worldy, map_screenx, map_screeny);
 
     //c2_worldx +=1;
+
+    frames++;
     
 }
 
@@ -727,8 +731,8 @@ void Game::Render()
                 nk_value_int(m_nukCtxt, "frames::", frames);  
                 nk_layout_row_dynamic(m_nukCtxt, 8, 1);
                 nk_label(m_nukCtxt, "nk_Rect Dimensions", NK_TEXT_LEFT);
-                nk_value_int(m_nukCtxt, "Width", nkrct.w);
-                nk_value_int(m_nukCtxt, "Height", nkrct.h);
+                nk_value_float(m_nukCtxt, "Width", nkrct.w);
+                nk_value_float(m_nukCtxt, "Height", nkrct.h);
                 //nk_layout_row_static(m_nukCtxt, 30, 30, 2);
                 nk_layout_row_dynamic(m_nukCtxt, 8, 1);
                 nk_value_int(m_nukCtxt, "SDL_GetTicks", SDL_GetTicks());
@@ -898,6 +902,11 @@ float Game::negRNG()
     //     std::cout << ( (LO + static_cast<float> ( rand() ) ) / static_cast<float>(RAND_MAX / (HI-LO)) )  - 0.5f<< "\n";
     // }
 
+}
+
+void Game::SetWindowTitle(const char* newTitle)
+{
+    SDL_SetWindowTitle(m_window, newTitle);
 }
 
 

@@ -117,6 +117,8 @@ void Adventurer::UpdateCollision(Adventurer& adv2)
 
 void Adventurer::Update(const int &mouseX, const int &mouseY)
 {
+
+
     m_MousePos.x = mouseX;
     m_MousePos.y = mouseY;
     m_lastPosition = m_worldPos;

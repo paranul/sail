@@ -24,6 +24,14 @@ void Shape::DrawRect(int x, int y, int width, int height)
     SDL_RenderDrawRect(Game::GetInstance().GetRenderer(), &rect);
 }
 
+void Shape::DrawRect(float x, float y, float width, float height)
+{
+    SDL_FRect rect = {x, y, width, height};
+
+    SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 255,0,0,255);
+    SDL_RenderDrawRectF(Game::GetInstance().GetRenderer(), &rect);
+}
+
 void Shape::DrawLine(int x1, int y1, int x2, int y2)
 {
     SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 255,0,0,255);

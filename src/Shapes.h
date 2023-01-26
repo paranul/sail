@@ -18,6 +18,7 @@ public:
     static Shape& GetInstance();
 
     void DrawRect(int x, int y, int width, int height);
+    void DrawRect(float x, float y, float width, float height);
     void DrawPixel(int x, int y);
     //TODO:: Maybe change radius to float? to consider
     void DrawCircle(int centerX, int centerY, int radius);

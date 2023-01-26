@@ -56,6 +56,8 @@ public:
     //generate floats between [-1.0f, 1.0f]
     float negRNG();
 
+    void SetWindowTitle(const char* newTitle);
+
 
 
     void Kill();
